@@ -1,0 +1,16 @@
+asgiref==3.7.2
+attrs==23.1.0
+Django==4.2.2
+djangorestframework==3.14.0
+drf-spectacular==0.26.2
+drf-spectacular-sidecar==2023.6.1
+inflection==0.5.1
+jsonschema==4.17.3
+Pillow==9.5.0
+pyrsistent==0.19.3
+python-decouple==3.8
+pytz==2023.3
+PyYAML==6.0
+sqlparse==0.4.4
+typing_extensions==4.6.3
+uritemplate==4.1.1
