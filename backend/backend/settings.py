@@ -44,9 +44,12 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'drf_spectacular',
     'accounts',
+    'drf_stripe',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -126,10 +129,6 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / "static"
-# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
-# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -148,6 +147,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     # YOUR SETTINGS
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ]
 }
 
 SPECTACULAR_SETTINGS = {
@@ -164,3 +168,12 @@ SPECTACULAR_SETTINGS = {
     'SERVE_INCLUDE_SCHEMA': False,
     # OTHER SETTINGS
 }
+
+DRF_STRIPE = {
+    "STRIPE_API_SECRET": config('STRIPE_TEST_SECRET_KEY'),
+    "STRIPE_WEBHOOK_SECRET": config('STRIPE_WEBHOOK_SECRET'),
+    "FRONT_END_BASE_URL": config('FRONT_END_BASE_URL')
+}
+
+CORS_ALLOW_ALL_ORIGINS = True
+
