@@ -1,4 +1,5 @@
 import ProgressBar from "@/components/ProgressBar";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -23,10 +24,12 @@ export default function Home() {
       <div className=" w-full px-5 flex flex-col gap-[26px]">
         <ProgressBar />
         <div className=" flex justify-center ">
-
-        <button className=" bg-white grid place-items-center w-[60px] h-[60px] rounded-full ">
-          <img src="/forward-arrow.svg" alt="" />
-        </button>
+          <Link
+            href={"/signup"}
+            className=" bg-white grid place-items-center w-[60px] h-[60px] rounded-full "
+          >
+            <img src="/forward-arrow.svg" alt="" />
+          </Link>
         </div>
       </div>
     </div>

@@ -1,14 +1,14 @@
 import React from "react";
 import Link from "next/link";
 
-const Screen2 = () => {
+const Screen2 = ({ setScreen }) => {
   return (
     <>
       <div className=" flex flex-col gap-12">
         <div className=" flex gap-[60px]">
-          <Link href={"/login"}>
+          <button onClick={() => setScreen("screen_1")}>
             <img src="/arrow-back.svg" alt="" />
-          </Link>
+          </button>
           <p className=" font-semibold text-lg absolute left-1/2 transform -translate-x-1/2">
             Reset Password
           </p>
