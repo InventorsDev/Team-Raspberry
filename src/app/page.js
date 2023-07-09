@@ -1,5 +1,10 @@
+'use client'
 import ProgressBar from "@/components/ProgressBar";
 import Image from "next/image";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import Link from "next/link";
+
+
 
 export default function Home() {
   return (
@@ -25,11 +30,17 @@ export default function Home() {
         <ProgressBar />
         <div className=" flex justify-center ">
 
+        <Link href='/login'>  
         <button className=" bg-white grid place-items-center w-[60px] h-[60px] rounded-full ">
           <img src="/forward-arrow.svg" alt="" />
         </button>
+         </Link>
         </div>
       </div>
+
+
+
+     
     </div>
   );
 }
