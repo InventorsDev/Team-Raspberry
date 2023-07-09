@@ -3,10 +3,14 @@ import ProgressBar from "@/components/ProgressBar";
 import Image from "next/image";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import Link from "next/link";
+import { useState } from "react";
 
 
 
 export default function Home() {
+
+    
+  
   return (
     <div className="bg-gradient-to-b from-pink-500 to-indigo-600 h-screen flex flex-col items-center py-[60px] justify-between">
       <div className=" flex flex-col gap-[30px] items-center">
@@ -30,11 +34,11 @@ export default function Home() {
         <ProgressBar />
         <div className=" flex justify-center ">
 
-        <Link href='/login'>  
-        <button className=" bg-white grid place-items-center w-[60px] h-[60px] rounded-full ">
+        {/* <Link href='/login'>   */}
+        <button  className=" bg-white grid place-items-center w-[60px] h-[60px] rounded-full ">
           <img src="/forward-arrow.svg" alt="" />
         </button>
-         </Link>
+         {/* </Link> */}
         </div>
       </div>
 

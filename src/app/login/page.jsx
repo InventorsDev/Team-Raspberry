@@ -1,11 +1,34 @@
 'use client'
+import axios from "axios";
 import Link from "next/link";
 import React from "react";
-
+import { useState } from "react";
 const page = () => {
+  const [password,setPassword]=useState('')
+  const[email,setEmail]=useState('')
+
+
+
   const handleLogin=(e)=>{
      e.preventDefault()
+     axios.post('https://unique.pythonanywhere.com/login',{
+      email:email,
+      password:password
+     }).then(res=>{
+     console.log(res.data)
+     console.log('Successful');
+     }
+     )
+     console.log(`
+     USER:
+      Email: ${email},
+      Password: ${password}
+     
+     `)
   }
+
+
+ 
   return (
     <div className=" flex flex-col justify-between h-screen py-[40px] px-4">
       <div className=" flex flex-col gap-12">
@@ -24,6 +47,8 @@ const page = () => {
             <input
               type="text"
               required
+              value={email}
+              onChange={(e)=>setEmail(e.target.value)}
               className=" w-full h-full bg-transparent outline-none px-3"
               placeholder="Example@gmail.com"
             />
@@ -32,6 +57,8 @@ const page = () => {
             <input
               type="text"
               required
+              value={password}
+              onChange={(e)=>setPassword(e.target.value)}
               className=" w-full h-full bg-transparent outline-none px-3"
               placeholder="Enter password"
             />
