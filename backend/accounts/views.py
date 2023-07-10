@@ -8,7 +8,7 @@ from rest_framework.authentication import *
 from rest_framework.decorators import api_view
 from rest_framework.reverse import reverse
 from drf_spectacular.utils import extend_schema,OpenApiResponse
-import secrets
+# import secrets
 
 
 
@@ -51,7 +51,7 @@ class LoginView(APIView):
             status.HTTP_200_OK: {
                 'token': 'string',
                 'example': {
-                    'token': secrets.token_hex(20), 
+                    'token': "string", 
                 },
             },
             status.HTTP_401_UNAUTHORIZED: {
