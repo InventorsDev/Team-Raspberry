@@ -7,10 +7,14 @@ from rest_framework.authtoken.models import Token
 from rest_framework.authentication import *
 from rest_framework.decorators import api_view
 from rest_framework.reverse import reverse
+from drf_spectacular.utils import extend_schema,OpenApiResponse
+import secrets
+
+
 
 # 
 from .models import MyUser
-from .serializers import UserSerializer,ProfileSerializer
+from .serializers import UserSerializer,ProfileSerializer,LoginSerializer
 
 
 
@@ -40,6 +44,24 @@ class SignUpView(generics.CreateAPIView):
         user.save()
 
 class LoginView(APIView):
+    serializer_class = LoginSerializer
+    permission_classes = [AllowAny]
+    @extend_schema(
+        responses={
+            status.HTTP_200_OK: {
+                'token': 'string',
+                'example': {
+                    'token': secrets.token_hex(20), 
+                },
+            },
+            status.HTTP_401_UNAUTHORIZED: {
+                'error': 'string',
+                'example': {
+                    'error': 'Invalid credentials'
+                }
+            }
+        }
+    )
     def post(self, request, *args, **kwargs):
         username = request.data.get('username')
         password = request.data.get('password')
