@@ -24,24 +24,24 @@ const Screen2 = ({ screen, setScreen }) => {
           {[1, 1, 1, 1, 1].map((item, i) => (
             <input
               type="text"
-              className=" w-[45px] h-[60px] rounded-[15px] border border-[#F95DA0] outline-none px-3"
+              className=" w-[45px] h-[60px] rounded-[15px] border border-primary-green outline-none px-3"
             />
           ))}
         </div>
         <div className=" flex gap-5 flex-col items-center">
           <button
-            className="bg-gradient-to-l from-pink-500 to-indigo-600 h-[60px] rounded-full text-white font-semibold text-lg w-full"
+            className=" bg-primaryButton h-[60px] rounded-full text-white font-semibold text-lg w-full"
             onClick={() => setScreen("screen_3")}
           >
             Verify
           </button>
-          <button className="border-b-2 border-transparent hover:border-[#F95DA0] px-3 transition duration-300 ease-in-out w-min">
+          <button className="border-b-2 border-transparent hover:border-primary-green px-3 transition duration-300 ease-in-out w-min">
             Resend
           </button>
         </div>
       </div>
       <div className=" flex justify-center">
-        <Link href={"/login"} className=" text-[#5C50C7]">Login to Account</Link>
+        <Link href={"/login"} className=" text-primary-green">Login</Link>
       </div>
     </>
   );

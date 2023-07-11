@@ -1,36 +1,72 @@
-import ProgressBar from "@/components/ProgressBar";
+"use client";
+
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function Home() {
+  const router = useRouter();
+
+  const [screen, setScreen] = useState(0);
+  const data = [
+    {
+      img: "/screen1.png",
+      title: "Learn Anytime, Anywhere",
+      text: "Enjoy the captivating process of online education in a place & at a time of your choice, Comfort and Convenience.",
+    },
+    {
+      img: "/screen2.png",
+      title: "Have Access To Everything",
+      text: "Unlock a world of knowledge and gain seamless access to everything you need for your educational journey.",
+    },
+    {
+      img: "/screen3.png",
+      title: "Thousand Of Course Activities",
+      text: "Discover a world of educational opportunities through our diverse selection of a thousand courses designed to enhance your learning experience.",
+    },
+  ];
+
+  const handleClick = () => {
+    if (screen === 2) {
+      router.push("/signup");
+    }
+    setScreen(screen + 1);
+  };
   return (
-    <div className="bg-gradient-to-b from-pink-500 to-indigo-600 h-screen flex flex-col items-center py-[60px] justify-between text-white">
-      <div className=" flex flex-col gap-[30px] items-center">
-        <div className=" w-[200px] h-[200px] rounded-full bg-white ">
-          <img
-            src="/girl-study.png"
-            alt=""
-            className=" w-[250px] absolute left-1/2 transform -translate-x-1/2 "
-          />
+    <div className="bg-primaryBg h-screen flex flex-col items-center pt-[50px] justify-between text-white">
+      <Link
+        href={"/signup"}
+        className=" text-end w-full px-[30px] font-semibold"
+      >
+        <p>skip</p>
+      </Link>
+      <img
+        src={data[screen < 3 ? screen : 0].img}
+        alt=""
+        className=" w-[420px] h-[370px]"
+      />
+      <div className=" flex flex-col gap-[30px] items-center bg-accent-1 w-full py-[38px] px-[24px] rounded-t-[24px]">
+        <div className=" flex h-2 gap-1.5 justify-center">
+          {["", "", ""].map((_, i) => (
+            <div
+              className={` w-[22px]  rounded-full ${
+                screen == i ? " bg-primary-green" : "bg-white"
+              }`}
+            />
+          ))}
         </div>
-        <div className=" min-w-[500px]"></div>
-        <p className=" w-[250px] font-bold text-center text-3xl font-montserrat">
-          Learn Anytime, Anywhere
+        <p className=" font-bold text-center text-3xl font-montserrat">
+          {data[screen < 3 ? screen : 0].title}
         </p>
-        <p className=" w-[340px] opacity-80 font-semibold font-montserrat text-center text-sm">
-          Enjoy the captivating process of online education in a place & at a
-          time of your choice, Comfort and Convenience.
+        <p className=" font-semibold text-center text-sm">
+          {data[screen < 3 ? screen : 0].text}
         </p>
-      </div>
-      <div className=" w-full px-5 flex flex-col gap-[26px]">
-        <ProgressBar />
-        <div className=" flex justify-center ">
-          <Link
-            href={"/signup"}
-            className=" bg-white grid place-items-center w-[60px] h-[60px] rounded-full "
-          >
-            <img src="/forward-arrow.svg" alt="" />
-          </Link>
-        </div>
+        <button
+          className=" bg-white grid place-items-center w-[60px] h-[60px] rounded-full "
+          onClick={handleClick}
+        >
+          <img src="/forward-arrow.svg" alt="" />
+        </button>
       </div>
     </div>
   );

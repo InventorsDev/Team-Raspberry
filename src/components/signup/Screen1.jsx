@@ -15,10 +15,10 @@ const Screen1 = ({ screen, setScreen }) => {
           </p>
           <input
             type="text"
-            className=" w-full h-[60px] rounded-full px-4 outline-none border border-[#F95DA0]"
+            className=" w-full h-[60px] rounded-full px-4 outline-none border border-primary-green"
           />
           <button
-            className="bg-gradient-to-l from-pink-500 to-indigo-600 h-[60px] rounded-full text-white font-semibold text-lg"
+            className=" bg-primaryButton h-[60px] rounded-full text-white font-semibold text-lg"
             onClick={() => setScreen("screen_2")}
           >
             Get OTP
@@ -27,8 +27,8 @@ const Screen1 = ({ screen, setScreen }) => {
       </div>
 
       <div className=" flex justify-center">
-        <Link href={"/login"} className=" text-[#5C50C7]">
-          Login to Account
+        <Link href={"/login"} className="  text-primary-green">
+          Login
         </Link>
       </div>
     </div>

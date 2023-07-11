@@ -10,7 +10,7 @@ const Success = () => {
           YAY! your account has been created successfully.
         </p>
       </div>
-      <button className="bg-gradient-to-l from-pink-500 to-indigo-600 h-[60px] rounded-full text-white font-semibold text-lg w-full">
+      <button className="bg-primaryButton h-[60px] rounded-full text-white font-semibold text-lg w-full">
         Continue
       </button>
     </div>

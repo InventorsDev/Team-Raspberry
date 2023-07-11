@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-const Screen5 = ({screen, setScreen}) => {
+const Screen5 = ({ screen, setScreen }) => {
   return (
     <>
       <div className=" flex flex-col gap-12">
@@ -19,14 +19,19 @@ const Screen5 = ({screen, setScreen}) => {
         </div>
         <input
           type="text"
-          className="  h-[60px] rounded-full border border-[#F95DA0] outline-none px-3"
+          className="  h-[60px] rounded-full border border-primary-green outline-none px-3"
         />
-        <button className="bg-gradient-to-l from-pink-500 to-indigo-600 h-[60px] rounded-full text-white font-semibold text-lg w-full" onClick={() => setScreen("screen_6")}>
+        <button
+          className="bg-primaryButton h-[60px] rounded-full text-white font-semibold text-lg w-full"
+          onClick={() => setScreen("screen_6")}
+        >
           Continue
         </button>
       </div>
       <div className=" flex justify-center">
-        <Link className=" text-[#5C50C7]" href={"/login"}>Login to Account</Link>
+        <Link className="  text-primary-green" href={"/login"}>
+          Login
+        </Link>
       </div>
     </>
   );

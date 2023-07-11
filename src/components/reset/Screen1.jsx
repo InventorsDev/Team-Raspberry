@@ -19,9 +19,9 @@ const Screen1 = ({setScreen}) => {
         </div>
         <input
           type="text"
-          className="  h-[60px] rounded-full border border-[#343434] outline-none px-3"
+          className="  h-[60px] rounded-full border border-primary-green outline-none px-3"
         />
-        <button className="bg-gradient-to-l from-pink-500 to-indigo-600 h-[60px] rounded-full text-white font-semibold text-lg w-full" onClick={() => setScreen("screen_2")}>
+        <button className=" bg-primaryButton h-[60px] rounded-full text-white font-semibold text-lg w-full" onClick={() => setScreen("screen_2")}>
           Send reset email
         </button>
       </div>

@@ -21,7 +21,7 @@ const Screen4 = ({ screen, setScreen }) => {
         <div className=" flex flex-col gap-5">
           <div
             className={` flex p-3 gap-2 items-center  border ${
-              active == "student" ? "border-[#F95DA0]" : ""
+              active == "student" ? "border-primary-green" : ""
             }  rounded-[15px] cursor-pointer`}
             onClick={() => setActive("student")}
           >
@@ -33,7 +33,7 @@ const Screen4 = ({ screen, setScreen }) => {
           </div>
           <div
             className={` flex p-3 gap-2 items-center  border ${
-              active == "creator" ? "border-[#5B52C7]" : ""
+              active == "creator" ? "border-primary-brown" : ""
             }  rounded-[15px] cursor-pointer`}
             onClick={() => setActive("creator")}
           >
@@ -48,15 +48,15 @@ const Screen4 = ({ screen, setScreen }) => {
         </div>
 
         <button
-          className="bg-gradient-to-l from-pink-500 to-indigo-600 h-[60px] rounded-full text-white font-semibold text-lg w-full"
+          className="bg-primaryButton h-[60px] rounded-full text-white font-semibold text-lg w-full"
           onClick={() => setScreen("screen_5")}
         >
           Continue
         </button>
       </div>
       <div className=" flex justify-center">
-        <Link className=" text-[#5C50C7]" href={"/login"}>
-          Login to Account
+        <Link className="  text-primary-green" href={"/login"}>
+          Login
         </Link>
       </div>
     </>
