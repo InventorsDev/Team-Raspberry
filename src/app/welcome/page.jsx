@@ -52,6 +52,7 @@ export default function Home() {
               className={` w-[22px]  rounded-full ${
                 screen == i ? " bg-primary-green" : "bg-white"
               }`}
+              onClick={() => setScreen(i)}
             />
           ))}
         </div>
@@ -61,11 +62,16 @@ export default function Home() {
         <p className=" font-semibold text-center text-sm">
           {data[screen < 3 ? screen : 0].text}
         </p>
-        <button
-          className=" bg-white grid place-items-center w-[60px] h-[60px] rounded-full "
-          onClick={handleClick}
-        >
-          <img src="/forward-arrow.svg" alt="" />
+        <button onClick={handleClick}>
+          {screen < 2 ? (
+            <div className=" bg-white grid place-items-center w-[60px] h-[60px] rounded-full ">
+              <img src="/forward-arrow.svg" alt="" />
+            </div>
+          ) : (
+            <div className=" p-3 bg-primaryButton rounded-full">
+              GET STARTED
+            </div>
+          )}
         </button>
       </div>
     </div>
