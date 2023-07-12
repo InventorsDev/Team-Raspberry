@@ -44,10 +44,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'drf_spectacular',
     'accounts',
-    'drf_stripe',
     'corsheaders',
-    'django_cleanup',
-    'main',
 ]
 
 MIDDLEWARE = [
@@ -169,12 +166,6 @@ SPECTACULAR_SETTINGS = {
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
     # OTHER SETTINGS
-}
-
-DRF_STRIPE = {
-    "STRIPE_API_SECRET": config('STRIPE_TEST_SECRET_KEY'),
-    "STRIPE_WEBHOOK_SECRET": config('STRIPE_WEBHOOK_SECRET'),
-    "FRONT_END_BASE_URL": config('FRONT_END_BASE_URL')
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
