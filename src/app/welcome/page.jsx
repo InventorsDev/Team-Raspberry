@@ -10,17 +10,17 @@ export default function Home() {
   const [screen, setScreen] = useState(0);
   const data = [
     {
-      img: "/screen1.png",
+      img: "/screen1.svg",
       title: "Learn Anytime, Anywhere",
       text: "Enjoy the captivating process of online education in a place & at a time of your choice, Comfort and Convenience.",
     },
     {
-      img: "/screen2.png",
+      img: "/screen2.svg",
       title: "Have Access To Everything",
       text: "Unlock a world of knowledge and gain seamless access to everything you need for your educational journey.",
     },
     {
-      img: "/screen3.png",
+      img: "/screen3.svg",
       title: "Thousand Of Course Activities",
       text: "Discover a world of educational opportunities through our diverse selection of a thousand courses designed to enhance your learning experience.",
     },

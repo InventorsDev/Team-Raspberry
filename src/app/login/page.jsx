@@ -1,37 +1,44 @@
 "use client";
 import axios from "axios";
 import Link from "next/link";
-import React from "react";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const page = () => {
+  const router = useRouter();
+
   const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [errror, setError] = useState();
+  const [username, setUsername] = useState("");
+  const [error, setError] = useState();
+
+  useEffect(() => {
+    if (error) {
+      if (error.error) {
+        toast.error("invalid credentials");
+      }
+    }
+  }, [error]);
 
   const handleLogin = (e) => {
     e.preventDefault();
-    axios
-      .post("https://unique.pythonanywhere.com/signup/", {
-        username: "heyad",
-        first_name: "james",
-        last_name: "brend",
-        email: email,
-        password: password,
-      })
-      .then((res) => {
-        console.log(res.Object.response);
-        console.log("Successful");
-      })
-      .catch((error) => {
-        console.log(error.response.data);
-      });
+    toast.error("invalid credentials");
 
-    console.log(`
-      USER:
-      Email: ${email},
-      Password: ${password}
-    `);
+    // axios
+    //   .post("https://unique.pythonanywhere.com/login/", {
+    //     username: username,
+    //     password: password,
+    //   })
+    //   .then((res) => {
+    //     // console.log(res.Object.response);
+    //     console.log("Successful");
+    //     router.push("/dashboard");
+    //   })
+    //   .catch((err) => {
+    //     setError(err.response.data);
+    //     console.log(err.response.data);
+    //   });
   };
 
   return (
@@ -45,20 +52,20 @@ const page = () => {
           <div className=" flex flex-col gap-8">
             <div className=" border border-primary-green h-[60px] rounded-full p-2">
               <p className=" bg-white w-min mt-[-20px] ml-[30px] px-1 text-[#8a8a8a] text-sm font-extralight">
-                Email
+                Username
               </p>
               <input
                 type="text"
                 required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 className=" w-full h-full bg-transparent outline-none px-3"
-                placeholder="Example@gmail.com"
+                placeholder="Enter Username"
               />
             </div>
             <div className=" border border-primary-green h-[60px] rounded-full p-2">
               <input
-                type="text"
+                type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -82,6 +89,19 @@ const page = () => {
             Login with Face ID
           </button>
         </form>
+        <ToastContainer
+          className=" mb-8"
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
         {/* <p className=" w-full text-center">OR</p> */}
       </div>
 

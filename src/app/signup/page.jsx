@@ -1,20 +1,39 @@
 "use client";
-import Screen1 from "@/components/signup/Screen1";
+
+// import Screen1 from "@/components/Screen1";
+// import Screen1 from "@/components/signup/Screen1";
 import Screen2 from "@/components/signup/Screen2";
-import Screen3 from "@/components/signup/Screen3";
-import Screen4 from "@/components/signup/Screen4";
-import Screen5 from "@/components/signup/Screen5";
-import Screen6 from "@/components/signup/Screen6";
+// import Screen3 from "@/components/signup/Screen3";
+import FinalScreen from "../../components/signup/FinalScreen";
 import Success from "@/components/signup/Success";
 import { useState } from "react";
+import Dummy from "../../components/signup/Screen1";
 
 export default function Home() {
-  const [screen, setScreen] = useState("screen_1");
+  const [screen, setScreen] = useState("screen_4");
+  const [formData, setFormData] = useState({
+    username: "",
+    fullname: "",
+    password: "",
+    email: "",
+    typeOfUser: "student",
+  });
 
   let currentScreen;
   switch (screen) {
     case "screen_1":
-      currentScreen = <Screen1 screen={screen} setScreen={setScreen} />;
+      currentScreen = (
+        <Dummy
+          screen={screen}
+          setScreen={setScreen}
+          fullname={formData.fullname}
+          email={formData.email}
+          password={formData.password}
+          setFullname={(value) => setFormData({ ...formData, fullname: value })}
+          setEmail={(value) => setFormData({ ...formData, email: value })}
+          setPassword={(value) => setFormData({ ...formData, password: value })}
+        />
+      );
       break;
 
     case "screen_2":
@@ -22,19 +41,30 @@ export default function Home() {
       break;
 
     case "screen_3":
-      currentScreen = <Screen3 screen={screen} setScreen={setScreen} />;
+      currentScreen = (
+        <Screen3
+          screen={screen}
+          setScreen={setScreen}
+          typeOfUser={formData.typeOfUser}
+          setTypeOfUser={(value) =>
+            setFormData({ ...formData, typeOfUser: value })
+          }
+        />
+      );
       break;
 
     case "screen_4":
-      currentScreen = <Screen4 screen={screen} setScreen={setScreen} />;
-      break;
-
-    case "screen_5":
-      currentScreen = <Screen5 screen={screen} setScreen={setScreen} />;
-      break;
-
-    case "screen_6":
-      currentScreen = <Screen6 screen={screen} setScreen={setScreen} />;
+      currentScreen = (
+        <FinalScreen
+          screen={screen}
+          setScreen={setScreen}
+          username={formData.username}
+          fullname={formData.fullname}
+          email={formData.email}
+          password={formData.password}
+          setUserName={(value) => setFormData({ ...formData, username: value })}
+        />
+      );
       break;
 
     case "success":

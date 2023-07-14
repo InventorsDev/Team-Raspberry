@@ -1,7 +1,7 @@
-import React from "react";
 import Link from "next/link";
+import { useState } from "react";
 
-const Screen3 = ({ screen, setScreen }) => {
+const Screen3 = ({ screen, setScreen, typeOfUser, setTypeOfUser }) => {
   return (
     <>
       <div className=" flex flex-col gap-12">
@@ -13,14 +13,37 @@ const Screen3 = ({ screen, setScreen }) => {
             Create an account
           </p>
         </div>
-        <div className=" flex gap-5 flex-col">
-          <p className=" font-semibold text-[22px]">What should we call you</p>
-          <p>Enter your full name</p>
+        <p className=" font-semibold text-[22px]">Choose your role</p>
+
+        <div className=" flex flex-col gap-5">
+          <div
+            className={` flex p-3 gap-2 items-center  border ${
+              typeOfUser == "student" ? "border-primary-green" : ""
+            }  rounded-[15px] cursor-pointer`}
+            onClick={() => setTypeOfUser("student")}
+          >
+            <img src="/student-icon.svg" alt="" />
+            <div>
+              <p className=" font-semibold">Student</p>
+              <p className=" opacity-50 text-sm">come and learn</p>
+            </div>
+          </div>
+          <div
+            className={` flex p-3 gap-2 items-center  border ${
+              typeOfUser == "creator" ? "border-primary-brown" : ""
+            }  rounded-[15px] cursor-pointer`}
+            onClick={() => setTypeOfUser("creator")}
+          >
+            <img src="/tutor-icon.svg" alt="" />
+            <div>
+              <p className=" font-semibold">Creator</p>
+              <p className=" opacity-50 text-sm">
+                just create beautiful content
+              </p>
+            </div>
+          </div>
         </div>
-        <input
-          type="text"
-          className="  h-[60px] rounded-full border border-primary-green outline-none px-3"
-        />
+
         <button
           className="bg-primaryButton h-[60px] rounded-full text-white font-semibold text-lg w-full"
           onClick={() => setScreen("screen_4")}

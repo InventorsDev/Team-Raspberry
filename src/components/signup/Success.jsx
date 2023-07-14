@@ -1,6 +1,9 @@
 import React from "react";
+import { useRouter } from "next/navigation";
 
 const Success = () => {
+  const router = useRouter();
+
   return (
     <div className=" flex w-full h-full justify-center items-center flex-col gap-[30px]">
       <img src="/white-checkmark.svg" alt="" />
@@ -10,7 +13,7 @@ const Success = () => {
           YAY! your account has been created successfully.
         </p>
       </div>
-      <button className="bg-primaryButton h-[60px] rounded-full text-white font-semibold text-lg w-full">
+      <button className="bg-primaryButton h-[60px] rounded-full text-white font-semibold text-lg w-full" onClick={() => router.push("/dashboard")}>
         Continue
       </button>
     </div>

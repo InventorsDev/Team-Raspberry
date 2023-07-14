@@ -14,10 +14,9 @@ const Screen2 = ({ screen, setScreen }) => {
           </p>
         </div>
         <div className=" flex gap-5 flex-col">
-          <p className=" font-semibold text-[22px]">Phone verification</p>
+          <p className=" font-semibold text-[22px]">Email verification</p>
           <p>
-            Please check your phone for the verification code sent and input the
-            code in the box.
+            Please check your Email for the verification code sent to you.
           </p>
         </div>
         <div className=" flex justify-between px-2">
@@ -30,7 +29,7 @@ const Screen2 = ({ screen, setScreen }) => {
         </div>
         <div className=" flex gap-5 flex-col items-center">
           <button
-            className=" bg-primaryButton h-[60px] rounded-full text-white font-semibold text-lg w-full"
+            className="bg-primaryButton h-[60px] rounded-full text-white font-semibold text-lg w-full"
             onClick={() => setScreen("screen_3")}
           >
             Verify
@@ -41,7 +40,9 @@ const Screen2 = ({ screen, setScreen }) => {
         </div>
       </div>
       <div className=" flex justify-center">
-        <Link href={"/login"} className=" text-primary-green">Login</Link>
+        <Link className="  text-primary-green" href={"/login"}>
+          Login
+        </Link>
       </div>
     </>
   );
