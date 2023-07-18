@@ -40,12 +40,26 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+
     'rest_framework',
     'rest_framework.authtoken',
+
     'drf_spectacular',
+
     'accounts',
     'corsheaders',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
+
+    'rest_registration',
 ]
+SITE_ID = 1
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
@@ -169,4 +183,30 @@ SPECTACULAR_SETTINGS = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+EMAIL_CONFIRM_REDIRECT_BASE_URL = f"{config('FRONT_END_BASE_URL')}/email/confirm/"
+
+# <PASSWORD_RESET_CONFIRM_REDIRECT_BASE_URL>/<uidb64>/<token>/
+PASSWORD_RESET_CONFIRM_REDIRECT_BASE_URL = f"{config('FRONT_END_BASE_URL')}password-reset/confirm/"
+
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_USE_SSL = True
+# EMAIL_PORT = 465
+# EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+# DEFAULT_FROM_EMAIL = config('EMAIL_HOST_USER') 
+
+
+REST_REGISTRATION = {
+    'REGISTER_VERIFICATION_URL': f'{config("FRONT_END_BASE_URL")}/verify-user/',
+    'RESET_PASSWORD_VERIFICATION_URL': f'{config("FRONT_END_BASE_URL")}/reset-password/',
+    'REGISTER_EMAIL_VERIFICATION_URL': f'{config("FRONT_END_BASE_URL")}/verify-email/',
+
+    'VERIFICATION_FROM_EMAIL': 'no-reply@example.com',
+}
 
