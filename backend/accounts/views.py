@@ -9,6 +9,7 @@ from rest_framework.decorators import api_view
 from rest_framework.reverse import reverse
 from drf_spectacular.utils import extend_schema,OpenApiResponse
 
+
 from django.conf import settings
 from django.http import HttpResponseRedirect
 
@@ -36,7 +37,7 @@ def api_root(request,format=None):
         }
 
     )
-# 
+
 # 
 # class SignUpView(generics.CreateAPIView):
     # queryset = MyUser.objects.all()
