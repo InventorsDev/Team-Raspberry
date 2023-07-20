@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <p>Hello {{ admin.username }},</p>
+    <p>A new user, {{ user.username }}, has registered on our website and requires activation.</p>
+    <p>Please activate their account by clicking on the following link:</p>
+    <p><a href="{{ activation_url }}">{{ activation_url }}</a></p>
+    <p>Thank you.</p>
+    <p>Sincerely, {{ current_site }}</p>
+</body>
+</html>
