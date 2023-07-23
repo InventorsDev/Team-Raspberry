@@ -14,15 +14,22 @@ from django.urls import reverse
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from django.contrib.auth import get_user_model
+from django.conf import settings
 
 
 from .serializers import CreatorRegistrationSerializer, EmailVerificationSerializer
 
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+from allauth.socialaccount.providers.oauth2.client import OAuth2Client
+from dj_rest_auth.registration.views import SocialLoginView
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import RedirectView
+
 
 User = get_user_model()
 
-
-# Create your views here.
+    
 
 @api_view(['GET'])
 def api_root(request,format=None):
@@ -36,6 +43,27 @@ def api_root(request,format=None):
         }
 
     )
+
+class UserRedirectView(LoginRequiredMixin, RedirectView):
+    """
+    This view is needed by the dj-rest-auth-library in order to work the google login. It's a bug.
+    """
+
+    permanent = False
+
+    def get_redirect_url(self):
+        return "redirect-url"
+
+
+class GoogleLoginView(SocialLoginView):
+    adapter_class = GoogleOAuth2Adapter
+    callback_url = 'http://localhost:3000'
+    client_class = OAuth2Client
+
+    def get_serializer(self, *args, **kwargs):
+        serializer_class = self.get_serializer_class()
+        kwargs['context'] = self.get_serializer_context()
+        return serializer_class(*args, **kwargs)
 
 
 class CreatorRegistrationView(generics.CreateAPIView):
@@ -73,6 +101,7 @@ class CreatorRegistrationView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         user = serializer.save()
+        user.set_password(serializer.validated_data["password"])
         user.is_active = False  # Set the user as inactive initially
         user.save()
         return user

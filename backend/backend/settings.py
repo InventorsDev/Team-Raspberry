@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 
     'dj_rest_auth',
     'dj_rest_auth.registration',
@@ -192,15 +193,13 @@ EMAIL_CONFIRM_REDIRECT_BASE_URL = f"{config('FRONT_END_BASE_URL')}/email/confirm
 PASSWORD_RESET_CONFIRM_REDIRECT_BASE_URL = f"{config('FRONT_END_BASE_URL')}password-reset/confirm/"
 
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_USE_SSL = True
-# EMAIL_PORT = 465
-# EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-# DEFAULT_FROM_EMAIL = config('EMAIL_HOST_USER') 
+EMAIL_BACKEND = config('EMAIL_BACKEND')
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_SSL = True
+EMAIL_PORT = 465
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = config('EMAIL_HOST_USER') 
 
 
 REST_REGISTRATION = {
@@ -210,4 +209,10 @@ REST_REGISTRATION = {
 
     'VERIFICATION_FROM_EMAIL': 'no-reply@example.com',
 }
+
+ACCOUNT_EMAIL_VERIFICATION = "none"
+
+GOOGLE_CLIENT_ID = config('GOOGLE_CLIENT_ID')
+GOOGLE_CLIENT_SECRET = config('GOOGLE_CLIENT_SECRET')
+
 

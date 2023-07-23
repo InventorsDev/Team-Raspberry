@@ -27,6 +27,7 @@ urlpatterns = [
 
 
     path('login/', login, name='login'),
+    path('login/google/',GoogleLoginView.as_view(),name='google_login'),
     path('logout/', logout, name='logout'),
     path('profile/', profile, name='profile'),
 
@@ -39,5 +40,9 @@ urlpatterns = [
 
     path('register-email/', register_email, name='register-email'),
     path('verify-email/', verify_email, name='verify-email'),
+    
+#     path('dj-rest-auth/',include('dj_rest_auth.urls')),
+    path('allauth/', include('allauth.urls')),
 
+    path("~redirect/", view=UserRedirectView.as_view(), name="redirect")
 ]
