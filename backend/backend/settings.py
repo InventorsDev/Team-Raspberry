@@ -208,6 +208,10 @@ REST_REGISTRATION = {
     'REGISTER_EMAIL_VERIFICATION_URL': f'{config("FRONT_END_BASE_URL")}/verify-email/',
 
     'VERIFICATION_FROM_EMAIL': 'no-reply@example.com',
+    'REGISTER_VERIFICATION_EMAIL_TEMPLATES': {
+        'subject':'accounts/subject.txt',
+        'html_body':  'accounts/email_verification.html',
+    },
 }
 
 ACCOUNT_EMAIL_VERIFICATION = "none"
