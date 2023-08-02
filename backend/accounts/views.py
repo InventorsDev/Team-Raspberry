@@ -167,7 +167,7 @@ class AdminActivateUserView(generics.GenericAPIView):
     serializer_class = EmailVerificationSerializer
 
     def send_activated_account_email(self, user):
-        email_subject = 'Account activated'
+        email_subject = 'Raspberry-Account activated'
         email_body = render_to_string(
             'activated_account.html',
             {
