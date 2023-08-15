@@ -1,20 +1,19 @@
 "use client";
 
-// import Screen1 from "@/components/Screen1";
-// import Screen1 from "@/components/signup/Screen1";
-import Screen2 from "@/components/signup/Screen2";
-// import Screen3 from "@/components/signup/Screen3";
-import FinalScreen from "../../components/signup/FinalScreen";
-import Success from "@/components/signup/Success";
 import { useState } from "react";
-import Dummy from "../../components/signup/Screen1";
+import FinalScreen from "../../components/signup/FinalScreen";
+import Screen1 from "../../components/signup/Screen1";
+import Screen2 from "../../components/signup/Screen2";
+import Screen3 from "../../components/signup/Screen3";
+import Success from "../../components/signup/Success";
 
 export default function Home() {
-  const [screen, setScreen] = useState("screen_4");
+  const [screen, setScreen] = useState("screen_2");
   const [formData, setFormData] = useState({
     username: "",
     fullname: "",
     password: "",
+    confirmPassword: "",
     email: "",
     typeOfUser: "student",
   });
@@ -23,15 +22,19 @@ export default function Home() {
   switch (screen) {
     case "screen_1":
       currentScreen = (
-        <Dummy
+        <Screen1
           screen={screen}
           setScreen={setScreen}
           fullname={formData.fullname}
           email={formData.email}
           password={formData.password}
+          confirmPassword={formData.confirmPassword}
           setFullname={(value) => setFormData({ ...formData, fullname: value })}
           setEmail={(value) => setFormData({ ...formData, email: value })}
           setPassword={(value) => setFormData({ ...formData, password: value })}
+          setConfirmPassword={(value) =>
+            setFormData({ ...formData, confirmPassword: value })
+          }
         />
       );
       break;
@@ -62,6 +65,7 @@ export default function Home() {
           fullname={formData.fullname}
           email={formData.email}
           password={formData.password}
+          confirmPassword={formData.confirmPassword}
           setUserName={(value) => setFormData({ ...formData, username: value })}
         />
       );

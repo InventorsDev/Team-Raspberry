@@ -1,7 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
+import axios from "axios";
 
-const Screen1 = ({setScreen}) => {
+const Screen1 = ({ setScreen }) => {
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = async () => {
+    try {
+      const res = await axios.post(
+        "https://unique.pythonanywhere.com/send-reset-password-link/",
+        {
+          email: email,
+        }
+      );
+      console.log("Successful");
+      setScreen("screen_2");
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <>
       <div className=" flex flex-col gap-12">
@@ -20,8 +37,15 @@ const Screen1 = ({setScreen}) => {
         <input
           type="text"
           className="  h-[60px] rounded-full border border-primary-green outline-none px-3"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          placeholder="example@gmail.com"
         />
-        <button className=" bg-primaryButton h-[60px] rounded-full text-white font-semibold text-lg w-full" onClick={() => setScreen("screen_2")}>
+        <button
+          className=" bg-primaryButton h-[60px] rounded-full text-white font-semibold text-lg w-full"
+          onClick={handleSubmit}
+        >
           Send reset email
         </button>
       </div>

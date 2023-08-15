@@ -23,22 +23,22 @@ const page = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    toast.error("invalid credentials");
+    // toast.error("invalid credentials");
 
-    // axios
-    //   .post("https://unique.pythonanywhere.com/login/", {
-    //     username: username,
-    //     password: password,
-    //   })
-    //   .then((res) => {
-    //     // console.log(res.Object.response);
-    //     console.log("Successful");
-    //     router.push("/dashboard");
-    //   })
-    //   .catch((err) => {
-    //     setError(err.response.data);
-    //     console.log(err.response.data);
-    //   });
+    axios
+      .post("https://unique.pythonanywhere.com/login/", {
+        username: username,
+        password: password,
+      })
+      .then((res) => {
+        // console.log(res.Object.response);
+        console.log("Successful");
+        router.push("/dashboard");
+      })
+      .catch((err) => {
+        setError(err.response.data);
+        console.log(err.response.data);
+      });
   };
 
   return (

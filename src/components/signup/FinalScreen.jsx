@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -14,6 +14,7 @@ const FinalScreen = ({
   fullname,
   email,
   password,
+  confirmPassword,
 }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
@@ -33,27 +34,26 @@ const FinalScreen = ({
   }, [error]);
 
   const handleSubmit = () => {
-    toast.error("password field should not be empty");
-
     setLoading(true);
-    // if (username.length > 2) {
-    //   axios
-    //     .post("https://unique.pythonanywhere.com/signup/", {
-    //       username: username,
-    //       first_name: fullname,
-    //       last_name: fullname,
-    //       email: email,
-    //       password: password,
-    //     })
-    //     .then((res) => {
-    //       console.log("Successful");
-    //       setScreen("success");
-    //     })
-    //     .catch((err) => {
-    //       setError(err.response.data);
-    //       console.log(err.response.data);
-    //     });
-    // }
+    if (username.length > 2) {
+      axios
+        .post("https://unique.pythonanywhere.com/student-register/", {
+          username: username,
+          first_name: fullname,
+          last_name: fullname,
+          email: email,
+          password: password,
+          password_confirm: confirmPassword,
+        })
+        .then((res) => {
+          console.log("Successful");
+          setScreen("success");
+        })
+        .catch((err) => {
+          setError(err.response.data);
+          console.log(err.response.data);
+        });
+    }
   };
 
   return (
@@ -100,7 +100,7 @@ const FinalScreen = ({
           newestOnTop={false}
           closeOnClick
           rtl={false}
-          // pauseOnFocusLoss
+          pauseOnFocusLoss
           draggable
           pauseOnHover
           theme="light"

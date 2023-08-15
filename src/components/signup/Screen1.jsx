@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
 
 const FirstScreen = ({
   screen,
@@ -11,22 +10,19 @@ const FirstScreen = ({
   setFullname,
   setEmail,
   setPassword,
+  confirmPassword,
+  setConfirmPassword,
 }) => {
   const isValidEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
   const validEmail = email && email.match(isValidEmail);
-
-  const [confirmPassword, setConfirmPassword] = useState("");
   const isPasswordMatch =
     (password === confirmPassword) & (password?.length >= 8);
   const isSubmitDisabled = !isPasswordMatch;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (isPasswordMatch && validEmail && fullname.length) {
       setScreen("screen_2");
-      console.log("Passwords match");
-    } else {
-      console.log("Passwords do not match");
     }
   };
 
