@@ -28,7 +28,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/components/cards/CourseCard.jsx", "src/components/cards/OngoingCard.jsx", "src/components/cards/PopularCard.jsx", "src/components/cards/TopicCard.jsx"  ],
   "exclude": [
     "node_modules"
   ]

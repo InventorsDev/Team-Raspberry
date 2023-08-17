@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Edit from "../../components/profile/Edit";
 import Save from "../../components/profile/Save";
+import Navbar from "../../components/Navbar";
 
 const page = () => {
   const [screen, setScreen] = useState("edit");
@@ -23,18 +24,22 @@ const page = () => {
             />
           )}
           <p className=" font-semibold text-lg absolute left-1/2 transform -translate-x-1/2">
-            Your Profile
+            Profile
           </p>
         </div>
 
-        <>{screen == "edit" ? <Edit /> : <Save />}</>
+        <>{screen == "edit" ? <Edit setScreen={setScreen} /> : <Save />}</>
       </div>
-      <button
-        className=" bg-primaryButton h-[60px] rounded-full text-white"
-        onClick={() => setScreen(!screen)}
-      >
-        {screen == "edit" ? "Edit" : "Save"}
-      </button>
+      {screen == "edit" ? (
+        <Navbar />
+      ) : (
+        <button
+          className=" bg-primaryButton h-[60px] rounded-full text-white"
+          onClick={() => setScreen("edit")}
+        >
+          Save
+        </button>
+      )}
     </div>
   );
 };
