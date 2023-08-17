@@ -92,7 +92,7 @@ const page = () => {
             </div>
             <p className=" mt-8 font-bold">Chemistry</p>
             <div className=" flex flex-wrap justify-between gap-6">
-            {savedVideos.chemistry.map((items, i) => (
+              {savedVideos.chemistry.map((items, i) => (
                 <TopicCard
                   img={items.img}
                   noCourse={items.noCourse}
@@ -155,7 +155,7 @@ const page = () => {
             </div>
             <p className="  font-bold">Geology</p>
             <div className=" flex flex-wrap justify-between gap-6">
-            {savedBooks.geology.map((item, i) => (
+              {savedBooks.geology.map((item, i) => (
                 <BookCard slug={"36743"} image={item.img} topic={item.title} />
               ))}
             </div>
