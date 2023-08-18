@@ -2,7 +2,7 @@ import React from "react";
 import CourseCard from "../../components/cards/CourseCard";
 import PopularCard from "../../components/cards/PopularCard";
 import OngoingCard from "../../components/cards/OngoingCard";
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/nav/Navbar";
 import Link from "next/link";
 
 const page = () => {
