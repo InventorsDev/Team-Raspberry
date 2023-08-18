@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import Navbar from "../../components/Navbar";
-import BookCard from "../../components/cards/BookCard"
+import Navbar from "../../components/nav/Navbar";
+import BookCard from "../../components/cards/BookCard";
 
 const page = () => {
   const books = {
@@ -78,10 +78,10 @@ const page = () => {
           Geology
         </p>
       </div>
-      
+
       <div className=" flex gap-6 flex-wrap justify-between mt-6 overflow-y-auto h-[50vh] pb-5">
         {books[screen].map((item, i) => (
-          <BookCard slug={"36743"} image={item.img} topic={item.title}  />
+          <BookCard slug={"36743"} image={item.img} topic={item.title} />
         ))}
       </div>
       <Navbar />

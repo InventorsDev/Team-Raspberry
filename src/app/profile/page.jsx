@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Edit from "../../components/profile/Edit";
 import Save from "../../components/profile/Save";
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/nav/Navbar";
 
 const page = () => {
   const [screen, setScreen] = useState("edit");

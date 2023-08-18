@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import TopicCard from "../../components/cards/TopicCard";
 import BookCard from "../../components/cards/BookCard";
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/nav/Navbar";
 
 const page = () => {
   const [showVideos, setShowVideos] = useState(true);
