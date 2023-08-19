@@ -13,33 +13,39 @@ class QuizView(generics.ListCreateAPIView):
     serializer_class = QuizSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
+
 class QuizDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Quiz.objects.all()
     serializer_class = QuizSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-    
+
 class QuestionView(generics.ListCreateAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
 
 class QuestionDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
+
 class AnswerView(generics.ListCreateAPIView):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
 
 class AnswerDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
+
 class QuizAttemptView(generics.ListCreateAPIView):
+    """The selected_answers is to be sent in the format {"question_id": "answer_id"}"""
     queryset = QuizAttempt.objects.all()
     serializer_class = QuizAttemptSerializer
     permission_classes = [permissions.IsAuthenticated,]
@@ -50,7 +56,8 @@ class QuizAttemptView(generics.ListCreateAPIView):
     def get_queryset(self):
         return QuizAttempt.objects.filter(user_id=self.request.user)
 
+
 class QuizAttemptDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = QuizAttempt.objects.all()
     serializer_class = QuizAttemptSerializer
-    permission_classes = [permissions.IsAuthenticated,IsQuizOwner]
+    permission_classes = [permissions.IsAuthenticated, IsQuizOwner]

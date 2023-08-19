@@ -26,6 +26,7 @@ class QuizAttemptSerializer(serializers.ModelSerializer):
         model = QuizAttempt
         fields = ['id', 'user_id', 'quiz_id', 'score', 'timestamp','selected_answers']
 
+
     def create(self, validated_data):
         selected_answers = validated_data.pop('selected_answers')
         quiz = validated_data['quiz_id']
