@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_cleanup',
     'main',
+    'quizapp',
 ]
 
 MIDDLEWARE = [
