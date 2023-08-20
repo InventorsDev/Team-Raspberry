@@ -1,5 +1,4 @@
 # REST imports
-from rest_framework import viewsets
 from rest_framework import generics
 from rest_framework.permissions import *
 # Custom import
@@ -13,7 +12,7 @@ from .permissions import *
 class VideoList(generics.ListCreateAPIView):
     queryset = Video.objects.all()
     serializer_class = VideoSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly,IsContentCreatorOrReadOnly]
 
     def perform_create(self, serializer):
         serializer.save(creator_id=self.request.user)
@@ -23,4 +22,4 @@ class VideoDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Video.objects.all()
     serializer_class = VideoSerializer
     lookup_field = 'id'
-    permission_classes = [IsAuthenticatedOrReadOnly, IsCreatorOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsVideoOwnerOrReadOnly]
