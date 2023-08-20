@@ -3,7 +3,7 @@ from rest_framework import generics
 from .models import *
 from .serializers import *
 from rest_framework import permissions
-from .permissions import IsQuizOwner
+from .permissions import IsQuizOwner,IsContentCreatorOrReadOnly
 
 # Create your views here.
 
@@ -11,37 +11,37 @@ from .permissions import IsQuizOwner
 class QuizView(generics.ListCreateAPIView):
     queryset = Quiz.objects.all()
     serializer_class = QuizSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,IsContentCreatorOrReadOnly]
 
 
 class QuizDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Quiz.objects.all()
     serializer_class = QuizSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,IsContentCreatorOrReadOnly]
 
 
 class QuestionView(generics.ListCreateAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,IsContentCreatorOrReadOnly]
 
 
 class QuestionDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,IsContentCreatorOrReadOnly]
 
 
 class AnswerView(generics.ListCreateAPIView):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,IsContentCreatorOrReadOnly]
 
 
 class AnswerDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,IsContentCreatorOrReadOnly]
 
 
 class QuizAttemptView(generics.ListCreateAPIView):
