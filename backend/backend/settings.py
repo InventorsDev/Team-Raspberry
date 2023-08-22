@@ -50,6 +50,9 @@ INSTALLED_APPS = [
 
     'accounts',
     'corsheaders',
+    'django_cleanup',
+    'main',
+    'quizapp',
 
     'allauth',
     'allauth.account',
