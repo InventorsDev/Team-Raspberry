@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_cleanup',
     'main',
+    'gdstorage',
 ]
 
 MIDDLEWARE = [
@@ -178,4 +179,7 @@ DRF_STRIPE = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = BASE_DIR / 'google_storage.json'
+# GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE_CONTENTS = config("GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE_CONTENTS")
 

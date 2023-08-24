@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from gdstorage.storage import GoogleDriveStorage
 
 # Create your models here.
 
@@ -15,11 +16,15 @@ STATUS = (
 )
 
 
+# Define Google Drive Storage
+gd_storage = GoogleDriveStorage()
+
+
 class Video(models.Model):
     title = models.CharField(max_length=500)
     description = models.TextField(null=True)
     creator_id = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    video_file = models.FileField(upload_to='videos/file/')
+    video_file = models.FileField(upload_to='videos/file/',storage=gd_storage)
     level = models.CharField(max_length=20,choices=LEVEL_CHOICES,default='beginner')
     uploaded_at = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS,default=0)
