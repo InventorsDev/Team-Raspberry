@@ -15,6 +15,7 @@ from pathlib import Path
 import os
 # import dj_database_url
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -40,16 +41,31 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+
     'rest_framework',
     'rest_framework.authtoken',
+
     'drf_spectacular',
+
     'accounts',
-    'drf_stripe',
     'corsheaders',
     'django_cleanup',
     'main',
     'gdstorage',
+    'quizapp',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
+
+    'rest_registration',
 ]
+SITE_ID = 1
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
@@ -161,24 +177,47 @@ SPECTACULAR_SETTINGS = {
     'SWAGGER_UI_DIST': 'SIDECAR',  # shorthand to use the sidecar instead
     'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
     'REDOC_DIST': 'SIDECAR',
-    # OTHER SETTINGS
-}
-
-SPECTACULAR_SETTINGS = {
-    'TITLE': 'Educational App Api',
+    'TITLE': 'Raspberry App Api docs',
     # 'DESCRIPTION': 'Your project description',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
-    # OTHER SETTINGS
-}
-
-DRF_STRIPE = {
-    "STRIPE_API_SECRET": config('STRIPE_TEST_SECRET_KEY'),
-    "STRIPE_WEBHOOK_SECRET": config('STRIPE_WEBHOOK_SECRET'),
-    "FRONT_END_BASE_URL": config('FRONT_END_BASE_URL')
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+EMAIL_CONFIRM_REDIRECT_BASE_URL = f"{config('FRONT_END_BASE_URL')}/email/confirm/"
+
+# <PASSWORD_RESET_CONFIRM_REDIRECT_BASE_URL>/<uidb64>/<token>/
+PASSWORD_RESET_CONFIRM_REDIRECT_BASE_URL = f"{config('FRONT_END_BASE_URL')}password-reset/confirm/"
+
+
+EMAIL_BACKEND = config('EMAIL_BACKEND')
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_SSL = True
+EMAIL_PORT = 465
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = config('EMAIL_HOST_USER') 
+
+
+REST_REGISTRATION = {
+    'REGISTER_VERIFICATION_URL': f'{config("FRONT_END_BASE_URL")}/verify-user/',
+    'RESET_PASSWORD_VERIFICATION_URL': f'{config("FRONT_END_BASE_URL")}/reset-password/',
+    'REGISTER_EMAIL_VERIFICATION_URL': f'{config("FRONT_END_BASE_URL")}/verify-email/',
+
+    'VERIFICATION_FROM_EMAIL': 'no-reply@example.com',
+    'REGISTER_VERIFICATION_EMAIL_TEMPLATES': {
+        'subject':'accounts/subject.txt',
+        'html_body':  'accounts/email_verification.html',
+    },
+}
+
+ACCOUNT_EMAIL_VERIFICATION = "none"
+
+GOOGLE_CLIENT_ID = config('GOOGLE_CLIENT_ID')
+GOOGLE_CLIENT_SECRET = config('GOOGLE_CLIENT_SECRET')
+
 
 GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = BASE_DIR / 'google_storage.json'
 # GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE_CONTENTS = config("GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE_CONTENTS")
