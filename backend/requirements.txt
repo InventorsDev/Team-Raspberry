@@ -13,11 +13,18 @@ Django==4.2.2
 django-allauth==0.54.0
 django-cleanup==8.0.0
 django-cors-headers==4.1.0
+django-googledrive-storage==1.6.0
 django-rest-registration==0.8.2
 djangorestframework==3.14.0
 drf-spectacular==0.26.2
 drf-spectacular-sidecar==2023.6.1
 drf-stripe-subscription==1.2.0
+google-api-core==2.10.2
+google-api-python-client==2.97.0
+google-auth==1.35.0
+google-auth-httplib2==0.1.0
+google-auth-oauthlib==1.0.0
+googleapis-common-protos==1.60.0
 google-auth==2.22.0
 google-auth-httplib2==0.1.0
 google-auth-oauthlib==1.0.0
@@ -29,6 +36,7 @@ jsonschema==4.17.3
 oauthlib==3.2.2
 pdf2image==1.16.3
 Pillow==9.5.0
+protobuf==4.24.1
 pyasn1==0.5.0
 pyasn1-modules==0.3.0
 pycparser==2.21
@@ -37,6 +45,7 @@ PyJWT==2.7.0
 pyparsing==3.1.0
 PyPDF2==3.0.1
 pyrsistent==0.19.3
+python-dateutil==2.8.2
 python-decouple==3.8
 python3-openid==3.2.0
 pytz==2023.3

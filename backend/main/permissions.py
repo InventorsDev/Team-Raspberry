@@ -13,4 +13,4 @@ class IsContentCreatorOrReadOnly(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
 
-        return obj.user_type == 'content_creator'
+        return obj.creator_id.user_type == 'content_creator'
