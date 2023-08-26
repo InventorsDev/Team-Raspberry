@@ -18,7 +18,7 @@ from django.conf import settings
 from django.utils.html import strip_tags
 
 
-from .serializers import CreatorRegistrationSerializer, EmailVerificationSerializer
+from .serializers import RegistrationSerializer, EmailVerificationSerializer
 from decouple import config
 
 from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
@@ -47,6 +47,16 @@ def api_root(request,format=None):
 
     )
 
+class StudentSignUpView(generics.CreateAPIView):
+    queryset = get_user_model()
+    serializer_class = RegistrationSerializer
+    permission_classes = [AllowAny]
+
+    def perform_create(self, serializer):
+        user = serializer.save()
+        user.set_password(serializer.validated_data["password"])
+        user.save()
+
 class UserRedirectView(LoginRequiredMixin, RedirectView):
     """
     This view is needed by the dj-rest-auth-library in order to work the google login. It's a bug.
@@ -70,7 +80,7 @@ class GoogleLoginView(SocialLoginView):
 
 
 class CreatorRegistrationView(generics.CreateAPIView):
-    serializer_class = CreatorRegistrationSerializer
+    serializer_class = RegistrationSerializer
 
     def send_verification_email(self, user):
         user_id = urlsafe_base64_encode(force_bytes(user.pk))

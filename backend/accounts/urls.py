@@ -14,7 +14,7 @@ from rest_registration.api.views import (
 )
 
 urlpatterns = [
-    path('student-register/', register, name='register'),
+    path('student-register/', StudentSignUpView.as_view(), name='register'),
     path('student-verify-registration/',
          verify_registration, name='verify-registration'),
 
