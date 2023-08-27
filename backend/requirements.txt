@@ -21,7 +21,6 @@ drf-spectacular-sidecar==2023.6.1
 drf-stripe-subscription==1.2.0
 google-api-core==2.10.2
 google-api-python-client==2.97.0
-google-auth==1.35.0
 google-auth-httplib2==0.1.0
 google-auth-oauthlib==1.0.0
 googleapis-common-protos==1.60.0
