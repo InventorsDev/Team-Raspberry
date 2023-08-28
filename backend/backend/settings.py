@@ -51,13 +51,13 @@ INSTALLED_APPS = [
     'accounts',
     'corsheaders',
 
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.google',
 
-    'dj_rest_auth',
-    'dj_rest_auth.registration',
+    # 'dj_rest_auth',
+    # 'dj_rest_auth.registration',
 
     'rest_registration',
 ]
@@ -66,7 +66,7 @@ SITE_ID = 1
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    # "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -173,7 +173,7 @@ SPECTACULAR_SETTINGS = {
     # 'SWAGGER_UI_DIST': 'SIDECAR',  # shorthand to use the sidecar instead
     'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
     # 'REDOC_DIST': 'SIDECAR',
-    'TITLE': 'Raspberry App Api docs',
+    'TITLE': 'Learnverse Api docs',
     # 'DESCRIPTION': 'Your project description',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
