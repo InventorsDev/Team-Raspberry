@@ -50,6 +50,10 @@ INSTALLED_APPS = [
 
     'accounts',
     'corsheaders',
+    'django_cleanup',
+    'main',
+    'gdstorage',
+    'quizapp',
 
     # 'allauth',
     # 'allauth.account',
@@ -214,4 +218,7 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 GOOGLE_CLIENT_ID = config('GOOGLE_CLIENT_ID')
 GOOGLE_CLIENT_SECRET = config('GOOGLE_CLIENT_SECRET')
 
+
+GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = BASE_DIR / 'google_storage.json'
+# GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE_CONTENTS = config("GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE_CONTENTS")
 
