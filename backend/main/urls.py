@@ -13,4 +13,5 @@ from .views import *
 urlpatterns = [
     path('videos/',VideoList.as_view(),name='video_list'),
     path('videos/<int:id>/',VideoDetail.as_view(),name = 'video_detail'),
+    path('stream-video/<int:video_id>/', stream_video, name='stream_video'),
 ]
