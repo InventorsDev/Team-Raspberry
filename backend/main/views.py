@@ -9,6 +9,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.http import FileResponse
 from gdstorage.storage import GoogleDriveStorage
+from rest_framework import status
 
 
 
@@ -49,5 +50,23 @@ def stream_video(request, video_id):
 
     except Video.DoesNotExist:
         # Handle video not found case
-        pass
+        return Response({"detail":"video does not exist"},status=status.HTTP_404_NOT_FOUND)
 
+
+class CategoryListCreateView(generics.ListCreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+class CategoryRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+class SubCategoryListCreateView(generics.ListCreateAPIView):
+    queryset = Topic.objects.all()
+    serializer_class = TopicSerializer
+
+class SubCategoryRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Topic.objects.all()
+    serializer_class = TopicSerializer
+
+    
