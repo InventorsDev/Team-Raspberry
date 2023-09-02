@@ -1,10 +1,32 @@
 "use client";
 import Link from "next/link";
 import React, { useState } from "react";
+import { useFlutterwave } from "flutterwave-react-v3";
 
 const page = () => {
   const [payment, setPayment] = useState("year");
   const [screen, setScreen] = useState("first");
+
+  const config = {
+    public_key: `FLWPUBK_TEST-841c10b026f35195c62cfc032d14c5a0-X`,
+    tx_ref: Date.now(),
+    amount: 2000,
+    currency: "NGN",
+    payment_options: "card,mobilemoney,ussd",
+    customer: {
+      email: `${"enaikeleomoh@gmail.com"}`,
+      phone_number: "09073597660",
+      name: `${"Enaikele Omoh"}`,
+    },
+    customizations: {
+      title: `${"Biology"}`,
+      description: "Payment for Learnverse",
+      logo: "https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg",
+    },
+  };
+
+  const handleFlutterPayment = useFlutterwave(config);
+
   return (
     <>
       {screen == "confirmed" ? (
@@ -93,7 +115,20 @@ const page = () => {
           </div>
           <button
             className=" w-[90%] bottom-5 py-3 bg-primaryButton text-white font-bold rounded-full absolute left-1/2 transform -translate-x-1/2"
-            onClick={() => setScreen("confirmed")}
+            onClick={() => {
+              handleFlutterPayment({
+                callback: (response) => {
+                  setShow(true);
+                  console.log(response);
+
+                  closePaymentModal(); // this will close the modal programmatically
+                },
+                onClose: () => {
+                  setScreen("confirmed");
+                },
+              });
+            }}
+            // onClick={}
           >
             Pay
           </button>
