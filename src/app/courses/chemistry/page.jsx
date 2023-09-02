@@ -14,7 +14,7 @@ const page = () => {
         </p>
       </div>
       <div className=" w-full p-3 bg-[#8498CBB2] flex items-center gap-2.5 rounded-[20px] shadow-2xl shadow-[#17337962]">
-        <img src="/chem-icon.svg" alt="" className=" w-[15ƒ0px]" />
+        <img src="/chem-icon.svg" alt="" className=" w-[150px]" />
         <div className=" flex flex-col gap-5">
           <p className=" text-white font-bold">
             The branch of science concerned with the substances of which matter

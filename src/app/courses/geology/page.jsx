@@ -13,17 +13,12 @@ const page = () => {
           Geology
         </p>
       </div>
-      <div className=" w-full p-3 bg-[#8498CBB2]  items-center gap-2.5 rounded-[20px] shadow-2xl shadow-[#17337962]">
-        <img src="/geo.jpeg" alt="" className=" w-[15ƒ0px]" />
+      <div className=" w-full p-3 bg-[#318644a5] flex items-center gap-2.5 rounded-[20px] shadow-2xl shadow-[#17337962]">
+        <img src="/geology.svg" alt="" className=" w-[150px]" />
         <div className=" flex flex-col gap-5">
-          <h1>What is Geology?</h1>
-          <p className=" text-white leading-6 font-bold">
-
-            ​​The word geology means 'Study of the Earth'.
-
-            Also known as geoscience or earth science, Geology is the primary Earth science and looks at how the earth formed, its structure and composition, and the types of processes acting on it.
-
-            Geology is concerned with the history of the earth over the course of its 4.5 billion year life. By studying the structures of the earth we can unlock its hidden past and anticipate its future.
+          <p className=" text-white font-bold">
+            The branch of science that deals with the history of the earth as
+            recorded in rocks is composed.
           </p>
           <p className=" text-sm text-[#173379] font-bold">5 topics</p>
         </div>
@@ -33,13 +28,17 @@ const page = () => {
           img={"/geo1.jpeg"}
           noCourse={3}
           level={"Intermediate"}
-          topic={"STRATIGRAPHY- How layering of rocks and strata are analyzed to measure geologic time"}
+          topic={
+            "STRATIGRAPHY- How layering of rocks and strata are analyzed to measure geologic time"
+          }
         />
         <TopicCard
           img={"/geo2.jpeg"}
           noCourse={3}
           level={"Intermediate"}
-          topic={"PALEONTOLOGY - How organisms evolve and their interactions in their environment by studying fossil records often found in rocks."}
+          topic={
+            "PALEONTOLOGY - How organisms evolve and their interactions in their environment by studying fossil records often found in rocks."
+          }
         />
         <TopicCard
           img={"/geo3.webp"}
@@ -51,13 +50,17 @@ const page = () => {
           img={"/geo4.jpeg"}
           noCourse={3}
           level={"Intermediate"}
-          topic={"GEOMORPHOLOGY - How landforms, physical features and geological structures on Earth were created and evolved."}
+          topic={
+            "GEOMORPHOLOGY - How landforms, physical features and geological structures on Earth were created and evolved."
+          }
         />
         <TopicCard
           img={"/geo5.jpeg"}
           noCourse={3}
           level={"Intermediate"}
-          topic={"GEOCHRONOLOGY  - How landforms, physical features and geological structures on Earth were created and evolved."}
+          topic={
+            "GEOCHRONOLOGY  - How landforms, physical features and geological structures on Earth were created and evolved."
+          }
         />
       </div>
     </div>
