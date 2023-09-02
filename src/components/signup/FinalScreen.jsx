@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const FinalScreen = ({
   screen,
@@ -33,24 +34,51 @@ const FinalScreen = ({
     }
   }, [error]);
 
-  const handleSubmit = () => {
-    setLoading(true);
+  const handleSubmit =async () => {
+    // setLoading(true);
+
+    // setUser({ username,
+    //   setUserName,
+    //   fullname,
+    //   email})
+
+    // const auth = getAuth();
+    // createUserWithEmailAndPassword(auth, email, password)
+    //   .then((userCredential) => {
+    //     // Signed in 
+    //     const user = userCredential.user;
+    //     console.log(user);
+        
+    //     // ...
+    //   })
+    //   .catch((error) => {
+    //     const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     // ..
+    //   });
+    
+
+
+
+
     if (username.length > 2) {
       axios
-        .post("https://unique.pythonanywhere.com/student-register/", {
-          username: username,
+        .post("https://unicdata.pythonanywhere.com/student-register/", {
+          ussername: username,
+          email,
           first_name: fullname,
           last_name: fullname,
-          email: email,
           password: password,
-          password_confirm: confirmPassword,
+       
         })
         .then((res) => {
           console.log("Successful");
+          toast.success("Successful");
           setScreen("success");
         })
         .catch((err) => {
           setError(err.response.data);
+          toast.error("error!,Try again..");
           console.log(err.response.data);
         });
     }

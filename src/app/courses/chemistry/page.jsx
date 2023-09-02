@@ -23,19 +23,38 @@ const page = () => {
           <p className=" text-sm text-[#173379] font-bold">5 topics</p>
         </div>
       </div>
-      <div className=" flex flex-wrap justify-between gap-6 mt-8">
+      <div className=" grid   grid-cols-2 w-full  gap-6 mt-8">
         <TopicCard
-          img={"/pic-1.png"}
+          img={"/chem2.jpeg"}
           noCourse={3}
           level={"Intermediate"}
-          topic={"Atoms and why they are important"}
+          topic={"Organic chemistry"}
         />
         <TopicCard
-          img={"/pic-1.png"}
+          img={"/chem1.jpeg"}
           noCourse={3}
           level={"Intermediate"}
-          topic={"Atoms and why they are important"}
+          topic={"Nuclear chemistry"}
         />
+        <TopicCard
+          img={"/chem4.jpeg"}
+          noCourse={3}
+          level={"Intermediate"}
+          topic={"Chemical Kinetics"}
+        />
+        <TopicCard
+          img={"/chem3.jpeg"}
+          noCourse={3}
+          level={"Intermediate"}
+          topic={"Organic Chemistry"}
+        />
+        <TopicCard
+          img={"/chem5.jpeg"}
+          noCourse={3}
+          level={"Intermediate"}
+          topic={"Inorganic chemistry"}
+        />
+       
       </div>
     </div>
   );

@@ -1,12 +1,54 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import Edit from "../../components/profile/Edit";
 import Save from "../../components/profile/Save";
 import Navbar from "../../components/nav/Navbar";
-
+import MyContext from "../../context/context";
+import Cookies from 'js-cookie';
+import InvalidAuth from "../../components/invalidAuth/InvalidAuth";
+import axios from "axios";
 const page = () => {
   const [screen, setScreen] = useState("edit");
+  const { token,setToken,setPASS,PASS, setUser, user } = useContext(MyContext);
+
+
+
+ 
+      const cokkieToken = Cookies.get('token'); 
+
+
+
+  if (cokkieToken === '') {
+    return (<InvalidAuth />)
+   }
+   else{
+
+    useEffect(() => { 
+      
+        setToken(cokkieToken)
+      if (token) {
+        const config = {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        };
+     
+        axios
+          .get('https://unicdata.pythonanywhere.com', config)
+          .then((res) => {
+            // Handle successful response here
+            console.log(res.data);
+            setUser({ ...user, ...res.data });
+            setToken(token); // Set the token here
+          })
+          .catch((err) => {
+            toast.error('Invalid credentials try again')
+            console.log(err);
+          });
+      }
+    }, [token]);
+
   return (
     <div className=" flex flex-col px-4 py-8 justify-between h-screen">
       <div>
@@ -33,15 +75,11 @@ const page = () => {
       {screen == "edit" ? (
         <Navbar />
       ) : (
-        <button
-          className=" bg-primaryButton h-[60px] rounded-full text-white"
-          onClick={() => setScreen("edit")}
-        >
-          Save
-        </button>
+      <></>
       )}
     </div>
   );
+};
 };
 
 export default page;

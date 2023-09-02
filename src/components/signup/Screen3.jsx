@@ -1,7 +1,11 @@
+'use client'
 import Link from "next/link";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import MyContext from "../../context/context";
 
 const Screen3 = ({ screen, setScreen, typeOfUser, setTypeOfUser }) => {
+  const { user, setUser } = useContext(MyContext);
+
   return (
     <>
       <div className=" flex flex-col gap-12">
@@ -20,7 +24,11 @@ const Screen3 = ({ screen, setScreen, typeOfUser, setTypeOfUser }) => {
             className={` flex p-3 gap-2 items-center  border ${
               typeOfUser == "student" ? "border-primary-green" : ""
             }  rounded-[15px] cursor-pointer`}
-            onClick={() => setTypeOfUser("student")}
+            onClick={() =>{
+               setTypeOfUser("student")
+               setUser({...user,userType:typeOfUser })
+                console.log(user);
+              }}
           >
             <img src="/student-icon.svg" alt="" />
             <div>
@@ -32,7 +40,12 @@ const Screen3 = ({ screen, setScreen, typeOfUser, setTypeOfUser }) => {
             className={` flex p-3 gap-2 items-center  border ${
               typeOfUser == "creator" ? "border-primary-brown" : ""
             }  rounded-[15px] cursor-pointer`}
-            onClick={() => setTypeOfUser("creator")}
+            onClick={() =>{ 
+            
+               setTypeOfUser("creator")  
+               setUser({...user,userType:typeOfUser })
+              console.log(user);
+              }}
           >
             <img src="/tutor-icon.svg" alt="" />
             <div>
@@ -46,7 +59,7 @@ const Screen3 = ({ screen, setScreen, typeOfUser, setTypeOfUser }) => {
 
         <button
           className="bg-primaryButton h-[60px] rounded-full text-white font-semibold text-lg w-full"
-          onClick={() => setScreen("screen_4")}
+          onClick={() => setScreen("screen_1")}
         >
           Continue
         </button>
