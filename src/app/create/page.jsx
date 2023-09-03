@@ -303,9 +303,9 @@ const page = () => {
                  
                   <p className=""  onClick={handleVideoUpload} >{selectedVideo?selectedVideo.name:" Add video"}</p>
                 </div>
-                <button className=" px-8 bg-[#37494E] text-white rounded-full">
+                {/* <button className=" px-8 bg-[#37494E] text-white rounded-full">
                   Use AI!
-                </button>
+                </button> */}
               </div>
               <div className=" w-full h-[1px] bg-[#828282]" />
               <div className=" flex gap-4 items-center">
@@ -318,6 +318,26 @@ const page = () => {
                  
               </div>
               <div className=" w-full h-[1px] bg-[#828282]" />
+               <p className=" p-2 ">Course Category</p>
+               <ul className=" flex flex-col gap-6">
+               
+               <li className=" flex gap-3">
+                  <label htmlFor=""> Biology</label>
+                  <input value={1} type="checkbox" />
+                </li>
+                  <li className=" flex gap-3">
+                  <label htmlFor=""> Chemistry</label>
+                  <input value={1} type="checkbox" />
+                </li>
+                  <li className=" flex gap-3">
+                  <label htmlFor=""> Physics</label>
+                  <input value={1} type="checkbox" />
+                </li>
+                 <li className=" flex gap-3">
+                  <label htmlFor=""> Geography</label>
+                  <input value={1} type="checkbox" />
+                </li>
+               </ul>
 
               <div className=" flex justify-between items-center">
                 <Link href={"/create/create-quiz"}>

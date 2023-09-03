@@ -91,7 +91,7 @@ console.log(
             ) : (
               <img className="rounded-xl" src={course.cover_image} alt="" />
             )}
-              <p className="font-bold flex mt-10"> <AiTwotoneFilePdf size={20}/>Download: <AiOutlineDownload size={20}/>  {course.pdf}</p>
+              <p className="font-bold flex mt-10 w-full"> <AiTwotoneFilePdf size={20}/>Download: <AiOutlineDownload size={20}/>  {course.pdf}</p>
           </div>
         </Link>
       ))}

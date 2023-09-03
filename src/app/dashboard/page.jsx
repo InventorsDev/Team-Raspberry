@@ -134,17 +134,13 @@ const page = () => {
       </div>
       <p className="font-bold my-4 px-4">Popular Topics</p>
       <div className="flex w-full overflow-y-scroll gap-4 px-4">
-        <PopularCard img="/bio3.jpeg" course="Biology" topic="Cells" />
-        {popularCoursses.map((course)=><>
-         <PopularCard img="/pic-2.png" course={course.title} topic={course.title} />
-        </>)}
-        
-       
-        <PopularCard img="/pic-1.png" course="Chemistry" topic="Programming" />
-        <PopularCard img="/pic-1.png" course="Chemistry" topic="Programming" />
-        <PopularCard img="/pic-1.png" course="Chemistry" topic="Programming" />
+        {/* <PopularCard img="/bio3.jpeg" course="Biology" topic="Cells" /> */}
+        {popularCoursses.filter((course)=> course.creator_id!==user.id).map(course=>(<>
+         <PopularCard img={course} course={course.title} topic={course.title} />
+        </>))}
+      
       </div>
-      <OngoingCard />
+      {/* <OngoingCard /> */}
       <Navbar />
     </div>
   );
