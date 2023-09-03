@@ -134,25 +134,31 @@ const page = () => {
     newFormData.append('level', level);
    
     // Check if a video file is selected
-    if (selectedVideo) {
-      // Create a Blob object from the video URL
-      const videoBlob = await fetch(selectedVideo.videoURL).then((res) =>
-        res.blob()
-      );
+    // if (selectedVideo) {
+    //   // Create a Blob object from the video URL
+    //   const videoBlob = await fetch(selectedVideo.videoURL).then((res) =>
+    //     res.blob()
+    //   );
   
-      // Append the Blob object as a file with a custom name
-      newFormData.append('video_file', videoBlob, selectedVideo.name);
-    }
+    //   // Append the Blob object as a file with a custom name
+    //   newFormData.append('video_file', videoBlob, selectedVideo.name);
+    // }
   
-    // Check if a PDF file is selected
-    if (selectedFile) {
-      // Append the PDF file with a custom name
-      newFormData.append('pdf', selectedFile, selectedFile.name);
-    }
-      // Append the cover_image as a file
-      if (selectedImage) {
-        newFormData.append('cover_image', selectedImage);
-      } 
+      // Check if a video file is selected
+  if (selectedVideo) {
+    newFormData.append('video_file', selectedVideo); // Just append the selected file object
+  }
+
+  // Check if a PDF file is selected
+  if (selectedFile) {
+    newFormData.append('pdf', selectedFile); // Just append the selected file object
+  }
+
+  // Append the cover_image as a file
+  if (selectedImage) {
+    newFormData.append('cover_image', selectedImage);
+  }
+
       
       // Send the FormData directly in the POST request
       await axios.post("https://unicdata.pythonanywhere.com/videos/", newFormData, config)
@@ -187,6 +193,7 @@ const page = () => {
         </div>
       ) : (
         <div className=" bg-[#9E7167] pt-6 ">
+       
           <div className=" flex gap-[60px] text-white px-4">
             <img
               src="/arrow-back-white.svg"
@@ -306,6 +313,7 @@ const page = () => {
           <button onClick={(e)=>handleUpload(e)} className=" bg-primaryButton w-[90%] fixed bottom-6  left-1/2 transform -translate-x-1/2 h-[60px] rounded-full text-white">
             UPLOAD
           </button>
+
         </div>
       )}
     </>

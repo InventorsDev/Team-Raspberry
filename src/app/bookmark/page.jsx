@@ -9,39 +9,39 @@ const page = () => {
   const [showVideos, setShowVideos] = useState(true);
   const savedVideos = {
     chemistry: [
-      { img: "pic-1.png", noCourse: 4, level: "beginners", topic: "titration" },
-      { img: "pic-2.png", noCourse: 1, level: "beginners", topic: "molecules" },
-      { img: "pic-3.png", noCourse: 7, level: "advanced", topic: "atoms" },
+      { img: "/pic-1.png", noCourse: 4, level: "beginners", topic: "titration" },
+      { img: "/pic-2.png", noCourse: 1, level: "beginners", topic: "molecules" },
+      { img: "/pic-3.png", noCourse: 7, level: "advanced", topic: "atoms" },
     ],
     physics: [
       {
-        img: "pic-1.png",
+        img: "/pic-1.png",
         noCourse: 4,
         level: "intermediate",
         topic: "voltage",
       },
       {
-        img: "pic-2.png",
+        img: "/pic-2.png",
         noCourse: 1,
         level: "intermediate",
         topic: "current",
       },
-      { img: "pic-3.png", noCourse: 7, level: "advanced", topic: "waveforms" },
+      { img: "/pic-3.png", noCourse: 7, level: "advanced", topic: "waveforms" },
     ],
     biology: [
-      { img: "pic-1.png", noCourse: 4, level: "beginners", topic: "cells" },
+      { img: "/pic-1.png", noCourse: 4, level: "beginners", topic: "cells" },
       {
-        img: "pic-2.png",
+        img: "/pic-2.png",
         noCourse: 1,
         level: "intermediate",
         topic: "tissues",
       },
-      { img: "pic-3.png", noCourse: 7, level: "advanced", topic: "organs" },
+      { img: "/pic-3.png", noCourse: 7, level: "advanced", topic: "organs" },
     ],
     geology: [
-      { img: "pic-1.png", noCourse: 4, level: "beginners", topic: "space" },
-      { img: "pic-2.png", noCourse: 1, level: "intermediate", topic: "sands" },
-      { img: "pic-3.png", noCourse: 7, level: "advanced", topic: "rocks" },
+      { img: "/pic-1.png", noCourse: 4, level: "beginners", topic: "space" },
+      { img: "/pic-2.png", noCourse: 1, level: "intermediate", topic: "sands" },
+      { img: "/pic-3.png", noCourse: 7, level: "advanced", topic: "rocks" },
     ],
   };
 

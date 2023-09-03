@@ -129,7 +129,7 @@ useEffect(() => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className=" w-full h-full bg-transparent outline-none px-3"
-                placeholder="kelvin@gmail.com"
+                placeholder="username"
               />
             </div>
             <div className=" border border-primary-green h-[60px] rounded-full p-2">

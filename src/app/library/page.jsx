@@ -37,7 +37,7 @@ const Page = () => {
           console.log(res.data);
         })
         .catch((err) => {
-          if (err.response.status === 401) {
+          if (err?.response?.status === 401) {
             console.log("Unauthorized. Token may be invalid or expired.");
           } else {
             console.log("An error occurred:", err);
