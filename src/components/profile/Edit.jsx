@@ -51,10 +51,10 @@ const Edit = ({ setScreen }) => {
     return (
       <>
         <div className=" mt-[30px] flex gap-8 items-center">
-          {profileImage ? (
+          {user.profile_picture ? (
             <img
               className="w-[30vw] h-[18vh] rounded-md object-cover"
-              src={profileImage}
+              src={user?.profile_picture}
               alt=""
             />
           ) : (

@@ -21,23 +21,14 @@ return (<InvalidAuth />)
 
 }
 else{
-
-
-  
-
-
-  const profilePictureRef = useRef(null);
-
     
   const [formData, setFormData] = useState({
     creator_email_verified: false,
     date_of_birth: null,
     email:'',
   });
-
-
   useEffect(() => { 
-      
+      console.log(cokkieToken);
     setToken(cokkieToken)
   if (token) {
     const config = {
@@ -45,22 +36,38 @@ else{
         Authorization: `Token ${token}`,
       },
     };
- 
+ console.log(token);
     axios
-      .get('https://unicdata.pythonanywhere.com/profile', config)
+      .get("https://unicdata.pythonanywhere.com/profile/", config)
       .then((res) => {
         // Handle successful response here
         console.log(res.data);
         setUser({ ...user, ...res.data });
-        setFormData({...formData,...res?.data})
+        setFormData({...formData,...res.data})
         setToken(token); // Set the token here
       })
       .catch((err) => {
         toast.error('Invalid credentials try again')
         console.log(err);
       });
+ 
+
+
   }
 }, [token]);
+
+
+
+
+  
+  const[PROFILE_PHOTO,setPROFILE_PHOTO]=useState(null)
+
+  const profilePictureRef = useRef(null);
+
+
+
+
+
 
   console.log(user?.email);
 
@@ -80,7 +87,7 @@ else{
 
   
 
- 
+  console.log(PROFILE_PHOTO);
 
   const handleSave = async(e) => {
     e.preventDefault();
@@ -99,11 +106,11 @@ else{
     newformData.append('date_of_birth', formData?.date_of_birth);
     newformData.append('last_name', formData?.last_name);
     newformData.append('gender', formData?.gender);
-    // newformData.append('profile_picture', profilePicture);
+    newformData.append('profile_picture', PROFILE_PHOTO);
   
-
+   console.log(PROFILE_PHOTO);
     await axios
-       .put('https://unicdata.pythonanywhere.com/profile', newformData, config)
+       .put("https://unicdata.pythonanywhere.com/profile/", newformData, config)
        .then((res) => {
           // Handle successful response here
           console.log(res.data);
@@ -113,7 +120,7 @@ else{
           setToken(token); // Set the token here
        })
        .catch((err) => {
-          toast.error('Invalid credentials try again')
+          toast.error('try again')
           console.log(err);
        });
     
@@ -151,10 +158,11 @@ else{
           name="profile_picture"
           accept="image/*"
           ref={fileInputRef}
-          onChange={()=>{
+          onChange={(e)=>{
             const file = fileInputRef.current.files[0];
        
-           
+           console.log(e.target.files[0]);
+           setPROFILE_PHOTO(e.target.files[0])
             // setFormData({...formData,profile_picture:file})              
             setProfilePicture(file);
 

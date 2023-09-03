@@ -97,8 +97,8 @@ const page = () => {
           
            </p>
  
-           {profileImage ?
-           <img className="w-[10vw] rounded-full h-[5vh]  " src={profileImage} alt="" /> 
+           {user.profile_picture ?
+           <img className="w-[10vw] rounded-full h-[5vh]  " src={user?.profile_picture} alt="" /> 
            :
   <FaUserCircle size={40}/>
       }
