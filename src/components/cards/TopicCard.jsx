@@ -7,7 +7,7 @@ const TopicCard = ({ img, noCourse, level, topic }) => {
     <div className=" ">
       <Link className="w-fit" href={"/courses/" + topic}>
         <div className=" w-[190px]  overflow-hidden flex flex-col gap-1 hover:shadow-2xl pb-4 rounded-b-lg hover:shadow-[#1733792a] transition-all duration-300">
-          <div className=" relative flex items-center justify-center w-full h-[120px] overflow-hidden rounded-[10px]  z-[1]">
+          <div className=" relative flex items-center justify-center w-full h-[120px] overflow-hidden rounded-[10px] z-10">
             <Image
               style={{
                 objectFit: "cover",

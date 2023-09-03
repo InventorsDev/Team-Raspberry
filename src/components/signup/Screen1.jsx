@@ -5,108 +5,96 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const FirstScreen = (
-  {
-    setScreen,
-    setEmail, // Make sure you're receiving setEmail as a prop
-    setPassword,
-    fullname,
-    email,
-    password,
-    confirmPassword,
-    setFullname,
-    setConfirmPassword,
-  
+const FirstScreen = ({
+  setScreen,
+  setEmail, // Make sure you're receiving setEmail as a prop
+  setPassword,
+  fullname,
+  email,
+  password,
+  confirmPassword,
+  setFullname,
+  setConfirmPassword,
 }) => {
-
-  const router=useRouter()
+  const router = useRouter();
   const isValidEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
   const validEmail = email && email.match(isValidEmail);
   const isPasswordMatch =
     (password === confirmPassword) & (password?.length >= 8);
   const isSubmitDisabled = !isPasswordMatch;
 
-  const handleSubmit =  async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
- 
-   
+
     console.log({
-username:fullname,
-email,
-password,
-password_confirm:confirmPassword,
-});
-
-
-if (fullname.length > 2) {
-  await axios
-    .post("https://unicdata.pythonanywhere.com/student-register/", {
       username: fullname,
       email,
-      password: password,
-      // password_confirm: confirmPassword,
-    })
-    .then((res) => {
-      console.log("Successful");
-      console.log(res.data);
-    
-      toast.success("Successful");
-      setScreen("success"); 
-       router.push("/login")
-    })
-    .catch((err) => { 
-     console.log(err);
-      toast.error("error!,Try again..");
-    
+      password,
+      password_confirm: confirmPassword,
     });
-}
 
+    if (fullname.length > 2) {
+      await axios
+        .post("https://unicdata.pythonanywhere.com/student-register/", {
+          username: fullname,
+          email,
+          password: password,
+          // password_confirm: confirmPassword,
+        })
+        .then((res) => {
+          console.log("Successful");
+          console.log(res.data);
 
+          toast.success("Successful");
+          setScreen("success");
+          router.push("/login");
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error("error!,Try again..");
+        });
+    }
 
-// const auth = getAuth();
-//   createUserWithEmailAndPassword(auth, email, password)
-//       .then((userCredential) => {
-//         // Signed in 
-//         const user = userCredential.user;
-//         console.log(user);
-//            console.log({
-//       username:fullname,
-//       email,
-//       password,
-//       password_confirm:confirmPassword,
-//       });
-//       // if(user){
-//       //   router.push('/login')
-//       // }
-      
-      
-//         // ...
-//       })
-//       .catch((error) => {
-//         const errorCode = error.code;
-//         const errorMessage = error.message;
-//         // ..
-//       });
-      
-  
-   
+    // const auth = getAuth();
+    //   createUserWithEmailAndPassword(auth, email, password)
+    //       .then((userCredential) => {
+    //         // Signed in
+    //         const user = userCredential.user;
+    //         console.log(user);
+    //            console.log({
+    //       username:fullname,
+    //       email,
+    //       password,
+    //       password_confirm:confirmPassword,
+    //       });
+    //       // if(user){
+    //       //   router.push('/login')
+    //       // }
+
+    //         // ...
+    //       })
+    //       .catch((error) => {
+    //         const errorCode = error.code;
+    //         const errorMessage = error.message;
+    //         // ..
+    //       });
   };
 
   return (
     <>
-     <ToastContainer
-          className=" mb-8"
-          position="bottom-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
+      <ToastContainer
+        className=" mb-8"
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <form className=" flex flex-col gap-9" onSubmit={handleSubmit}>
         <p className="font-bold font-montserrat text-[22px] text-center">
           Sign-up
@@ -118,15 +106,15 @@ if (fullname.length > 2) {
         <div className=" flex flex-col gap-6">
           <div className=" border border-primary-green h-[60px] rounded-full p-2">
             <p className=" bg-white w-min mt-[-20px] ml-[30px] px-1 text-[#8a8a8a] text-sm font-extralight whitespace-nowrap">
-              Full Name
+              Username
             </p>
             <input
               type="text"
               value={fullname}
-              onChange={(e) => e&&setFullname(e.target.value)}
+              onChange={(e) => e && setFullname(e.target.value)}
               required
               className=" w-full h-full bg-transparent outline-none px-3"
-              placeholder="full name"
+              placeholder="username"
             />
           </div>
           <div
@@ -138,13 +126,13 @@ if (fullname.length > 2) {
               Email
             </p>
             <input
-                type="text"
-                value={email}
-                onChange={(e) => e && setEmail(e.target.value)} // Use setEmail as a function
-                required
-                className={`w-full h-full bg-transparent outline-none px-3`}
-                placeholder="example@gmail.com"
-              />
+              type="text"
+              value={email}
+              onChange={(e) => e && setEmail(e.target.value)} // Use setEmail as a function
+              required
+              className={`w-full h-full bg-transparent outline-none px-3`}
+              placeholder="example@gmail.com"
+            />
           </div>
           <div className=" border border-primary-green h-[60px] rounded-full p-2">
             <p className=" bg-white w-min mt-[-20px] ml-[30px] px-1 text-[#8a8a8a] text-sm font-extralight whitespace-nowrap">
@@ -153,8 +141,7 @@ if (fullname.length > 2) {
             <input
               type="password"
               value={password}
-          
-              onChange={ (e) => e&& setPassword(e.target.value)} // Use setPassword as a function
+              onChange={(e) => e && setPassword(e.target.value)} // Use setPassword as a function
               required
               className="w-full h-full bg-transparent outline-none px-3"
               placeholder="password"
@@ -171,7 +158,7 @@ if (fullname.length > 2) {
             <input
               type="password"
               value={confirmPassword}
-              onChange={(e) =>e&&setConfirmPassword(e.target.value)}
+              onChange={(e) => e && setConfirmPassword(e.target.value)}
               required
               className=" w-full h-full bg-transparent outline-none px-3"
               placeholder="password"
@@ -186,7 +173,7 @@ if (fullname.length > 2) {
                 : " opacity-50 cursor-not-allowed"
             }`}
             disabled={isSubmitDisabled}
-            onClick={(e)=>handleSubmit(e)}
+            onClick={(e) => handleSubmit(e)}
           >
             Continue
           </button>
