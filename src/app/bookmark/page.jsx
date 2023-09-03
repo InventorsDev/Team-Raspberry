@@ -22,8 +22,18 @@ const page = () => {
         topic: "molecules",
       },
       { img: "/pic-3.png", noCourse: 7, level: "advanced", topic: "atoms" },
-      { img: "/pic-1.png", noCourse: 4, level: "beginners", topic: "titration" },
-      { img: "/pic-2.png", noCourse: 1, level: "beginners", topic: "molecules" },
+      {
+        img: "/pic-1.png",
+        noCourse: 4,
+        level: "beginners",
+        topic: "titration",
+      },
+      {
+        img: "/pic-2.png",
+        noCourse: 1,
+        level: "beginners",
+        topic: "molecules",
+      },
       { img: "/pic-3.png", noCourse: 7, level: "advanced", topic: "atoms" },
     ],
     physics: [

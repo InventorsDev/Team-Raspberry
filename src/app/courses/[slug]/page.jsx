@@ -104,7 +104,7 @@ const page = () => {
         </div>
         <div className=" flex gap-1.5 items-center">
           <img src="/pdf.svg" alt="" />
-          <p className=" text-sm ">jm1 PDF</p>
+          <p className=" text-sm ">PDF</p>
         </div>
 
         <Link className=" flex gap-1.5 items-center" href={"/courses/45/quiz"}>
