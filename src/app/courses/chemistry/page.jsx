@@ -1,8 +1,67 @@
-import React from "react";
+'use client'
+import React, { useEffect, useState } from "react";
 import TopicCard from "../../../components/cards/TopicCard";
 import Link from "next/link";
+import axios from "axios";
 
 const page = () => {
+  const [data,setData]=useState([])
+  const [MAINcourse,setMAINCourse]=useState([])
+  const [filtered,setFiltered]=useState([])
+  const [coursesByCategory, setCoursesByCategory] = useState({});
+
+  useEffect(()=>{
+
+   
+  
+     axios.get('https://unicdata.pythonanywhere.com/categories/',
+    ) .then((res) => {
+      console.log(res.data);
+      setData(res.data)
+
+    })
+    .catch((e) => {
+      // toast.error("Try again..");
+      console.log(e);
+    });
+
+
+
+     axios.get('https://unicdata.pythonanywhere.com/subcategories/',
+    ) .then((res) => {
+      setMAINCourse(res.data)
+      console.log(res.data);
+
+    })
+    .catch((e) => {
+      // toast.error("Try again..");
+      console.log(e);
+    });
+
+
+
+
+  },[])
+
+  useEffect(() => {
+   
+    
+    // Filter courses based on the "ict" category
+    const filteredCourses = data.filter(course => {
+      // Check if there is any category in categories where course.id matches category.category
+      return MAINcourse.some(category => category.name === 'chemistry' && category.category === course.id);
+    });
+    setFiltered(filteredCourses)
+    console.log(filteredCourses);
+  }, [MAINcourse,data]);
+
+
+
+
+
+
+
+
   return (
     <div className=" py-6  flex flex-col gap-6 px-4 ">
       <div className=" flex gap-[60px]">
@@ -24,13 +83,38 @@ const page = () => {
         </div>
       </div>
       <div className=" grid   grid-cols-2 w-full  gap-6 mt-8">
+       
+       {/* {MAINcourse? */}
+       {filtered.length>0?<>
+       {filtered.map((course,i)=>(
         <TopicCard
-          img={"/chem2.jpeg"}
+    
+          key={i}
+          link={course.id}
+          img={"/chem.webp"}
           noCourse={3}
           level={"Intermediate"}
-          topic={"Organic chemistry"}
+          topic={course.name}
         />
-        <TopicCard
+        ))}
+       </>:
+       <p>No courses on this yet, come back later</p>
+      }
+       
+      
+      
+      
+      {/* (
+         
+      )):null */}
+
+      
+   
+      {/* } */}
+       
+
+
+        {/* <TopicCard
           img={"/chem1.jpeg"}
           noCourse={3}
           level={"Intermediate"}
@@ -53,7 +137,7 @@ const page = () => {
           noCourse={3}
           level={"Intermediate"}
           topic={"Inorganic chemistry"}
-        />
+        /> */}
        
       </div>
     </div>

@@ -1,8 +1,67 @@
-import React from "react";
+'use client'
+import React, { useEffect, useState } from "react";
 import TopicCard from "../../../components/cards/TopicCard";
 import Link from "next/link";
+import axios from "axios";
 
 const page = () => {
+  const [data,setData]=useState([])
+  const [MAINcourse,setMAINCourse]=useState([])
+  const [filtered,setFiltered]=useState([])
+  const [coursesByCategory, setCoursesByCategory] = useState({});
+
+  useEffect(()=>{
+
+   
+  
+     axios.get('https://unicdata.pythonanywhere.com/categories/',
+    ) .then((res) => {
+      console.log(res.data);
+      setData(res.data)
+
+    })
+    .catch((e) => {
+      // toast.error("Try again..");
+      console.log(e);
+    });
+
+
+
+     axios.get('https://unicdata.pythonanywhere.com/subcategories/',
+    ) .then((res) => {
+      setMAINCourse(res.data)
+      console.log(res.data);
+
+    })
+    .catch((e) => {
+      // toast.error("Try again..");
+      console.log(e);
+    });
+
+
+
+
+  },[])
+
+  useEffect(() => {
+   
+    
+    // Filter courses based on the "ict" category
+    const filteredCourses = data.filter(course => {
+      // Check if there is any category in categories where course.id matches category.category
+      return MAINcourse.some(category => category.name === 'physics' && category.category === course.id);
+    });
+    setFiltered(filteredCourses)
+    console.log(filteredCourses);
+  }, [MAINcourse,data]);
+
+
+
+
+
+
+
+
   return (
     <div className=" py-6  flex flex-col gap-6 px-4 ">
       <div className=" flex gap-[60px]">
@@ -13,46 +72,69 @@ const page = () => {
           Physics
         </p>
       </div>
-      <div className=" w-full p-3 bg-[#e88190b1] flex items-center gap-2.5 rounded-[20px] shadow-2xl shadow-[#17337962]">
-        <img src="/physics.svg" alt="" className=" w-[150px]" />
+      <div className=" w-full p-3 bg-[#8498CBB2] flex items-center gap-2.5 rounded-[20px] shadow-2xl shadow-[#17337962]">
+        <img src="/chem-icon.svg" alt="" className=" w-[150px]" />
         <div className=" flex flex-col gap-5">
           <p className=" text-white font-bold">
-            The branch of the science that deals with matter, energy and their interactions
+          physics is central to our understanding of the natural world and has led to countless technological advancements that have shaped modern society. It continues to push the boundaries of human knowledge and holds the key to solving many of the mysteries of the universe.
           </p>
           <p className=" text-sm text-[#173379] font-bold">5 topics</p>
         </div>
       </div>
       <div className=" grid   grid-cols-2 w-full  gap-6 mt-8">
+       
+       {/* {MAINcourse? */}
+       {filtered.length>0?<>
+       {filtered.map((course,i)=>(
         <TopicCard
-          img={"/phy1.jpeg"}
+    
+          key={i}
+          link={course.id}
+          img={"/phy.jpeg"}
           noCourse={3}
           level={"Intermediate"}
-          topic={"Modern Physics"}
+          topic={course.name}
         />
-        <TopicCard
-          img={"/phy2.jpeg"}
+        ))}
+       </>:
+       <p>No courses on this yet, come back later</p>
+      }
+      
+      {/* (
+         
+      )):null */}
+
+      
+   
+      {/* } */}
+       
+
+
+        {/* <TopicCard
+          img={"/chem1.jpeg"}
           noCourse={3}
           level={"Intermediate"}
-          topic={"Nuclear Physics"}
+          topic={"Nuclear chemistry"}
         />
         <TopicCard
-          img={"/phy3.jpeg"}
+          img={"/chem4.jpeg"}
           noCourse={3}
           level={"Intermediate"}
-          topic={"Atomic Physics"}
+          topic={"Chemical Kinetics"}
         />
         <TopicCard
-          img={"/phy4.jpeg"}
+          img={"/chem3.jpeg"}
           noCourse={3}
           level={"Intermediate"}
-          topic={"Thermodynamics"}
+          topic={"Organic Chemistry"}
         />
         <TopicCard
-          img={"/phy5.png"}
+          img={"/chem5.jpeg"}
           noCourse={3}
           level={"Intermediate"}
-          topic={"Mechanics"}
-        />
+          topic={"Inorganic chemistry"}
+        /> */}
+       
       </div>
     </div>
   );

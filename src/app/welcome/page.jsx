@@ -36,7 +36,7 @@ export default function Home() {
     <div className="bg-primaryBg h-screen flex flex-col items-center pt-[50px] justify-between text-white">
       <Link
         href={"/signup"}
-        className=" text-end w-full px-[30px] font-semibold"
+        className=" text-end px-[30px] font-semibold w-full"
       >
         <p>skip</p>
       </Link>

@@ -6,7 +6,9 @@ import axios from "axios";
 import withAuth from "../../components/withAuth/withAuth";
 import MyContext from "../../context/context";
 import Cookies from 'js-cookie';
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { AiFillBackward, AiFillCaretLeft, AiOutlineArrowLeft, AiOutlineLeft } from "react-icons/ai";
 const page = () => {
   const [dashboard, setDashboard] = useState(false);
   const [title, setTitle] = useState('');
@@ -19,7 +21,15 @@ const page = () => {
   const[coverIMAGE,setCoverIMAGE]=useState('')
   const[VIDEO,setVIDEO]=useState('')
   const { token,setToken,setPASS,PASS, setUser, user } = useContext(MyContext);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedMainCategory, setSelectedMainCategory] = useState(null);
+  const [note, setNote] = useState(null);
 
+  const handleCategoryChange = (value,course) => {
+    setSelectedCategory(value);
+    setSelectedMainCategory(course);
+    console.log('Selected Category:', course);
+  };
 
 
   setToken(cokkieToken)
@@ -79,7 +89,7 @@ const page = () => {
 
 
 
-  if (cokkieToken === '') {
+  if (!cokkieToken) {
     return (<InvalidAuth />)
    }
    else{
@@ -139,7 +149,9 @@ const page = () => {
     const newFormData = new FormData();
     newFormData.append('title', title);
     newFormData.append('description', description);
-    newFormData.append('level', level);
+    newFormData.append('level', 'beginner');
+    newFormData.append('subject', selectedCategory);
+    newFormData.append('co', selectedCategory);
    
     // Check if a video file is selected
     // if (selectedVideo) {
@@ -168,25 +180,70 @@ const page = () => {
   }
 
   
+
       
       // Send the FormData directly in the POST request
-      await axios.post("https://unicdata.pythonanywhere.com/videos/", newFormData, config)
-        .then((res) => {
-          toast.success("Successful");
+
+      
+     
+
+      await axios.post("https://unicdata.pythonanywhere.com/categories/", {
+        name:title,
+        description:note,
+      }, config)
+        .then(async(res) => {
+         
           console.log(res.data);
-          setDashboard(true)
+         await axios.post("https://unicdata.pythonanywhere.com/subcategories/",{
+              name:selectedMainCategory,
+              category: res.data.id
+          }, config)
+            .then((res) => {
+            
+              console.log(res.data);
+      
+            })
+            .catch((e) => {
+              toast.error("Try again..");
+              console.log(e);
+            });
+        
         })
         .catch((e) => {
           toast.error("Try again..");
           console.log(e);
         });
+
+
+
+        await axios.post("https://unicdata.pythonanywhere.com/videos/", newFormData, config)
+        .then((res) => {
+          toast.success("Successful");
+          console.log(res.data);
+          setDashboard(!dashboard)
+        })
+        .catch((e) => {
+          toast.error("Try again..");
+          console.log(e);
+        });
+
+
+
       };
 
   return (
     <>
       {!dashboard ? (
         <div className=" py-6 px-4 flex flex-col">
-          <div className=" flex gap-[60px] justify-end">
+          
+          <div className=" flex justify-between items-center  gap-[60px]">
+            <Link href={"/dashboard"}>
+                    <AiOutlineArrowLeft size={30}/> 
+            </Link>
+  
+          <p className=" font-semibold text-lg absolute left-1/2 transform -translate-x-1/2">
+              Home
+            </p>
             <img
               src="/upload.svg"
               alt=""
@@ -194,13 +251,12 @@ const page = () => {
               className=" cursor-pointer"
               onClick={() => setDashboard(!dashboard)}
             />
-            <p className=" font-semibold text-lg absolute left-1/2 transform -translate-x-1/2">
-              Home
-            </p>
+           
           </div>
           <div className=" flex flex-col gap-4 mt-6">
             <p className=" font-bold text-lg">My Videos</p>
             <TutorsCard />
+            
           </div>
         </div>
       ) : (
@@ -259,6 +315,7 @@ const page = () => {
                 placeholder="Description of the video"
               />
             </div>
+            <ToastContainer></ToastContainer>
             <div className=" flex flex-col gap-2">
               <p>Level</p>
               <input
@@ -318,27 +375,65 @@ const page = () => {
                  
               </div>
               <div className=" w-full h-[1px] bg-[#828282]" />
-               <p className=" p-2 ">Course Category</p>
-               <ul className=" flex flex-col gap-6">
-               
-               <li className=" flex gap-3">
-                  <label htmlFor=""> Biology</label>
-                  <input value={1} type="checkbox" />
-                </li>
-                  <li className=" flex gap-3">
-                  <label htmlFor=""> Chemistry</label>
-                  <input value={1} type="checkbox" />
-                </li>
-                  <li className=" flex gap-3">
-                  <label htmlFor=""> Physics</label>
-                  <input value={1} type="checkbox" />
-                </li>
-                 <li className=" flex gap-3">
-                  <label htmlFor=""> Geography</label>
-                  <input value={1} type="checkbox" />
-                </li>
-               </ul>
+               <p className=" p-2 ">Select a Course Category</p>
+                 <ul className="order-1   flex flex-col gap-6">
+        <li className="list-decimal flex gap-3">
+          <label htmlFor="biology">Biology</label>
+          <input
+            id="biology"
+            value={1}
+            type="radio"
+            checked={selectedCategory === 1}
+            onChange={() => handleCategoryChange(1,'biology')}
+          />
+        </li>
+        <li className="list-decimal flex gap-3">
+          <label htmlFor="chemistry">Chemistry</label>
+          <input
+            id="chemistry"
+            value={2}
+            type="radio"
+            checked={selectedCategory === 2}
+            onChange={() => handleCategoryChange(2,'chemistry')}
+          />
+        </li>
+        <li className="list-decimal flex gap-3">
+          <label htmlFor="physics">Physics</label>
+          <input
+            id="physics"
+            value={3}
+            type="radio"
+            checked={selectedCategory === 3}
+            onChange={() => handleCategoryChange(3,'physics')}
+          />
+        </li>
+        <li className="list-decimal flex gap-3">
+          <label htmlFor="geography">Geography</label>
+          <input
+            id="geography"
+            
+            value={4}
+            type="radio"
+            checked={selectedCategory === 4}
+            onChange={() => handleCategoryChange(4,'geography')}
+          />
+        </li>
+        <li className="list-decimal flex gap-3">
+          <label htmlFor="ict">ICT</label>
+          <input
+            id="ict"
+            
+            value={5}
+            type="radio"
+            checked={selectedCategory === 5}
+            onChange={() => handleCategoryChange(5,'ict')}
+          />
+        </li>
+      </ul>
 
+            
+            </div>
+            <textarea value={note} onChange={(e)=>setNote(e.target.value)} name="" className=" border border-black/10 rounded-lg p-4 " placeholder="Notes.... " id="" cols="30" rows="10"></textarea>
               <div className=" flex justify-between items-center">
                 <Link href={"/create/create-quiz"}>
                   <div className=" px-8 bg-[#37494E] text-white rounded-full h-[50px] flex items-center">
@@ -347,9 +442,8 @@ const page = () => {
                 </Link>
                 <p className=" font-bold ">Time: 5:00</p>
               </div>
-            </div>
           </div>
-          <button onClick={(e)=>handleUpload(e)} className=" bg-primaryButton w-[90%] fixed bottom-6  left-1/2 transform -translate-x-1/2 h-[60px] rounded-full text-white">
+          <button type="submit" onClick={(e)=>handleUpload(e)} className=" bg-primaryButton w-[90%] fixed bottom-6  left-1/2 transform -translate-x-1/2 h-[60px] rounded-full text-white">
             UPLOAD
           </button>
 

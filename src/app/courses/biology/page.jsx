@@ -1,69 +1,145 @@
-import React from "react";
+'use client'
+import React, { useEffect, useState } from "react";
 import TopicCard from "../../../components/cards/TopicCard";
 import Link from "next/link";
-import { AiOutlineArrowLeft, AiOutlineBackward } from "react-icons/ai";
+import axios from "axios";
+
 const page = () => {
+  const [data,setData]=useState([])
+  const [MAINcourse,setMAINCourse]=useState([])
+  const [filtered,setFiltered]=useState([])
+  const [coursesByCategory, setCoursesByCategory] = useState({});
+
+  useEffect(()=>{
+
+   
+  
+     axios.get('https://unicdata.pythonanywhere.com/categories/',
+    ) .then((res) => {
+      console.log(res.data);
+      setData(res.data)
+
+    })
+    .catch((e) => {
+      // toast.error("Try again..");
+      console.log(e);
+    });
+
+
+
+     axios.get('https://unicdata.pythonanywhere.com/subcategories/',
+    ) .then((res) => {
+      setMAINCourse(res.data)
+      console.log(res.data);
+
+    })
+    .catch((e) => {
+      // toast.error("Try again..");
+      console.log(e);
+    });
+
+
+
+
+  },[])
+
+  useEffect(() => {
+   
+    
+    // Filter courses based on the "ict" category
+    const filteredCourses = data.filter(course => {
+      // Check if there is any category in categories where course.id matches category.category
+      return MAINcourse.some(category => category.name === 'biology' && category.category === course.id);
+    });
+    setFiltered(filteredCourses)
+    console.log(filteredCourses);
+  }, [MAINcourse,data]);
+
+
+
+
+
+
+
+
   return (
     <div className=" py-6  flex flex-col gap-6 px-4 ">
-      <p>
-        <Link className="flex  items-center gap-2" href={"/dashboard"}>
-          <AiOutlineArrowLeft size={30} /> back
-        </Link>
-      </p>
-
       <div className=" flex gap-[60px]">
         <Link href={"/dashboard"}>
-          <img
-            src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fstatic.wixstatic.com%2Fmedia%2F7fe4e3_e9631d35de724b12b75a50f50d0c76fd~mv2.jpg%2Fv1%2Fcrop%2Fx_0%2Cy_60%2Cw_395%2Ch_275%2Ffill%2Fw_553%2Ch_385%2Cal_c%2Clg_1%2Cq_80%2Cenc_auto%2FBiology.jpg&tbnid=nSZlMk1giSk9XM&vet=12ahUKEwjIrbzm2v-AAxW1mCcCHVW7B8kQMygTegUIARCeAQ..i&imgrefurl=https%3A%2F%2Fwww.titaniumtutors.co.uk%2Fbiology-tutor&docid=4Pa3Ql_UH04WLM&w=553&h=385&q=biology&ved=2ahUKEwjIrbzm2v-AAxW1mCcCHVW7B8kQMygTegUIARCeAQ"
-            alt=""
-          />
+          <img src="/arrow-back.svg" alt="" />
         </Link>
+        <p className=" font-semibold text-lg absolute left-1/2 transform -translate-x-1/2">
+          Biology
+        </p>
       </div>
-      <div className=" w-full p-3 bg-[#14a4fda6] flex items-center gap-2.5 rounded-[20px] shadow-2xl shadow-[#17337962]">
-        <img src="/biology-icon.svg" alt="" className=" w-[150px]" />
+      <div className=" w-full p-3 bg-[#8498CBB2] flex items-center gap-2.5 rounded-[20px] shadow-2xl shadow-[#17337962]">
+        <img src="/chem-icon.svg" alt="" className=" w-[150px]" />
         <div className=" flex flex-col gap-5">
           <p className=" text-white font-bold">
-            Biology is the natural science field that studies living things.
+            The branch of science concerned with the substances of which matter
+            is composed.
           </p>
           <p className=" text-sm text-[#173379] font-bold">5 topics</p>
         </div>
       </div>
       <div className=" grid   grid-cols-2 w-full  gap-6 mt-8">
-        <Link href={"/courses/biology/cell"}>
-          <TopicCard
-            img={"/bio3.jpeg"}
-            noCourse={3}
-            level={"Intermediate"}
-            topic={"Cells"}
-          />
-        </Link>
+       
+       {/* {MAINcourse? */}
+     {filtered.length>0?
+        <>
+         {filtered.map((course,i)=>(
+        <TopicCard
+    
+          key={i}
+          link={course.id}
+          img={"/chem.webp"}
+          noCourse={3}
+          level={"Intermediate"}
+          topic={course.name}
+         />
+        ))}
+       </>:
+       <p>No courses on this yet, come back later</p>
+      }
+       
+      
+      
+      
+      {/* (
+         
+      )):null */}
 
-        <TopicCard
-          img={"/bio5.jpeg"}
+      
+   
+      {/* } */}
+       
+
+
+        {/* <TopicCard
+          img={"/chem1.jpeg"}
           noCourse={3}
           level={"Intermediate"}
-          topic={"ecology"}
+          topic={"Nuclear chemistry"}
         />
         <TopicCard
-          img={"/bio4.jpeg"}
+          img={"/chem4.jpeg"}
           noCourse={3}
           level={"Intermediate"}
-          topic={"Organisms exchange substances with their environment"}
+          topic={"Chemical Kinetics"}
         />
         <TopicCard
-          img={"/bio2.jpeg"}
+          img={"/chem3.jpeg"}
           noCourse={3}
           level={"Intermediate"}
-          topic={"Biological molecules"}
+          topic={"Organic Chemistry"}
         />
         <TopicCard
-          img={"/bio1.jpeg"}
+          img={"/chem5.jpeg"}
           noCourse={3}
           level={"Intermediate"}
-          topic={
-            "Genetic information, variation and relationships between organisms"
-          }
-        />
+          topic={"Inorganic chemistry"}
+        /> */}
+       
       </div>
     </div>
   );

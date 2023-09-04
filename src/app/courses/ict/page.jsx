@@ -49,7 +49,7 @@ const page = () => {
     // Filter courses based on the "ict" category
     const filteredCourses = data.filter(course => {
       // Check if there is any category in categories where course.id matches category.category
-      return MAINcourse.some(category => category.name === 'geography' && category.category === course.id);
+      return MAINcourse.some(category => category.name === 'ict' && category.category === course.id);
     });
     setFiltered(filteredCourses)
     console.log(filteredCourses);
@@ -69,38 +69,37 @@ const page = () => {
           <img src="/arrow-back.svg" alt="" />
         </Link>
         <p className=" font-semibold text-lg absolute left-1/2 transform -translate-x-1/2">
-          Geography
+          ICT
         </p>
       </div>
       <div className=" w-full p-3 bg-[#8498CBB2] flex items-center gap-2.5 rounded-[20px] shadow-2xl shadow-[#17337962]">
-        <img src="/chem-icon.svg" alt="" className=" w-[150px]" />
+        <img src="/ict1.jpeg" alt="" className=" w-[150px]" />
         <div className=" flex flex-col gap-5">
           <p className=" text-white font-bold">
             The branch of science concerned with the substances of which matter
             is composed.
           </p>
-          {/* <p className=" text-sm text-[#173379] font-bold">5 topics</p> */}
+          <p className=" text-sm text-[#173379] font-bold">5 topics</p>
         </div>
       </div>
       <div className=" grid   grid-cols-2 w-full  gap-6 mt-8">
        
        {/* {MAINcourse? */}
-         {filtered.length>0?<>
+       {filtered.length>0?<>
        {filtered.map((course,i)=>(
         <TopicCard
     
           key={i}
           link={course.id}
-          img={"/geo.jpeg"}
+          img={"/ict.jpeg"}
           noCourse={3}
           level={"Intermediate"}
           topic={course.name}
         />
-       ))}
-       </>:
-       <p>No courses on this yet, come back later</p>
-      }
-      
+        ))}
+        </>:
+        <p>No courses on this yet, come back later</p>
+       }
       
       {/* (
          

@@ -9,8 +9,31 @@ const page = () => {
   const [showVideos, setShowVideos] = useState(true);
   const savedVideos = {
     chemistry: [
-      { img: "/pic-1.png", noCourse: 4, level: "beginners", topic: "titration" },
-      { img: "/pic-2.png", noCourse: 1, level: "beginners", topic: "molecules" },
+      {
+        img: "/pic-1.png",
+        noCourse: 4,
+        level: "beginners",
+        topic: "titration",
+      },
+      {
+        img: "/pic-2.png",
+        noCourse: 1,
+        level: "beginners",
+        topic: "molecules",
+      },
+      { img: "/pic-3.png", noCourse: 7, level: "advanced", topic: "atoms" },
+      {
+        img: "/pic-1.png",
+        noCourse: 4,
+        level: "beginners",
+        topic: "titration",
+      },
+      {
+        img: "/pic-2.png",
+        noCourse: 1,
+        level: "beginners",
+        topic: "molecules",
+      },
       { img: "/pic-3.png", noCourse: 7, level: "advanced", topic: "atoms" },
     ],
     physics: [
@@ -70,7 +93,7 @@ const page = () => {
     <>
       {showVideos ? (
         <>
-          <div className=" flex w-full justify-center px-4 bg-white fixed left-1/2 transform -translate-x-1/2 pt-6 pb-3">
+          <div className=" flex w-full justify-center px-4 bg-white z-40 fixed left-1/2 transform -translate-x-1/2 pt-6 pb-3">
             <p
               className=" font-semibold text-lg cursor-pointer"
               onClick={() => setShowVideos(!showVideos)}

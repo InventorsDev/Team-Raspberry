@@ -7,8 +7,9 @@ const MyContextProvider = ({ children }) => {
     const [token,setToken]=useState("");
     const[PASS,setPASS]=useState('')
     const[profileImage,setProfileImage]=useState(null)
+    const[courseID,setCourseID]=useState(null)
   return (
-    <MyContext.Provider value={{user,PASS,setProfileImage,profileImage,setPASS,setUser,token,setToken }}>
+    <MyContext.Provider value={{user,setCourseID,courseID,PASS,setProfileImage,profileImage,setPASS,setUser,token,setToken }}>
       {children}
     </MyContext.Provider>
   );

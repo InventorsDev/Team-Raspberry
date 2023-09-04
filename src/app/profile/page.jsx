@@ -6,8 +6,10 @@ import Save from "../../components/profile/Save";
 import Navbar from "../../components/nav/Navbar";
 import MyContext from "../../context/context";
 import Cookies from 'js-cookie';
-import InvalidAuth from "../../components/invalidAuth/InvalidAuth";
+
 import axios from "axios";
+import { useRouter } from "next/navigation";
+import InvalidAuth from "../../components/invalidAuth/InvalidAuth";
 const page = () => {
   const [screen, setScreen] = useState("edit");
   const { token,setToken,setPASS,PASS, setUser, user } = useContext(MyContext);
@@ -16,11 +18,11 @@ const page = () => {
 
  
       const cokkieToken = Cookies.get('token'); 
-
+const router=useRouter()
 
 
   if (cokkieToken === '') {
-    return (<InvalidAuth />)
+    return <InvalidAuth />
    }
    else{
 
@@ -35,7 +37,7 @@ const page = () => {
         };
      
         axios
-          .get('https://unicdata.pythonanywhere.com', config)
+          .get('https://unicdata.pythonanywhere.com/profile', config)
           .then((res) => {
             // Handle successful response here
             console.log(res.data);
@@ -49,15 +51,28 @@ const page = () => {
       }
     }, [token]);
 
+       
+    
+
+    const handleLogOut=async()=>{
+      
+  
+  }
+
+
+
+
+  
   return (
     <div className=" flex flex-col px-4 py-8 justify-between h-screen">
-      <div>
-        <div className=" flex gap-[60px]">
+      <div >
+        <div className=" flex items-center px-5 justify-between gap-[60px]">
           {screen == "edit" ? (
             <Link href={"/dashboard"}>
               <img src="/arrow-back.svg" alt="" />
             </Link>
           ) : (
+            
             <img
               src="/arrow-back.svg"
               alt=""
@@ -65,9 +80,17 @@ const page = () => {
               onClick={() => setScreen("edit")}
             />
           )}
-          <p className=" font-semibold text-lg absolute left-1/2 transform -translate-x-1/2">
+          <div>
+             <p className=" font-semibold text-lg   transform ">
             Profile
           </p>
+          </div>
+         
+                
+          <button onClick={handleLogOut} className="    bg-red-700 text-white p-3 rounded-xl transform ">
+            Logout
+          </button>
+          
         </div>
 
         <>{screen == "edit" ? <Edit setScreen={setScreen} /> : <Save />}</>
@@ -81,5 +104,6 @@ const page = () => {
   );
 };
 };
+
 
 export default page;

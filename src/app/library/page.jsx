@@ -65,7 +65,7 @@ const Page = () => {
     ],
   };
 
-  if (token === '') {
+  if (!token) {
     return (<InvalidAuth />)
   } else {
     return (

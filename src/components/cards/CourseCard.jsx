@@ -14,7 +14,7 @@ const CourseCard = ({ img, subject, noCourses }) => {
         {subject}
         </p>
       <p>
-        {noCourses} {noCourses && "topics"}
+        {/* {noCourses} {noCourses && "topics"} */}
       </p>
     </div>
   );

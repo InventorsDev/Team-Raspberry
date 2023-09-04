@@ -17,7 +17,7 @@ import {  FaUserCircle } from "react-icons/fa";
 
 
 const page = () => {
-  const { token,setToken,setPASS,PASS, setUser,setProfileImage,profileImage, user } = useContext(MyContext);
+  const { token,setToken,setPASS,PASS, setUser,courseID,setCourseID,setProfileImage,profileImage, user } = useContext(MyContext);
   const router = useRouter();
 
  
@@ -129,6 +129,9 @@ const page = () => {
           </Link>
           <Link href="/courses/geology">
             <CourseCard img="/geology.svg" subject="Geology" noCourses={5} />
+          </Link>
+          <Link href="/courses/ict">
+            <CourseCard img="/ict1.jpeg" subject="ICT" noCourses={5} />
           </Link>
         </div>
       </div>

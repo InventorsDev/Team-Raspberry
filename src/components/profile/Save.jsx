@@ -15,7 +15,7 @@ const Save = () => {
 
 
 
-if (cokkieToken === '') {
+if (!cokkieToken) {
 return (<InvalidAuth />)
 
 
@@ -26,17 +26,19 @@ else{
     creator_email_verified: false,
     date_of_birth: null,
     email:'',
+    user_type:''
   });
+
   useEffect(() => { 
       console.log(cokkieToken);
     setToken(cokkieToken)
-  if (token) {
+ 
     const config = {
       headers: {
         Authorization: `Token ${token}`,
       },
     };
- console.log(token);
+
     axios
       .get("https://unicdata.pythonanywhere.com/profile/", config)
       .then((res) => {
@@ -52,8 +54,6 @@ else{
       });
  
 
-
-  }
 }, [token]);
 
 
@@ -106,7 +106,11 @@ else{
     newformData.append('date_of_birth', formData?.date_of_birth);
     newformData.append('last_name', formData?.last_name);
     newformData.append('gender', formData?.gender);
-    newformData.append('profile_picture', PROFILE_PHOTO);
+    if(PROFILE_PHOTO){
+        newformData.append('profile_picture', PROFILE_PHOTO);
+    }
+  
+    newformData.append('user_type', formData?.user_type);
   
    console.log(PROFILE_PHOTO);
     await axios
@@ -246,6 +250,19 @@ else{
             type="text"
             name="gender"
             value={formData.gender}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className=" border border-primary-green h-[60px] rounded-full p-2">
+          <p className=" bg-white w-min mt-[-20px] ml-[30px] px-1 text-[#8a8a8a] text-sm font-extralight whitespace-nowrap">
+          user type
+          </p>
+          <input
+            required
+            className="w-full h-full bg-transparent outline-none px-3"
+            type="text"
+            name="user_type"
+            value={formData.user_type}
             onChange={handleInputChange}
           />
         </div>
