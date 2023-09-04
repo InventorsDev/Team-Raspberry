@@ -9,6 +9,7 @@ import Cookies from 'js-cookie';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AiFillBackward, AiFillCaretLeft, AiOutlineArrowLeft, AiOutlineLeft } from "react-icons/ai";
+import InvalidAuth from "../../components/invalidAuth/InvalidAuth";
 const page = () => {
   const [dashboard, setDashboard] = useState(false);
   const [title, setTitle] = useState('');
@@ -89,7 +90,7 @@ const page = () => {
 
 
 
-  if (!cokkieToken) {
+  if (token === ''){
     return (<InvalidAuth />)
    }
    else{

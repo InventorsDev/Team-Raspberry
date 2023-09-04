@@ -50,9 +50,9 @@ const page = () => {
         console.log(token);
       })
       .catch((err) => {
-        setError(err.response.data);
+        setError(err?.response?.data);
         toast.error("Invalid Credentials!,Try again..");
-        console.log(err.response.data);
+        console.log(err?.response?.data);
       });
   };
 
@@ -110,8 +110,12 @@ const page = () => {
         pauseOnHover
         theme="light"
       />
-      <div className=" flex flex-col gap-12">
+      <div className="  flex flex-col gap-12">
+        <div className=" items-center justify-center flex-col flex">
+  <img className=" rounded-full h-[10em] text-center w-[10em]" src="/lk.png"/>
         <p className=" font-bold text-[28px]">LearnVerse</p>
+      
+        </div>
         <span className=" text-[22px]">
           <span className=" font-black">Login</span> <span>to account</span>
         </span>

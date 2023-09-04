@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import TopicCard from "../../../components/cards/TopicCard";
 import Link from "next/link";
 import axios from "axios";
+import { AiOutlineWarning } from "react-icons/ai";
 
 const page = () => {
   const [data,setData]=useState([])
@@ -82,13 +83,13 @@ const page = () => {
           {/* <p className=" text-sm text-[#173379] font-bold">5 topics</p> */}
         </div>
       </div>
-      <div className=" grid   grid-cols-2 w-full  gap-6 mt-8">
+      <div >
        
        {/* {MAINcourse? */}
-         {filtered.length>0?<>
+       {filtered.length>0?<>
+        <div className=" grid   grid-cols-2 w-full  gap-6 mt-8">
        {filtered.map((course,i)=>(
         <TopicCard
-    
           key={i}
           link={course.id}
           img={"/geo.jpeg"}
@@ -96,11 +97,16 @@ const page = () => {
           level={"Intermediate"}
           topic={course.name}
         />
-       ))}
-       </>:
-       <p>No courses on this yet, come back later</p>
-      }
-      
+        ))} 
+        </div>
+      </>
+    
+      :
+      <div className=" flex justify-center items-center mt-5 text-red-700">
+       
+      <p className=" flex flex-col items-center justify-center gap-9"><AiOutlineWarning size={80}/>No courses on this yet, come back later</p>
+    </div>
+     }
       
       {/* (
          

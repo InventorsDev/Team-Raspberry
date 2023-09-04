@@ -6,6 +6,8 @@ import Save from "../../components/profile/Save";
 import Navbar from "../../components/nav/Navbar";
 import MyContext from "../../context/context";
 import Cookies from 'js-cookie';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -21,7 +23,9 @@ const page = () => {
 const router=useRouter()
 
 
-  if (cokkieToken === '') {
+if (cokkieToken==='') {
+
+  
     return <InvalidAuth />
    }
    else{
@@ -54,9 +58,22 @@ const router=useRouter()
        
     
 
-    const handleLogOut=async()=>{
-      
-  
+    const handleLogOut=async()=>{ const config = {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    };
+      await axios.post('https://unicdata.pythonanywhere.com/logout/', { revoke_token: true }, config)
+      .then((response) => {
+        // Handle success, e.g., clear user session, redirect, etc.
+        console.log("Logout successful", response);
+        router.push('/login')
+      })
+      .catch((error) => {
+        // Handle error, e.g., show an error message.
+        console.error("Logout failed", error);
+      });
+     
   }
 
 
@@ -100,6 +117,19 @@ const router=useRouter()
       ) : (
       <></>
       )}
+       <ToastContainer
+        className=" mb-8"
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };

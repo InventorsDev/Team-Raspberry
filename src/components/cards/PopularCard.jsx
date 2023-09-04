@@ -13,9 +13,9 @@ const PopularCard = ({ img, course, topic }) => {
   // }
 
   return (
-    <div onClick={setCourseID(img.id )}  key={img.id}  className=" min-w-[140px] h-[140px] overflow-hidden flex flex-col gap-1">
+    <div   key={img.id}  className=" min-w-[140px] h-[140px] overflow-hidden flex flex-col gap-1">
 
-      
+
       {/* <Link  href={'/courses/'+courseID}> */}
        {img ?
       <img width={100} height={500} className=" bg-contain  w-full"   src={img.cover_image} alt='e'/>

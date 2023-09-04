@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
+import { AiFillBook } from "react-icons/ai";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -21,7 +22,7 @@ const Navbar = () => {
           </p>
         </div>
       </Link>
-      <Link href={"/bookmark"}>
+      {/* <Link href={"/bookmark"}>
         <div className=" flex flex-col gap-1 items-center justify-center">
           <img src="/course-icon.svg" alt="" className=" w-5" />
           <p
@@ -32,16 +33,17 @@ const Navbar = () => {
             Saved
           </p>
         </div>
-      </Link>
-      <Link href={"/library"}>
+      </Link> */}
+      <Link href={"/dictionary"}>
         <div className=" flex flex-col gap-1 items-center justify-center">
-          <img src="/library-icon.svg" alt="" className=" w-6" />
+          {/* <img src="/library-icon.svg" alt="" className=" w-6" /> */}
+          <AiFillBook size={30}/>
           <p
             className={`${
               page == "library" ? "text-[#9E7167]" : "text-[#8C8989]"
             } `}
           >
-            Library
+            Dictionary
           </p>
         </div>
       </Link>

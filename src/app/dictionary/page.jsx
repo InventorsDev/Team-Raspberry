@@ -23,7 +23,7 @@ const page = () => {
           input_data: word.wordUnderConsideration,
         }
       );
-
+     console.log(response.data);
       return response.data.response;
     } catch (error) {
       console.error(`Error fetching ${command} data:`, error);
@@ -47,6 +47,7 @@ const page = () => {
 
     // Update the state with the combined data
     setWord({ ...word, ...combinedData });
+    console.log({ ...word, ...combinedData });
     setShowWord(word.wordUnderConsideration);
   };
 
