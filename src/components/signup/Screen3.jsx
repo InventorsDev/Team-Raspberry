@@ -1,10 +1,16 @@
 'use client'
 import Link from "next/link";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import MyContext from "../../context/context";
 
-const Screen3 = ({ screen, setScreen, typeOfUser, setTypeOfUser }) => {
-  const { user, setUser } = useContext(MyContext);
+const Screen3 = ({ screen, setScreen }) => {
+  const { user, setUser,typeOfUser, setTypeOfUser } = useContext(MyContext);
+  // console.log(typeOfUser);
+  const [student,setStudent]=useState(true)
+
+// useEffect(()=>{
+console.log(typeOfUser);
+// },[student])
 
   return (
     <>
@@ -24,10 +30,13 @@ const Screen3 = ({ screen, setScreen, typeOfUser, setTypeOfUser }) => {
             className={` flex p-3 gap-2 items-center  border ${
               typeOfUser == "student" ? "border-primary-green" : ""
             }  rounded-[15px] cursor-pointer`}
-            onClick={() =>{
-               setTypeOfUser("student")
-               setUser({...user,userType:typeOfUser })
-                console.log(user);
+            onClick={(e) =>{
+                e.preventDefault()
+                setStudent(true)
+                setTypeOfUser(true)
+             
+         
+                // console.log(typeOfUser);
               }}
           >
             <img src="/student-icon.svg" alt="" />
@@ -40,11 +49,12 @@ const Screen3 = ({ screen, setScreen, typeOfUser, setTypeOfUser }) => {
             className={` flex p-3 gap-2 items-center  border ${
               typeOfUser == "creator" ? "border-primary-brown" : ""
             }  rounded-[15px] cursor-pointer`}
-            onClick={() =>{ 
-            
-               setTypeOfUser("creator")  
-               setUser({...user,userType:typeOfUser })
-              console.log(user);
+            onClick={(e) =>{ 
+              e.preventDefault()
+              setStudent(false)
+               setTypeOfUser(false)
+              
+              // console.log(typeOfUser);
               }}
           >
             <img src="/tutor-icon.svg" alt="" />

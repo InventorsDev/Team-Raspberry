@@ -80,7 +80,7 @@ const page = () => {
             The branch of science concerned with the substances of which matter
             is composed.
           </p>
-          <p className=" text-sm text-[#173379] font-bold">5 topics</p>
+          {/* <p className=" text-sm text-[#173379] font-bold">5 topics</p> */}
         </div>
       </div>
       <div className="">

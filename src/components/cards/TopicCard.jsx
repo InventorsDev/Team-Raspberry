@@ -23,9 +23,9 @@ const TopicCard = ({ img, noCourse, level, topic,link}) => {
           </div>
           <div className=" flex justify-between px-2">
             <p className=" text-[#8C8989] text-sm capitalize">{level}</p>
-            <p className=" text-[#8C8989] text-sm">
+            {/* <p className=" text-[#8C8989] text-sm">
               {noCourse} {noCourse && "videos"}
-            </p>
+            </p> */}
           </div>
           <p className=" px-2 text-sm capitalize h-[49px] py-2">{topic}</p>
         </div>

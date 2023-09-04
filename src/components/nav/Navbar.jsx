@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
-import { AiFillBook } from "react-icons/ai";
+import { AiFillBook, AiOutlineBook } from "react-icons/ai";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -37,7 +37,7 @@ const Navbar = () => {
       <Link href={"/dictionary"}>
         <div className=" flex flex-col gap-1 items-center justify-center">
           {/* <img src="/library-icon.svg" alt="" className=" w-6" /> */}
-          <AiFillBook size={30}/>
+          <AiOutlineBook className=" text-gray-400" size={30}/>
           <p
             className={`${
               page == "library" ? "text-[#9E7167]" : "text-[#8C8989]"

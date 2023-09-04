@@ -90,7 +90,7 @@ const page = () => {
 
 
 
-  if (token === ''){
+  if (cokkieToken === ''){
     return (<InvalidAuth />)
    }
    else{

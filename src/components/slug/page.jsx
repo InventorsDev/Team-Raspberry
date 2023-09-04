@@ -6,21 +6,15 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import MyContext from "../../context/context";
 import { useFlutterwave } from "flutterwave-react-v3";
 import { FlutterWaveButton, closePaymentModal } from "flutterwave-react-v3";
-import { useRouter } from 'next/navigation';
-import {useQueryParam} from '../useParams/useQueryParam'
 import axios from "axios";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 const page = () => {
     const [popularCoursses,setPopularCourses]=useState([])
     const cokkieToken = Cookies.get("token");
    
 
-    // // Access the "slug" parameter from the URL
-    // const { slug } = router.query;
-
-
-    // console.log(slug);
 
   const [show, setShow] = useState(true);
   const { token,setToken,setPASS,PASS, setUser, user,courseID,setCourseID } = useContext(MyContext);

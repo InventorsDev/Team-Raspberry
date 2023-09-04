@@ -93,7 +93,7 @@ const Edit = ({ setScreen }) => {
               <label htmlFor="">User Type</label>
               <h3 className=" mt-3 font-extrabold  text-gray-400"> {user.user_type}</h3>
               <Link href={"/create"}>
-             <p className=" mt-4  bg-green-900 text-white p-3 rounded-md w-fit font-bold">Create Course</p>
+             <p className=" mt-4  text-center flex bg-green-900 text-white p-3 rounded-md font-bold">Create Course</p>
           </Link>
              
             </div>

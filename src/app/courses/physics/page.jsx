@@ -79,7 +79,7 @@ const page = () => {
           <p className=" text-white font-bold">
           physics is central to our understanding of the natural world and has led to countless technological advancements that have shaped modern society. It continues to push the boundaries of human knowledge and holds the key to solving many of the mysteries of the universe.
           </p>
-          <p className=" text-sm text-[#173379] font-bold">5 topics</p>
+          {/* <p className=" text-sm text-[#173379] font-bold">5 topics</p> */}
         </div>
       </div>
       <div >
