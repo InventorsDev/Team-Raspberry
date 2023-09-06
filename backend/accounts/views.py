@@ -82,48 +82,6 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
 class CreatorRegistrationView(generics.CreateAPIView):
     serializer_class = RegistrationSerializer
 
-    def send_verification_email(self, user):
-        user_id = urlsafe_base64_encode(force_bytes(user.pk))
-        token = default_token_generator.make_token(user)
-        verification_url = reverse('email-verify')
-        verification_url = f'{frontend_url}{verification_url}?user_id={user_id}&token={token}'
-
-        email_subject = 'Verify your email'
-        html_body = render_to_string(
-            'accounts/email_verification.html',
-            {
-                'user': user,
-                'verification_url': verification_url,
-                'current_site': frontend_url,
-            }
-        )
-        plain_text_body = strip_tags((html_body))
-        email = EmailMultiAlternatives(email_subject, plain_text_body, to=[user.email])
-        email.attach_alternative(html_body,"text/html")
-        email.send()
-
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-
-        # Send verification email
-        self.send_verification_email(user)
-
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-
-    def perform_create(self, serializer):
-        user = serializer.save()
-        user.set_password(serializer.validated_data["password"])
-        user.is_active = False  # Set the user as inactive initially
-        user.save()
-        return user
-
-
-class EmailVerificationView(generics.GenericAPIView):
-    serializer_class = EmailVerificationSerializer
-
     def send_activation_email_to_admins(self, user, current_site):
         admins = User.objects.filter(is_staff=True)
 
@@ -148,36 +106,31 @@ class EmailVerificationView(generics.GenericAPIView):
             email.attach_alternative(html_body,"text/html")
             email.send()
 
-    def post(self, request):
+    def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        token = serializer.validated_data['token']
-        user_id = serializer.validated_data['user_id']
+        user = self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
 
-        try:
-            uid = force_str(urlsafe_base64_decode(user_id))
-            user = User.objects.get(pk=uid)
-            if not default_token_generator.check_token(user, token):
-                raise ValueError
-        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
-            return Response({'detail': 'Invalid token.'}, status=status.HTTP_401_UNAUTHORIZED)
-
-        if user.creator_email_verified == True:
-            return Response({'detail':'Email is already verified'},status=status.HTTP_400_BAD_REQUEST)
-        user.creator_email_verified = True
-        user.save()
-
-        # Send activation notification email to admins
         current_site = get_current_site(self.request)
         self.send_activation_email_to_admins(user, current_site)
 
-        return Response({'detail': 'Email verification successful.'})
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    def perform_create(self, serializer):
+        user = serializer.save()
+        user.set_password(serializer.validated_data["password"])
+        user.save()
+        return user
+
+
+
 
 class AdminActivateUserView(generics.GenericAPIView):
     serializer_class = EmailVerificationSerializer
 
     def send_activated_account_email(self, user):
-        email_subject = 'Raspberry-Account activated'
+        email_subject = 'Learnverse-Account activated'
         email_body = render_to_string(
             'activated_account.html',
             {
@@ -201,8 +154,7 @@ class AdminActivateUserView(generics.GenericAPIView):
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             return Response({'detail': 'Invalid token.'}, status=status.HTTP_401_UNAUTHORIZED)
 
-        user.is_active = True
         user.user_type = 'content_creator'
         user.save()
         self.send_activated_account_email(user)
-        return Response({'detail': 'Account activated successful.'})
+        return Response({'detail': 'Creator Account activated successful.'})
