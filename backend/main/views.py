@@ -12,7 +12,7 @@ from .permissions import *
 class VideoList(generics.ListCreateAPIView):
     queryset = Video.objects.all()
     serializer_class = VideoSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly,]
+    permission_classes = [IsAuthenticatedOrReadOnly,IsContentCreatorOrReadOnly]
 
     def perform_create(self, serializer):
         serializer.save(creator_id=self.request.user)
