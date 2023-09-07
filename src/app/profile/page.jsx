@@ -13,6 +13,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import InvalidAuth from "../../components/invalidAuth/InvalidAuth";
 import Image from "next/image";
+import { cookies } from "next/dist/client/components/headers";
 const Page = () => {
   const [screen, setScreen] = useState("edit");
   const { token,setToken,setPASS,PASS, setUser, user } = useContext(MyContext);
@@ -26,13 +27,10 @@ const Page = () => {
     useEffect(() => {
       
       const cokkieToken = Cookies.get('token'); 
-      if (cokkieToken==='') {
-    return <InvalidAuth />
-   }
-   else{
      
-      if (cokkieToken !== '') {
-        setToken(cokkieToken);
+     
+      // if (cokkieToken !== '') {
+      
         const config = {
           headers: {
             Authorization: `Token ${cokkieToken}`,
@@ -50,33 +48,37 @@ const Page = () => {
             toast.error('Invalid credentials, please try again');
             console.log(err);
           });
-      }
-      }
+
+      // }
     }, []);
   
 
        
     
+console.log(token);
+    
+const handleLogOut = async (e) => {
+  e.preventDefault()
+  const config = {
+    headers: {
+      Authorization: `Token ${token}`,
+    },
+  };
 
-    const handleLogOut=async()=>{ const config = {
-      headers: {
-        Authorization: `Token ${token}`,
-      },
-    };
-      await axios.post('https://unicdata.pythonanywhere.com/logout/', { revoke_token: true }, config)
-      .then((response) => {
-        // Handle success, e.g., clear user session, redirect, etc.
-        console.log("Logout successful", response);
-        router.push('/login')
-      })
-      .catch((error) => {
-        // Handle error, e.g., show an error message.
-        console.error("Logout failed", error);
-      });
-     
+  try {
+    await axios.post('https://unicdata.pythonanywhere.com/logout/', { revoke_token: true }, config);
+    
+    // Clear the token cookie after successful logout
+    Cookies.remove('token'); // Replace 'token' with the actual name of your cookie
+    
+    // Handle success, e.g., clear user session, redirect, etc.
+    console.log("Logout successful");
+    router.push('/login');
+  } catch (error) {
+    // Handle error, e.g., show an error message.
+    console.error("Logout failed", error);
   }
-
-
+};
 
 
   
@@ -84,7 +86,7 @@ const Page = () => {
     <>
  { !user.username?
   <div >
-     <div className=" flex  flex-col  justify-center items-center h-[100vh] w-full ">
+     <div  className={` flex  flex-col  justify-center items-center h-[100vh] w-full ${token===undefined || token===null || token==='' ?'hidden':'block'} `}>
       <Image alt="" src='/lk.png' className=" bg-transparent rounded-full"  width={130} height={100}/>
       <div className=" shadow p-5 rounded-lg w-[90%] bg-gray-100 outline-[#000000ae] m-3 flex gap-8 flex-col text-center">
          <p style={{textShadow:'2px 2px 4px rgba(0, 0, 0, 0.5)'}} className="  text-blue-800    font-extrabold font-montserrat  text-[30px]"> LEARN VERSE</p>
@@ -123,7 +125,7 @@ const Page = () => {
           </div>
          
                 
-          <button onClick={handleLogOut} className="    bg-red-700 text-white p-3 rounded-xl transform ">
+          <button onClick={(e)=>handleLogOut(e)} className="    bg-red-700 text-white p-3 rounded-xl transform ">
             Logout
           </button>
           

@@ -10,6 +10,7 @@ import auth from "../firebase";
 import MyContext from "../../context/context";
 import Cookies from "js-cookie";
 import Image from "next/image";
+import { cookies } from "next/dist/client/components/headers";
 
 const Page = () => {
   const router = useRouter();
@@ -40,9 +41,9 @@ const Page = () => {
         console.log(res.data.token);
         setPASS(res.data?.token);
         setToken(res.data?.token);
-        if (token) {
+    
           router.push("/dashboard");
-        }
+    
 
         console.log("Successful");
         toast.success("Successful");
@@ -68,13 +69,12 @@ const Page = () => {
         .get("https://unicdata.pythonanywhere.com/profile/", config)
         .then((res) => {
           console.log(res.data);
-          setToken(res.data?.token);
+          setToken(res.data.token);
           console.log(token);
           setUser({ ...user, ...res.data });
-          console.log(res.data);
-          if (token) {
-            router.push("/dashboard");
-          }
+          router.push("/dashboard");
+         
+     
         })
         .catch((err) => {
           if (err.response.status === 401) {
@@ -84,9 +84,11 @@ const Page = () => {
           }
         });
     }
-
-  }, [token]);
-
+// // <<<<<<< HEAD
+  }, []);
+// // =======
+  // }, []);
+// >>>>>>> 785fb0ef447e2025c73783432a7f2ccfc29bdf7f
 
   useEffect(() => {
     Cookies.set("token", token, { expires: 7 });
