@@ -36,7 +36,7 @@ const Page = () => {
       })
       .then((res) => {
         console.log(res.data);
-        Cookies.set("token", res.data.token, { expires: 7 });
+        Cookies.set("token", res.data.token);
         console.log(res.data.token);
         setPASS(res.data?.token);
         setToken(res.data?.token);
@@ -84,7 +84,7 @@ const Page = () => {
           }
         });
     }
-  }, [token, setUser,setToken, user, router]);
+  }, [token]);
 
   useEffect(() => {
     Cookies.set("token", token, { expires: 7 });

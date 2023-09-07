@@ -57,6 +57,7 @@ const Page = () => {
 
  
       const cokkieToken = Cookies.get('token'); 
+      console.log(Cookies);
       const[popularCoursses,setPopularCourses]=useState([])
      const [searchQuery, setSearchQuery] = useState(""); // Step 1: Create state variable for search query
 
@@ -91,7 +92,7 @@ const Page = () => {
             toast.error('Invalid credentials try again')
             console.log(err);
           });
-        axios
+          axios
           .get('https://unicdata.pythonanywhere.com/videos/', config)
           .then((res) => {
             // Handle successful response here
@@ -108,7 +109,7 @@ const Page = () => {
 
 
       }
-    }, [token]);
+    }, []);
   
 
    
@@ -116,8 +117,17 @@ const Page = () => {
       course.subject.toLowerCase().includes(searchQuery.toLowerCase())
     );
   
-  return (
+  return (<>
+  {token===undefined?
+  <InvalidAuth/>
+  :  
+
+
+  
+  
+
     <div className="py-6 relative flex flex-col gap-3 pb-32">
+     {token}
       <Image width={30} height={30} className="w-[3.3em] absolute top-[5px] rounded-full" src='/lk.png'/>
        <ToastContainer
           className=" mb-8"
@@ -215,6 +225,8 @@ const Page = () => {
       {/* <OngoingCard /> */}
       <Navbar />
     </div>
+}
+    </>
   );
 };
 
