@@ -1,12 +1,13 @@
 import React from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const Success = () => {
   const router = useRouter();
 
   return (
     <div className=" flex w-full h-full justify-center items-center flex-col gap-[30px]">
-      <img src="/white-checkmark.svg" alt="" />
+         <Image width={100} height={70} src="/white-checkmark.svg" alt="" />
       <div className=" flex flex-col gap-4">
         <p className=" font-semibold text-[22px] text-center">Success</p>
         <p className=" text-center w-[285px] font-medium">

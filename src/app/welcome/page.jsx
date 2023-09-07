@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -36,11 +37,11 @@ export default function Home() {
     <div className="bg-primaryBg h-screen flex flex-col items-center pt-[50px] justify-between text-white">
       <Link
         href={"/signup"}
-        className=" text-end w-full px-[30px] font-semibold"
+        className=" text-end px-[30px] font-semibold w-full"
       >
         <p>skip</p>
       </Link>
-      <img
+      <Image width={40} height={20}
         src={data[screen < 3 ? screen : 0].img}
         alt=""
         className=" w-[420px] h-[370px]"
@@ -49,6 +50,7 @@ export default function Home() {
         <div className=" flex h-2 gap-1.5 justify-center">
           {["", "", ""].map((_, i) => (
             <div
+            key={i}
               className={` w-[22px]  rounded-full ${
                 screen == i ? " bg-primary-green" : "bg-white"
               }`}
@@ -64,8 +66,8 @@ export default function Home() {
         </p>
         <button onClick={handleClick}>
           {screen < 2 ? (
-            <div className=" bg-white grid place-items-center w-[60px] h-[60px] rounded-full ">
-              <img src="/forward-arrow.svg" alt="" />
+            <div key={1} className=" bg-white grid place-items-center w-[60px] h-[60px] rounded-full ">
+       <Image width={40} height={20} src="/forward-arrow.svg" alt="" />
             </div>
           ) : (
             <div className=" p-3 bg-primaryButton rounded-full">

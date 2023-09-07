@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const Screen2 = ({ setScreen }) => {
   return (
@@ -7,7 +8,11 @@ const Screen2 = ({ setScreen }) => {
       <div className=" flex flex-col gap-12">
         <div className=" flex gap-[60px]">
           <button onClick={() => setScreen("screen_1")}>
-            <img src="/arrow-back.svg" alt="" />
+               
+ <Image 
+ height={40}
+ width={40}
+       src="/arrow-back.svg" alt="" />
           </button>
           <p className=" font-semibold text-lg absolute left-1/2 transform -translate-x-1/2">
             Reset Password

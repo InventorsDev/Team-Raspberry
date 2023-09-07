@@ -6,6 +6,7 @@ import Screen1 from "../../components/signup/Screen1";
 import Screen2 from "../../components/signup/Screen2";
 import Screen3 from "../../components/signup/Screen3";
 import Success from "../../components/signup/Success";
+import axios from "axios";
 
 export default function Home() {
   const [screen, setScreen] = useState("screen_2");
@@ -17,6 +18,8 @@ export default function Home() {
     email: "",
     typeOfUser: "student",
   });
+
+  
 
   let currentScreen;
   switch (screen) {
@@ -39,11 +42,9 @@ export default function Home() {
       );
       break;
 
-    case "screen_2":
-      currentScreen = <Screen2 screen={screen} setScreen={setScreen} />;
-      break;
+  
 
-    case "screen_3":
+    case "screen_2":
       currentScreen = (
         <Screen3
           screen={screen}
@@ -54,7 +55,7 @@ export default function Home() {
           }
         />
       );
-      break;
+      break;x
 
     case "screen_4":
       currentScreen = (
@@ -79,6 +80,8 @@ export default function Home() {
       currentScreen = <Screen1 screen={screen} setScreen={setScreen} />;
       break;
   }
+
+
   return (
     <div className=" flex justify-center">
       <div className=" h-screen flex flex-col py-[40px] px-4 justify-between max-w-[600px] w-full">

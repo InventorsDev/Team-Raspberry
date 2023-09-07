@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 const AdminCourseCard = ({ img, topic, creator }) => {
@@ -11,7 +12,7 @@ const AdminCourseCard = ({ img, topic, creator }) => {
           {creator && "By "} {creator}
         </p>
       </div>
-      <img src={img} alt="" className=" " />
+      <Image width={50} height={50} src={img} alt="" className=" " />
       <div className=" flex justify-between items-center">
         <button className=" text-[#FFA927] font-bold text-sm">Modify</button>
         <button className=" text-[#EE4242] font-bold text-sm">Delete</button>

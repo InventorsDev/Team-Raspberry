@@ -1,6 +1,7 @@
 import React from "react";
 import AdminNav from "../../components/nav/AdminNav";
 import Link from "next/link";
+import Image from "next/image";
 
 const page = () => {
   return (
@@ -20,12 +21,12 @@ const page = () => {
           <div className=" flex flex-col items-center">
             <div className=" flex gap-1 items-center">
               <p>4.2</p>
-              <img src="/increase.svg" alt="" />
+              <Image width={20} height={20} src="/increase.svg" alt="" />
             </div>
             <p className=" text-[#B4B4B4] text-[15px]">vs last week</p>
           </div>
         </div>
-        <img src="/line-graph.png" className="w-full" alt="" />
+        <Image width={20} height={20} src="/line-graph.png" className="w-full" alt="" />
       </div>
       
       <div className=" py-2.5 px-3.5 shadow-[10px_10px_50px_10px_rgba(75,93,97,0.09)] rounded-[20px] flex gap-2.5 flex-col">
