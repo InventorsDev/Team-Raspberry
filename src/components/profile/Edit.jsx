@@ -8,6 +8,7 @@ import { FaUserCircle } from "react-icons/fa";
 import InvalidAuth from "../invalidAuth/InvalidAuth";
 import { toast } from "react-toastify"; // Import toast
 import Image from "next/image";
+import { AiOutlineBook, AiTwotoneBook } from "react-icons/ai";
 
 const Edit = ({ setScreen }) => {
   const {
@@ -80,7 +81,7 @@ const Edit = ({ setScreen }) => {
         </div>
 
         <div className=" mt-[70px] h-[90%] flex flex-col gap-4">
-          <p className=" font-bold">Subscription Plan</p>
+          <p className=" text-lg font-extrabold text-gray-500  my-4  ">Subscription Plan</p>
          
          
           <div className=" w-full flex bg-[#5E868E] p-5 rounded-[20px] text-white gap-2 items-start">
@@ -96,8 +97,8 @@ const Edit = ({ setScreen }) => {
           </div>
           <div className=" flex justify-between gap-3">
             <div>
-              <label htmlFor="">User Type</label>
-              <h3 className=" mt-3 font-extrabold  text-gray-400"> {user.user_type}</h3>
+              <label className="text-lg font-extrabold text-gray-500   " htmlFor=" ">User Type</label>
+              <h3 className=" mt-3 font-extrabold "> {user.user_type}</h3>
               <Link href={"/create"}>
              <p className=" mt-4  text-center flex bg-green-900 text-white p-3 rounded-md font-bold">Create Course</p>
           </Link>
@@ -118,10 +119,11 @@ const Edit = ({ setScreen }) => {
            
           </div>
           <div className=" mt-8">
-            <p className=" font-bold">Courses Covered.</p>
-            <div className=" flex gap-6 items-center mt-4">
-            <Image width={40} height={40} src="/pie-chart.svg" alt="" />
-              <p>You have covered 90% of the courses, good job!</p>
+            <p className=" text-lg font-extrabold text-gray-500  my-4 ">Courses Covered.</p>
+            <div className="flex    ">
+            {/* <Image width={40} height={40} src="/pie-chart.svg" alt="" /> */}
+            <AiOutlineBook className=" h-fit w-fit"  size={290}/>
+              <p className=" px-5">Unlock a world of knowledge with our comprehensive array of courses, where each one is a gateway to new horizons waiting to be explored!</p>
             </div>
           </div>
         </div>

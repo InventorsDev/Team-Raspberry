@@ -8,7 +8,7 @@ import { useFlutterwave } from "flutterwave-react-v3";
 import { FlutterWaveButton, closePaymentModal } from "flutterwave-react-v3";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useRouter } from "next/navigation";
+import { useRouter,useParams } from "next/navigation";
 import Image from "next/image";
 
 const Page = () => {
@@ -19,6 +19,11 @@ const Page = () => {
 
   const [show, setShow] = useState(true);
   const { token,setToken,setPASS,PASS, setUser, user,courseID,setCourseID } = useContext(MyContext);
+
+  const {slug}=useParams()
+  console.log(slug);
+  setCourseID(slug)
+
   console.log(user);
   const config = {
     public_key: `FLWPUBK_TEST-841c10b026f35195c62cfc032d14c5a0-X`,
@@ -61,9 +66,11 @@ const Page = () => {
   },[token,cokkieToken,setToken])
 
 const router=useRouter()
-  if(!courseID){
-    router.push('/dashboard')
-  }
+
+
+  // if(!courseID){
+  //   router.push('/dashboard')
+  // }
 
 
 
@@ -122,7 +129,7 @@ const router=useRouter()
     });
 
 
-  }, [setToken,token]);
+  }, [token]);
 
   useEffect(() => {
    
@@ -130,7 +137,7 @@ const router=useRouter()
     // Filter courses based on the "ict" category
     const filteredCourses = data.filter(course => {
       // Check if there is any category in categories where course.id matches category.category
-      return MAINcourse.some(category => category.name === 'chemistry' && category.category === course.id);
+      return MAINcourse.some(category => category.name === 'chemistry' && category.category === slug);
     });
     setFiltered(filteredCourses)
     console.log(filteredCourses);
@@ -190,6 +197,14 @@ const router=useRouter()
         </div>
       </div>
          {/* {courseID}z  */}
+         {popularCoursses.length===0?
+           <div className=" flex justify-center items-center h-[100vh] w-full ">
+           <Image className=" justify-center flex items-center " src={'/spin.gif'} width={50} height={50}/>
+       
+        </div>
+        :
+        null
+        }
       {
         popularCoursses.filter(course=>course.id===(courseID-5)).map(course=>(
 
@@ -250,10 +265,13 @@ const router=useRouter()
            
           }} key={i} className=" grid grid-cols-5 flex-wrap justify-between gap-6">
     
-           <div    className=" w-[130px]  overflow-hidden flex flex-col gap-1.5">
-           <Image width={100} height={60} src={book.cover_image} alt="" className=" rounded-lg" />
-                <p className="text-sm">{book.title}</p>
+           <div    className=" w-[130px] h-[120px]  overflow-hidden flex flex-col gap-1.5">
+            <div className="h-full w-full">
+               <Image width={1440} height={440} src={book.cover_image} alt="" className=" h-[5rem] w-[18rem] object-cover  rounded-lg" />
+                <p className="text-sm text-center">{book.title}</p>
               </div>
+            </div>
+          
         
              
            

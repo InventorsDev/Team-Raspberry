@@ -81,6 +81,26 @@ const Page = () => {
 
   
   return (
+    <>
+ { !user.username?
+  <div >
+     <div className=" flex  flex-col  justify-center items-center h-[100vh] w-full ">
+      <Image alt="" src='/lk.png' className=" bg-transparent rounded-full"  width={130} height={100}/>
+      <div className=" shadow p-5 rounded-lg w-[90%] bg-gray-100 outline-[#000000ae] m-3 flex gap-8 flex-col text-center">
+         <p style={{textShadow:'2px 2px 4px rgba(0, 0, 0, 0.5)'}} className="  text-blue-800    font-extrabold font-montserrat  text-[30px]"> LEARN VERSE</p>
+       <p className=' font-[fantasy] text-center mb-5 px-9 text-blue-800 font-extrabold text-[16px]' >Embark on a Journey of Discovery and Transformation</p>
+      
+      </div>
+      <Image alt="" className=" bg-transparent rounded-full justify-center flex items-center " src={'/spin.gif'} width={50} height={50}/>
+      </div>
+    {
+      token===undefined || token===null || token===''  &&  <InvalidAuth/>
+
+     
+    }
+    
+  </div>
+  :  
     <div className=" flex flex-col px-4 py-8 justify-between h-screen">
       <div >
         <div className=" flex items-center px-5 justify-between gap-[60px]">
@@ -130,6 +150,9 @@ const Page = () => {
         theme="light"
       />
     </div>
+}
+    </>
+      
   );
 };
 

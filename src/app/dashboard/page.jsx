@@ -57,7 +57,7 @@ const Page = () => {
 
  
       const cokkieToken = Cookies.get('token'); 
-      console.log(Cookies);
+      console.log(cokkieToken);
       const[popularCoursses,setPopularCourses]=useState([])
      const [searchQuery, setSearchQuery] = useState(""); // Step 1: Create state variable for search query
 
@@ -66,11 +66,7 @@ const Page = () => {
 
       
     useEffect(() => { 
-      if (cokkieToken==='') {
-        return <InvalidAuth />
-        
-        
-       }
+     
       
         setToken(cokkieToken)
       if (token) {
@@ -80,6 +76,7 @@ const Page = () => {
           },
         };
      
+        console.log(token);
         axios
           .get('https://unicdata.pythonanywhere.com/profile/', config)
           .then((res) => {
@@ -92,6 +89,8 @@ const Page = () => {
             toast.error('Invalid credentials try again')
             console.log(err);
           });
+
+
           axios
           .get('https://unicdata.pythonanywhere.com/videos/', config)
           .then((res) => {
@@ -109,7 +108,7 @@ const Page = () => {
 
 
       }
-    }, []);
+    }, [token,setToken]);
   
 
    
@@ -118,8 +117,24 @@ const Page = () => {
     );
   
   return (<>
-  {token===undefined?
-  <InvalidAuth/>
+  { !user.username?
+  <div >
+     <div className=" flex  flex-col  justify-center items-center h-[100vh] w-full ">
+      <Image alt="" src='/lk.png' className=" bg-transparent rounded-full"  width={130} height={100}/>
+      <div className=" shadow p-5 rounded-lg w-[90%] bg-gray-100 outline-[#000000ae] m-3 flex gap-8 flex-col text-center">
+         <p style={{textShadow:'2px 2px 4px rgba(0, 0, 0, 0.5)'}} className="  text-blue-800    font-extrabold font-montserrat  text-[30px]"> LEARN VERSE</p>
+       <p className=' font-[fantasy] text-center mb-5 px-9 text-blue-800 font-extrabold text-[16px]' >Embark on a Journey of Discovery and Transformation</p>
+      
+      </div>
+      <Image alt="" className=" bg-transparent rounded-full justify-center flex items-center " src={'/spin.gif'} width={50} height={50}/>
+      </div>
+    {
+      token===undefined || token===null || token===''  &&  <InvalidAuth/>
+
+     
+    }
+    
+  </div>
   :  
 
 
@@ -127,7 +142,7 @@ const Page = () => {
   
 
     <div className="py-6 relative flex flex-col gap-3 pb-32">
-     {token}
+   
       <Image width={30} height={30} className="w-[3.3em] absolute top-[5px] rounded-full" src='/lk.png'/>
        <ToastContainer
           className=" mb-8"
@@ -165,7 +180,7 @@ const Page = () => {
       <div className="flex pt-3 gap-4 justify-between px-4">
         <input
           type="text"
-          placeholder="search"
+          placeholder="search a course"
           className="border  shadow-2xl shadow-[#67949e3c] border-[#67949E] rounded-lg h-10 w-full outline-none px-3"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}

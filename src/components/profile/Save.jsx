@@ -75,7 +75,7 @@ const Save = () => {
     const newformData = new FormData();
     newformData.append('username', formData?.username);
     newformData.append('first_name', formData?.first_name);
-    newformData.append('date_of_birth', formData?.date_of_birth);
+    newformData.append('date_of_birth', formData.date_of_birth?formData.date_of_birth:'2023-09-07');
     newformData.append('last_name', formData?.last_name);
     newformData.append('gender', formData?.gender);
     if (PROFILE_PHOTO) {
