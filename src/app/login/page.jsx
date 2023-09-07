@@ -84,7 +84,7 @@ const Page = () => {
           }
         });
     }
-  }, [token, setUser,setToken, user, router]);
+  }, [token, setUser, setToken, user, router]);
 
   useEffect(() => {
     Cookies.set("token", token, { expires: 7 });
@@ -107,9 +107,14 @@ const Page = () => {
       />
       <div className="  flex flex-col gap-12">
         <div className=" items-center justify-center flex-col flex">
-  <Image alt="" width={100} height={100}  className=" rounded-full h-[10em] text-center w-[10em] " src="/lk.png"/>
-        <p className=" font-bold text-[28px]">LearnVerse</p>
-      
+          <Image
+            alt=""
+            width={100}
+            height={100}
+            className=" rounded-full h-[10em] text-center w-[10em] "
+            src="/lk.png"
+          />
+          <p className=" font-bold text-[28px]">LearnVerse</p>
         </div>
         <span className=" text-[22px]">
           <span className=" font-black">Login</span> <span>to account</span>
