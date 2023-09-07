@@ -15,13 +15,13 @@ from rest_registration.api.views import (
 
 urlpatterns = [
     path('student-register/', StudentSignUpView.as_view(), name='register'),
-    path('student-verify-registration/',
-         verify_registration, name='verify-registration'),
+    # path('student-verify-registration/',
+    #      verify_registration, name='verify-registration'),
 
 
     path('creator-register/', CreatorRegistrationView.as_view()),
-    path('creator-verify-registration/',
-         EmailVerificationView.as_view(), name='email-verify'),
+    # path('creator-verify-registration/',
+    #      EmailVerificationView.as_view(), name='email-verify'),
     path('admin-activate-user/', AdminActivateUserView.as_view(),
          name='admin-activate-user'),
 
