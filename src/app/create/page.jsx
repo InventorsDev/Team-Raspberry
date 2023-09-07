@@ -3,14 +3,17 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import TutorsCard from "../../components/cards/TutorsCard";
 import Link from "next/link";
 import axios from "axios";
-import withAuth from "../../components/withAuth/withAuth";
 import MyContext from "../../context/context";
 import Cookies from 'js-cookie';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AiFillBackward, AiFillCaretLeft, AiOutlineArrowLeft, AiOutlineLeft } from "react-icons/ai";
 import InvalidAuth from "../../components/invalidAuth/InvalidAuth";
-const page = () => {
+import Image from "next/image";
+const Page = () => {
+ 
+  
+
   const [dashboard, setDashboard] = useState(false);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -25,6 +28,16 @@ const page = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedMainCategory, setSelectedMainCategory] = useState(null);
   const [note, setNote] = useState(null);
+
+
+  const fileInputRef = useRef(null);
+  const PDFInputRef = useRef(null);
+
+
+  
+
+ 
+
 
   const handleCategoryChange = (value,course) => {
     setSelectedCategory(value);
@@ -49,9 +62,7 @@ const page = () => {
     }
   };
 
-  const fileInputRef = useRef(null);
-  const PDFInputRef = useRef(null);
-
+ 
   const handleButtonClick = () => {
     setSelectedVideo(fileInputRef.current.click());
   };
@@ -86,25 +97,20 @@ const page = () => {
    pdf:''
   },config)
   }
-  
 
 
-
-  if (cokkieToken === ''){
-    return (<InvalidAuth />)
-   }
-   else{
+  const config = {
+    headers: {
+      Authorization: `Token ${cokkieToken}`,
+    },
+  };
 
     useEffect(() => { 
-      
-      setToken(cokkieToken)
-    if (token) {
-      const config = {
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-      };
-   
+      if (cokkieToken === ''){
+        return (<InvalidAuth />)
+       }
+       else{
+    
       axios
         .get("https://unicdata.pythonanywhere.com/profile/", config)
         .then((res) => {
@@ -116,8 +122,10 @@ const page = () => {
         .catch((err) => {
           toast.error('Invalid credentials try again')
           console.log(err);
-        });
-    }
+        })
+      }
+     
+
   }, [token]);
 
 
@@ -232,6 +240,7 @@ const page = () => {
 
       };
 
+
   return (
     <>
       {!dashboard ? (
@@ -245,7 +254,7 @@ const page = () => {
           <p className=" font-semibold text-lg absolute left-1/2 transform -translate-x-1/2">
               Home
             </p>
-            <img
+            <Image width={20} height={20}
               src="/upload.svg"
               alt=""
             
@@ -268,7 +277,7 @@ const page = () => {
           </div>
           <div className=" flex justify-between gap-[60px] text-white px-4">  
          
-            <img
+          <Image width={20} height={20}
               src="/arrow-back-white.svg"
               onClick={() => setDashboard(!dashboard)}
               alt=""
@@ -282,14 +291,14 @@ const page = () => {
           <form encType="multipart/form-data" onSubmit={handleImageUpload}>
           <div  className="w-full relative  flex items-center justify-center py-10 gap-5  flex-col ">
           <input type="file" accept="image/*" name="cover_image" className="absolute z-40 top-9 opacity-0  w-full bg-red-500 flex items-center h-full" onChange={handleImageUpload} />
-          {selectedImage? <img
+          {selectedImage?        <Image width={200} height={200}
           src={selectedImage}
           alt="Selected"
          
           className="h-full"
           style={{ maxWidth: '300px' }}
         /> :
-            <img src="/upload-white.svg" alt="" />}
+        <Image width={20} height={20} src="/upload-white.svg" alt="" />}
             <p className=" text-white font-bold text-xl">Upload Cover</p>
           </div>
           </form>
@@ -335,7 +344,7 @@ const page = () => {
                         Your browser does not support the video tag.
                       </video>
                     ):
-                    <img
+                    <Image width={20} height={20}
                           src="/video-1.png"
                           alt=""
                           className=" rounded-[10px] w-[160px]"
@@ -346,7 +355,7 @@ const page = () => {
                 <div className="flex gap-4 items-center">
                 
                   <button onClick={handleButtonClick}>
-        <img src="/add-button.svg" alt="" />
+                  <Image width={20} height={20} src="/add-button.svg" alt="" />
       </button>
                   <input
                    id="video-input"
@@ -367,7 +376,7 @@ const page = () => {
               </div>
               <div className=" w-full h-[1px] bg-[#828282]" />
               <div className=" flex gap-4 items-center">
-                <img onClick={handlePDFUpload} src="/add-button.svg" alt="" />
+              <Image width={40} height={40} onClick={handlePDFUpload} src="/add-button.svg" alt="" />
                 <input type="file"   ref={PDFInputRef}  className="hidden"  onChange={(e)=>  setSelectedFile(e.target.files[0])} />
                
                 <p> {selectedFile?selectedFile.name:"Add PDF"}</p>
@@ -453,7 +462,7 @@ const page = () => {
     </>
   );
 };
-}
 
 
-export default page;
+
+export default Page;

@@ -18,7 +18,7 @@ const PopularCard = ({ img, course, topic }) => {
 
       {/* <Link  href={'/courses/'+courseID}> */}
        {img ?
-      <img width={100} height={500} className=" bg-contain  w-full"   src={img.cover_image} alt='e'/>
+     <Image  width={100} height={500} className=" bg-contain  w-full"   src={img.cover_image} alt='e'/>
       :
 <Image width={100} height={500} className=" bg-contain  w-full"   src={image} alt=''/>
   

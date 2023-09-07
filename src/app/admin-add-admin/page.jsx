@@ -1,9 +1,13 @@
 "use client";
 import React, { useState } from "react";
 import AdminNav from "../../components/nav/AdminNav";
+import Image from "next/image";
 
-const page = () => {
+const Page = () => {
   const [add, setAdd] = useState(false);
+
+
+  
   return (
     <div className=" flex px-4 gap-6 flex-col py-20">
       <div className=" flex justify-center w-full fixed top-6 bg-white">
@@ -34,7 +38,7 @@ const page = () => {
         </>
       ) : (
         <div className=" flex gap-4 items-center">
-          <img src="/add-button.svg" alt="" onClick={() => setAdd(true)} className=" cursor-pointer" />
+          <Image width={20} height={20} src="/add-button.svg" alt="" onClick={() => setAdd(true)} className=" cursor-pointer" />
           <p>Add admin</p>
         </div>
       )}
@@ -58,4 +62,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

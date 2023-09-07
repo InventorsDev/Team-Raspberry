@@ -9,8 +9,9 @@ import { FlutterWaveButton, closePaymentModal } from "flutterwave-react-v3";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
-const page = () => {
+const Page = () => {
     const [popularCoursses,setPopularCourses]=useState([])
     const cokkieToken = Cookies.get("token");
    
@@ -57,7 +58,7 @@ const page = () => {
     .catch((err) => {
       console.log(err);
     });
-  },[token])
+  },[token,cokkieToken,setToken])
 
 const router=useRouter()
   if(!courseID){
@@ -121,7 +122,7 @@ const router=useRouter()
     });
 
 
-  }, []);
+  }, [setToken,token]);
 
   useEffect(() => {
    
@@ -188,43 +189,43 @@ const router=useRouter()
           </div>
         </div>
       </div>
-         {courseID}
+         {/* {courseID}z  */}
       {
         popularCoursses.filter(course=>course.id===(courseID-5)).map(course=>(
 
             <>
           
             <div className=" flex justify-between items-center">
-        <Link href={"/dashboard"}>
-          <img
-            src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fstatic.wixstatic.com%2Fmedia%2F7fe4e3_e9631d35de724b12b75a50f50d0c76fd~mv2.jpg%2Fv1%2Fcrop%2Fx_0%2Cy_60%2Cw_395%2Ch_275%2Ffill%2Fw_553%2Ch_385%2Cal_c%2Clg_1%2Cq_80%2Cenc_auto%2FBiology.jpg&tbnid=nSZlMk1giSk9XM&vet=12ahUKEwjIrbzm2v-AAxW1mCcCHVW7B8kQMygTegUIARCeAQ..i&imgrefurl=https%3A%2F%2Fwww.titaniumtutors.co.uk%2Fbiology-tutor&docid=4Pa3Ql_UH04WLM&w=553&h=385&q=biology&ved=2ahUKEwjIrbzm2v-AAxW1mCcCHVW7B8kQMygTegUIARCeAQ"
+        {/* <Link href={"/dashboard"}>
+        <Image width={30} height={30}
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD47dX8zRi80NHQDSUMgO19si9nTH-PrFs6jM2RdVEEN9aHUpm"
             alt=""
           />
-        </Link>
-        <p className=" font-semibold w-[70%] text-center text-sm ">
+        </Link> */}
+        <p className=" text-[1.2em] font-bold w-[100%] text-center text-sm ">
         {course.title}
         </p>
         
-        <img src="/course-icon-black.svg" alt="" />
+        <Image width={20} height={20} src="/course-icon-black.svg" alt="" />
       </div>
-      <img src={course.cover_image} alt="" />
-      <p>
+      <Image className=" text-center w-full mx-auto" width={300} height={10} src={course.cover_image} alt="" />
+      <p className="text-[1em]">
        
        {course.description}
       </p>
       <div className=" flex justify-between items-center">
         <p className=" text-sm font-bold">Beginners</p>
         <div onClick={()=>router.push(course.video_file)} className=" flex gap-1.5 items-center">
-          <img src="/play-small.svg" alt="" />
+        <Image width={30} height={30}src="/play-small.svg" alt="" />
           <p className=" text-sm ">1 videos</p>
         </div>
         <div onClick={()=>router.push(course.pdf)} className=" flex gap-1.5 items-center">
-          <img src="/pdf.svg" alt="" />
+        <Image width={30} height={30} src="/pdf.svg" alt="" />
           <p  className=" text-sm ">PDF</p>
         </div>
 
         <Link className=" flex gap-1.5 items-center" href={"/courses/45/quiz"}>
-          <img src="/question.svg" alt="" />
+        <Image width={30} height={30} src="/question.svg" alt="" />
           <p className=" text-sm ">Quiz</p>
         </Link>
       </div>
@@ -234,8 +235,8 @@ const router=useRouter()
           { image: course.cover_image
             , topic: course.title},
         ].map((item, i) => (
-          <div onClick={()=>router.push(course.video_file)}  className=" w-[190px]  overflow-hidden flex flex-col gap-1.5">
-            <img src={item.image} alt="" className=" rounded-lg" />
+          <div key={i} onClick={()=>router.push(course.video_file)}  className=" w-[190px]  overflow-hidden flex flex-col gap-1.5">
+                <Image width={500} height={500} src={item.image} alt="" className=" rounded-lg" />
             <p className="text-sm">{item.topic}</p>
           </div>
         ))}
@@ -250,7 +251,7 @@ const router=useRouter()
           }} key={i} className=" grid grid-cols-5 flex-wrap justify-between gap-6">
     
            <div    className=" w-[130px]  overflow-hidden flex flex-col gap-1.5">
-                <img src={book.cover_image} alt="" className=" rounded-lg" />
+           <Image width={100} height={60} src={book.cover_image} alt="" className=" rounded-lg" />
                 <p className="text-sm">{book.title}</p>
               </div>
         
@@ -278,4 +279,4 @@ const router=useRouter()
   );
 };
 
-export default page;
+export default Page;

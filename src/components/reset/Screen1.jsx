@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import axios from "axios";
+import Image from "next/image";
 
 const Screen1 = ({ setScreen }) => {
   const [email, setEmail] = useState("");
@@ -24,7 +25,11 @@ const Screen1 = ({ setScreen }) => {
       <div className=" flex flex-col gap-12">
         <div className=" flex gap-[60px]">
           <Link href={"/login"}>
-            <img src="/arrow-back.svg" alt="" />
+                  
+ <Image 
+ height={40}
+ width={40}
+        src="/arrow-back.svg" alt="" />
           </Link>
           <p className=" font-semibold text-lg absolute left-1/2 transform -translate-x-1/2">
             Reset Password

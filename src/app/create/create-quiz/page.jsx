@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -6,7 +7,7 @@ const page = () => {
     <div className=" px-4 py-6">
       <div className=" flex">
         <Link href={"/create"}>
-          <img src="/arrow-back.svg" alt="" className=" cursor-pointer" />
+        <Image width={20} height={20} src="/arrow-back.svg" alt="" className=" cursor-pointer" />
         </Link>
         <p className=" font-semibold text-lg absolute left-1/2 transform -translate-x-1/2">
           Create Quiz
@@ -35,19 +36,19 @@ const page = () => {
               className=" border rounded-[10px] p-2 border-[#FA2E2E] outline-none text-[#777777] w-full"
             />
             <button className=" bg-[#67949E] h-[50px] min-w-[50px] flex items-center justify-center rounded-full">
-              <img src="/close.svg" alt="" />
+            <Image width={20} height={20} src="/close.svg" alt="" />
             </button>
           </div>
         </div>
         <div>
           <div className=" flex items-center gap-5">
             <button className=" bg-[#67949E] h-[50px] w-[50px] flex items-center justify-center rounded-full">
-              <img src="/add.svg" alt="" />
+            <Image width={20} height={20} src="/add.svg" alt="" />
             </button>
             <p className=" italic text-[#626262]">2 more questions left</p>
           </div>
           <div className=" flex justify-end">
-            <img src="/delete.svg" alt="" />
+          <Image width={20} height={20} src="/delete.svg" alt="" />
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import EndScreen from "./EndScreen";
+import Image from "next/image";
 
 const MainQuiz = () => {
   const [showEnd, setShowEnd] = useState(false);
@@ -38,7 +39,11 @@ const MainQuiz = () => {
           <div className=" flex justify-between items-center">
             <p className=" font-semibold">Pair of linear variables</p>
             <div className=" flex gap-2">
-              <img src="/time-black.svg" alt="" />
+                   
+ <Image
+ height={40}
+ width={40}
+       src="/time-black.svg" alt="" />
               <p className=" font-semibold">5:00</p>
             </div>
           </div>

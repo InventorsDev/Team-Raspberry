@@ -12,48 +12,48 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import InvalidAuth from "../../components/invalidAuth/InvalidAuth";
-const page = () => {
+import Image from "next/image";
+const Page = () => {
   const [screen, setScreen] = useState("edit");
   const { token,setToken,setPASS,PASS, setUser, user } = useContext(MyContext);
 
 
 
  
+ const router=useRouter()
+
+
+    useEffect(() => {
+      
       const cokkieToken = Cookies.get('token'); 
-const router=useRouter()
-
-
-if (cokkieToken==='') {
-
-  
+      if (cokkieToken==='') {
     return <InvalidAuth />
    }
    else{
-
-    useEffect(() => { 
-      
-        setToken(cokkieToken)
-      if (token) {
+     
+      if (cokkieToken !== '') {
+        setToken(cokkieToken);
         const config = {
           headers: {
-            Authorization: `Token ${token}`,
+            Authorization: `Token ${cokkieToken}`,
           },
         };
-     
+  
         axios
           .get('https://unicdata.pythonanywhere.com/profile', config)
           .then((res) => {
-            // Handle successful response here
             console.log(res.data);
             setUser({ ...user, ...res.data });
-            setToken(token); // Set the token here
+            setToken(token);
           })
           .catch((err) => {
-            toast.error('Invalid credentials try again')
+            toast.error('Invalid credentials, please try again');
             console.log(err);
           });
       }
-    }, [token]);
+      }
+    }, []);
+  
 
        
     
@@ -86,11 +86,10 @@ if (cokkieToken==='') {
         <div className=" flex items-center px-5 justify-between gap-[60px]">
           {screen == "edit" ? (
             <Link href={"/dashboard"}>
-              <img src="/arrow-back.svg" alt="" />
+              <Image width={40} height={20} src="/arrow-back.svg" alt="" />
             </Link>
           ) : (
-            
-            <img
+            <Image width={40} height={20}
               src="/arrow-back.svg"
               alt=""
               className=" cursor-pointer"
@@ -133,7 +132,7 @@ if (cokkieToken==='') {
     </div>
   );
 };
-};
 
 
-export default page;
+
+export default Page;

@@ -8,6 +8,7 @@ import MyContext from "../../context/context";
 import { useRouter } from "next/navigation";
 import InvalidAuth from "../../components/invalidAuth/InvalidAuth";
 import Cookies from 'js-cookie';
+import Image from 'next/image';
 
 const Page = () => {
   const router = useRouter();
@@ -16,7 +17,7 @@ const Page = () => {
 
   useEffect(() => {
     setToken(cokkieToken);
-  }, [cokkieToken]);
+  }, [cokkieToken,setToken]);
 
   const [screen, setScreen] = useState("biology");
 
@@ -44,8 +45,8 @@ const Page = () => {
           }
         });
     }
-  }, [token]);
-
+    setToken(cokkieToken);
+  }, [cokkieToken,token, setToken,setUser,user])
   const books = {
     biology: [
       { img: "/book-1.png", title: "biology" },
@@ -72,7 +73,7 @@ const Page = () => {
       <div className="py-6 px-4 flex flex-col">
         <div className="flex gap-[60px]">
           <Link href={"/dashboard"}>
-            <img src="/arrow-back.svg" alt="" />
+          <Image className=" w-[5rem] h-[3em]" width={120} height={46} src="/arrow-back.svg" alt="" />
           </Link>
           <p className="font-semibold text-lg absolute left-1/2 transform -translate-x-1/2">
             Library

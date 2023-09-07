@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const Screen2 = ({ screen, setScreen }) => {
   return (
@@ -7,7 +8,7 @@ const Screen2 = ({ screen, setScreen }) => {
       <div className=" flex flex-col gap-12">
         <div className=" flex gap-[60px]">
           <button onClick={() => setScreen("screen_1")}>
-            <img src="/arrow-back.svg" alt="" />
+           <Image width={20} height={20} src="/arrow-back.svg" alt="" />
           </button>
           <p className=" font-semibold text-lg absolute left-1/2 transform -translate-x-1/2">
             Create an account
@@ -22,6 +23,7 @@ const Screen2 = ({ screen, setScreen }) => {
         <div className=" flex justify-between px-2">
           {[1, 1, 1, 1, 1].map((item, i) => (
             <input
+            key={i}
               type="text"
               className=" w-[45px] h-[60px] rounded-[15px] border border-primary-green outline-none px-3"
             />

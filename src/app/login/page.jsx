@@ -7,22 +7,22 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import auth from "../firebase";
-import withAuth from "../../components/withAuth/withAuth";
 import MyContext from "../../context/context";
 import Cookies from "js-cookie";
+import Image from "next/image";
 
-const page = () => {
+const Page = () => {
   const router = useRouter();
   const { token, PASS, setPASS, setToken, setUser, user } =
     useContext(MyContext);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [error, setError] = useState();
+  const [error, setError] = useState(null); // Initialize error as null
 
   useEffect(() => {
     if (error) {
       if (error.error) {
-        toast.error("invalid credentials");
+        toast.error("Invalid credentials");
       }
     }
   }, [error]);
@@ -36,7 +36,7 @@ const page = () => {
       })
       .then((res) => {
         console.log(res.data);
-        Cookies.set("token", res.data.token, { expires: 7 }); // Set an expiration if needed
+        Cookies.set("token", res.data.token, { expires: 7 });
         console.log(res.data.token);
         setPASS(res.data?.token);
         setToken(res.data?.token);
@@ -51,24 +51,22 @@ const page = () => {
       })
       .catch((err) => {
         setError(err?.response?.data);
-        toast.error("Invalid Credentials!,Try again..");
+        toast.error("Invalid Credentials!, Try again..");
         console.log(err?.response?.data);
       });
   };
 
   useEffect(() => {
-    // Check if the token is available
     if (token) {
       const config = {
         headers: {
-          Authorization: `Token ${token}`, // Remove Cookies.get(token)
+          Authorization: `Token ${token}`,
         },
       };
 
       axios
         .get("https://unicdata.pythonanywhere.com/profile/", config)
         .then((res) => {
-          // Handle successful response here
           console.log(res.data);
           setToken(res.data?.token);
           console.log(token);
@@ -79,22 +77,19 @@ const page = () => {
           }
         })
         .catch((err) => {
-          // Handle authentication error
           if (err.response.status === 401) {
             console.log("Unauthorized. Token may be invalid or expired.");
-            // Optionally, you can redirect to the login page or show an error message to the user.
           } else {
-            // Handle other errors
             console.log("An error occurred:", err);
           }
         });
     }
-  }, [token]);
+  }, [token, setUser,setToken, user, router]);
 
   useEffect(() => {
-    // Set the token in a cookie
-    Cookies.set("token", token, { expires: 7 }); // Set an expiration if needed
-  }, []);
+    Cookies.set("token", token, { expires: 7 });
+  }, [token]);
+
   return (
     <div className=" flex flex-col justify-between h-screen py-[40px] px-4">
       <ToastContainer
@@ -112,7 +107,7 @@ const page = () => {
       />
       <div className="  flex flex-col gap-12">
         <div className=" items-center justify-center flex-col flex">
-  <img className=" rounded-full h-[10em] text-center w-[10em]" src="/lk.png"/>
+  <Image alt="" width={100} height={100}  className=" rounded-full h-[10em] text-center w-[10em] " src="/lk.png"/>
         <p className=" font-bold text-[28px]">LearnVerse</p>
       
         </div>
@@ -174,4 +169,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

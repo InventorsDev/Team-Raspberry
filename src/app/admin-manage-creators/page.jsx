@@ -1,5 +1,6 @@
 import React from "react";
 import AdminNav from "../../components/nav/AdminNav";
+import Image from "next/image";
 
 const page = () => {
   return (
@@ -38,7 +39,7 @@ const page = () => {
             <button className=" text-green-500 ml-[-28px] font-bold text-sm">
               Approve
             </button>
-            <img src="/download.svg" alt="" />
+            <Image width={20} height={20} src="/download.svg" alt="" />
           </div>
           <div className=" flex justify-between items-center">
             <p className=" text-sm w-1/2">Darlene Robertson</p>
@@ -46,7 +47,7 @@ const page = () => {
               Approve
             </button>
 
-            <img src="/download.svg" alt="" />
+            <Image width={20} height={20} src="/download.svg" alt="" />
           </div>
         </div>
       </div>

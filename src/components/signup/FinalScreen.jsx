@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import Image from "next/image";
 
 const FinalScreen = ({
   screen,
@@ -32,7 +33,7 @@ const FinalScreen = ({
         setScreen("screen_1");
       }
     }
-  }, [error]);
+  }, [error,setScreen,]);
 
   const handleSubmit =async () => {
     // setLoading(true);
@@ -89,7 +90,11 @@ const FinalScreen = ({
       <div className=" flex flex-col gap-12">
         <div className=" flex gap-[60px]">
           <button onClick={() => setScreen("screen_3")}>
-            <img src="/arrow-back.svg" alt="" />
+                  
+ <Image
+ height={40}
+ width={40}
+        src="/arrow-back.svg" alt="" />
           </button>
           <p className=" font-semibold text-lg absolute left-1/2 transform -translate-x-1/2">
             Create an account

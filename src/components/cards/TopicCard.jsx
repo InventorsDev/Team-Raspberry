@@ -19,6 +19,7 @@ const TopicCard = ({ img, noCourse, level, topic,link}) => {
               }}
               src={img}
               fill
+              alt=""
             />
           </div>
           <div className=" flex justify-between px-2">

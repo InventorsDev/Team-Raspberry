@@ -4,8 +4,9 @@ import Link from "next/link";
 import TopicCard from "../../components/cards/TopicCard";
 import BookCard from "../../components/cards/BookCard";
 import Navbar from "../../components/nav/Navbar";
+import Image from "next/image";
 
-const page = () => {
+const Page = () => {
   const [showVideos, setShowVideos] = useState(true);
   const savedVideos = {
     chemistry: [
@@ -104,7 +105,7 @@ const page = () => {
 
           <div className=" py-6  pt-20 flex flex-col gap-6 px-4 pb-24 ">
             <div className=" w-full p-3 bg-[#8498CBB2] flex items-center gap-2.5 rounded-[20px] shadow-2xl shadow-[#17337962]">
-              <img src="/biology-icon.svg" alt="" className=" w-[15ƒ0px]" />
+            <Image width={40} height={40} src="/biology-icon.svg" alt="" className=" w-[15ƒ0px]" />
               <div className=" flex flex-col gap-5">
                 <p className=" text-white font-bold">
                   The branch of science concerned with the substances of which
@@ -117,6 +118,7 @@ const page = () => {
             <div className=" flex flex-wrap justify-between gap-6">
               {savedVideos.chemistry.map((items, i) => (
                 <TopicCard
+                key={i}
                   img={items.img}
                   noCourse={items.noCourse}
                   level={items.level}
@@ -128,6 +130,7 @@ const page = () => {
             <div className=" flex flex-wrap justify-between gap-6">
               {savedVideos.geology.map((items, i) => (
                 <TopicCard
+                key={i}
                   img={items.img}
                   noCourse={items.noCourse}
                   level={items.level}
@@ -139,6 +142,7 @@ const page = () => {
             <div className=" flex flex-wrap justify-between gap-6">
               {savedVideos.biology.map((items, i) => (
                 <TopicCard
+                key={i}
                   img={items.img}
                   noCourse={items.noCourse}
                   level={items.level}
@@ -161,7 +165,7 @@ const page = () => {
           </div>
           <div className=" py-6  pt-20 flex flex-col gap-6 px-4 pb-24 ">
             <div className=" w-full p-3 bg-[#8498CBB2] flex items-center gap-2.5 rounded-[20px] shadow-2xl shadow-[#17337962]">
-              <img src="/biology-icon.svg" alt="" className=" w-[15ƒ0px]" />
+            <Image width={20} height={20} src="/biology-icon.svg" alt="" className=" w-[15ƒ0px]" />
               <div className=" flex flex-col gap-5">
                 <p className=" text-white font-bold">
                   The branch of science concerned with the substances of which
@@ -173,19 +177,19 @@ const page = () => {
             <p className=" mt-8 font-bold">Chemistry</p>
             <div className=" flex flex-wrap justify-between gap-6">
               {savedBooks.chemistry.map((item, i) => (
-                <BookCard slug={"36743"} image={item.img} topic={item.title} />
+                <BookCard key={i} slug={"36743"} image={item.img} topic={item.title} />
               ))}
             </div>
             <p className="  font-bold">Geology</p>
             <div className=" flex flex-wrap justify-between gap-6">
               {savedBooks.geology.map((item, i) => (
-                <BookCard slug={"36743"} image={item.img} topic={item.title} />
+                <BookCard key={i} slug={"36743"} image={item.img} topic={item.title} />
               ))}
             </div>
             <p className=" font-bold">Biology</p>
             <div className=" flex flex-wrap justify-between gap-6">
               {savedBooks.biology.map((item, i) => (
-                <BookCard slug={"36743"} image={item.img} topic={item.title} />
+                <BookCard key={i} slug={"36743"} image={item.img} topic={item.title} />
               ))}
             </div>
             <Navbar />
@@ -196,4 +200,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

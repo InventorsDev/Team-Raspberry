@@ -11,6 +11,7 @@ import {
   AiOutlineDownload,
   AiTwotoneFilePdf,
 } from "react-icons/ai";
+import InvalidAuth from "../invalidAuth/InvalidAuth";
 const TutorsCard = () => {
   const {
     token,
@@ -26,11 +27,11 @@ const TutorsCard = () => {
 
   const cokkieToken = Cookies.get("token");
   const [popularCoursses, setPopularCourses] = useState([]);
-
+    useEffect(() => {
   if (cokkieToken === "") {
     return <InvalidAuth />;
   } else {
-    useEffect(() => {
+
       setToken(cokkieToken);
       if (token) {
         const config = {
@@ -66,7 +67,8 @@ const TutorsCard = () => {
             console.log(err);
           });
       }
-    }, [token]);
+      }
+    }, [token,cokkieToken,setToken,setUser,user]);
 console.log(user?.gender);
 console.log(
   popularCoursses
@@ -97,7 +99,7 @@ console.log(
               {!course.cover_image ? (
                 <Image src={imgd} className="rounded-xl" alt="courses" width={650} height={650} />
               ) : (
-                <img className="rounded-xl" src={course.cover_image} alt="" />
+                <Image width={100} height={200} className="rounded-xl" src={course.cover_image} alt="" />
               )}
               {/* You can add the download section here */}
             </div>
@@ -112,6 +114,6 @@ console.log(
   
   );
 };
-};
+
 
 export default TutorsCard;

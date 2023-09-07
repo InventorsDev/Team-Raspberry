@@ -1,10 +1,13 @@
 "use client";
 import Link from "next/link";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import MyContext from "../../context/context";
 import { FaUserCircle } from "react-icons/fa";
+import InvalidAuth from "../invalidAuth/InvalidAuth";
+import { toast } from "react-toastify"; // Import toast
+import Image from "next/image";
 
 const Edit = ({ setScreen }) => {
   const {
@@ -21,11 +24,11 @@ const Edit = ({ setScreen }) => {
   const cokkieToken = Cookies.get("token");
 
 
-
+  useEffect(() => {
   if (!cokkieToken) {
     return <InvalidAuth />;
   } else {
-    useEffect(() => {
+  
       setToken(cokkieToken);
       if (token) {
         const config = {
@@ -47,12 +50,15 @@ const Edit = ({ setScreen }) => {
             console.log(err);
           });
       }
-    }, [token]);
+      
+      }
+    }, []);
+
     return (
       <>
         <div className=" mt-[30px] flex gap-8 items-center">
           {user.profile_picture ? (
-            <img
+          <Image width={40} height={40}
               className="w-[30vw] h-[18vh] rounded-md object-cover"
               src={user?.profile_picture}
               alt=""
@@ -78,7 +84,7 @@ const Edit = ({ setScreen }) => {
          
          
           <div className=" w-full flex bg-[#5E868E] p-5 rounded-[20px] text-white gap-2 items-start">
-            <img src="/bullet.svg" alt="" className=" pt-1" />
+          <Image width={20} height={20} src="/bullet.svg" alt="" className=" pt-1" />
             <div>
     
               <p className=" font-bold text-lg">Monthly</p>
@@ -114,7 +120,7 @@ const Edit = ({ setScreen }) => {
           <div className=" mt-8">
             <p className=" font-bold">Courses Covered.</p>
             <div className=" flex gap-6 items-center mt-4">
-              <img src="/pie-chart.svg" alt="" />
+            <Image width={40} height={40} src="/pie-chart.svg" alt="" />
               <p>You have covered 90% of the courses, good job!</p>
             </div>
           </div>
@@ -122,6 +128,6 @@ const Edit = ({ setScreen }) => {
       </>
     );
   }
-};
+
 
 export default Edit;

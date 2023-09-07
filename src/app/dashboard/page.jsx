@@ -14,9 +14,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AiOutlineUser } from "react-icons/ai";
 import {  FaUserCircle } from "react-icons/fa";
+import Image from "next/image";
 
 
-const page = () => {
+const Page = () => {
   const { token,setToken,setPASS,PASS, setUser,courseID,setCourseID,setProfileImage,profileImage, user } = useContext(MyContext);
   const router = useRouter();
 
@@ -62,14 +63,13 @@ const page = () => {
 
 
 
-      if (cokkieToken==='') {
-    return <InvalidAuth />
-    
-    
-   }
-   else{
-
+      
     useEffect(() => { 
+      if (cokkieToken==='') {
+        return <InvalidAuth />
+        
+        
+       }
       
         setToken(cokkieToken)
       if (token) {
@@ -112,14 +112,13 @@ const page = () => {
   
 
    
-    const [searchQuery, setSearchQuery] = useState("");
     const filteredCourses = courseData.filter((course) =>
       course.subject.toLowerCase().includes(searchQuery.toLowerCase())
     );
   
   return (
     <div className="py-6 relative flex flex-col gap-3 pb-32">
-      <img className="w-[3.3em] absolute top-[5px] rounded-full" src='/lk.png'/>
+      <Image width={30} height={30} className="w-[3.3em] absolute top-[5px] rounded-full" src='/lk.png'/>
        <ToastContainer
           className=" mb-8"
           position="top-right"
@@ -142,7 +141,7 @@ const page = () => {
  
            {user.profile_picture ?
            <div className="  relative">
-              <img className="w-[11vw] rounded-full h-[6vh]  " src={user?.profile_picture} alt="" />
+              <Image width={176} height={96} className="w-[11vw] rounded-full h-[6vh]  " src={user?.profile_picture} alt="" />
                <span className=" block rounded-full absolute right-[-5px] top-[0] w-[.9em] h-[.9em]  bg-green-400"></span>
           
            </div>
@@ -164,7 +163,7 @@ const page = () => {
         <button onClick={(e)=>{ 
           e.preventDefault()
           setSearchQuery('')}} className="w-10 h-10 bg-[#67949E] rounded-lg flex items-center cursor-pointer justify-center">
-          <img src="/filter.svg" alt="" />
+          <Image width={30} height={30} src="/filter.svg" alt="" />
         </button>
       </div>
       <h2 className=" text-lg font-extrabold text-gray-500  my-4 px-4 ">Course Categories</h2>
@@ -218,6 +217,6 @@ const page = () => {
     </div>
   );
 };
-};
 
-export default page;
+
+export default Page;

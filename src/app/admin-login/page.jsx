@@ -1,7 +1,48 @@
+'use client'
 import Link from "next/link";
-import React from "react";
+import MyContext from "../../context/context";
+import { useRouter } from "next/navigation";
+import { useContext, useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+const Page = () => {
+  const { token, PASS, setPASS, setToken, setUser, user } =
+  useContext(MyContext);
+const [password, setPassword] = useState("");
+const [email, setEmail] = useState("");
+const [error, setError] = useState();
 
-const page = () => {
+  const handleLogin = async (e) => {
+
+    e.preventDefault();
+    await axios
+      .post("https://unicdata.pythonanywhere.com/login/", {
+        login: email,
+        password: password,
+      })
+      .then((res) => {
+        console.log(res.data);
+        Cookies.set("token", res.data.token, { expires: 7 }); // Set an expiration if needed
+        console.log(res.data.token);
+        setPASS(res.data?.token);
+        setToken(res.data?.token);
+        if (token) {
+          router.push("/dashboard");
+        }
+
+        console.log("Successful");
+        toast.success("Successful");
+
+        console.log(token);
+      })
+      .catch((err) => {
+        setError(err?.response?.data);
+        toast.error("Invalid Credentials!,Try again..");
+        console.log(err?.response?.data);
+      });
+  };
+
+
   return (
     <div className=" flex flex-col justify-between h-screen py-[40px] px-4">
       <div className=" flex flex-col gap-12">
@@ -16,6 +57,8 @@ const page = () => {
               <input
                 type="text"
                 required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className=" w-full h-full bg-transparent outline-none px-3"
               />
             </div>
@@ -23,7 +66,10 @@ const page = () => {
               <input
                 type="password"
                 required
-                className=" w-full h-full bg-transparent outline-none px-3"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className=" w-full h-full 
+                bg-transparent outline-none px-3"
                 placeholder="Password"
               />
             </div>
@@ -48,4 +94,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

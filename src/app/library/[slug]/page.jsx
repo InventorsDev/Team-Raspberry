@@ -1,8 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
-const page = () => {
+const Page = () => {
   const [screen, setScreen] = useState("front");
   return (
     <>
@@ -10,13 +11,13 @@ const page = () => {
         <div className=" py-6 flex flex-col gap-6">
           <div className=" flex gap-[60px] px-4">
             <Link href={"/library"}>
-              <img src="/arrow-back.svg" alt="" />
+            <Image width={20} height={20} src="/arrow-back.svg" alt="" />
             </Link>
             <p className=" font-semibold text-lg absolute left-1/2 transform -translate-x-1/2">
               What are cells
             </p>
           </div>
-          <img src="/book-cover.png" className=" w-full" alt="" />
+          <Image width={40} height={40} src="/book-cover.png" className=" w-full" alt="" />
           <div className=" flex flex-col px-4 gap-3">
             <p className=" font-bold">Summary</p>
             <p className=" text-sm text-[#646464] leading-6">
@@ -31,7 +32,7 @@ const page = () => {
           </div>
           <div className=" fixed w-[90%] bottom-6 left-1/2 transform -translate-x-1/2 flex gap-5">
             <button>
-              <img src="/bookmark.svg" alt="" />
+            <Image width={20} height={20} src="/bookmark.svg" alt="" />
             </button>
             <button
               className=" bg-primaryButton w-full rounded-full text-white"
@@ -45,7 +46,7 @@ const page = () => {
         <div className=" py-6 px-4 h-screen">
           <div className=" flex items-center">
             <button onClick={() => setScreen("front")}>
-              <img src="/arrow-back.svg" alt="" />
+            <Image width={20} height={20} src="/arrow-back.svg" alt="" />
             </button>
             <p className="  text-sm absolute left-1/2 transform -translate-x-1/2 w-[70%] text-center">
               What are cells -<span className=" font-semibold"> Chapter 1</span>
@@ -84,10 +85,10 @@ const page = () => {
           </div>
           <div className=" w-[90%] fixed bottom-6 left-1/2 transform -translate-x-1/2 flex justify-between">
             <button className=" py-3 px-3 bg-[#aaa9a9] rounded-full">
-              <img src="/arrow-back-white.svg" alt="" />
+            <Image width={30} height={30} src="/arrow-back-white.svg" alt="" />
             </button>
             <button className=" py-3 px-3 bg-[#aaa9a9] rounded-full">
-              <img src="/arrow-front-white.svg" alt="" />
+            <Image width={30} height={30} src="/arrow-front-white.svg" alt="" />
             </button>
           </div>
         </div>
@@ -96,4 +97,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

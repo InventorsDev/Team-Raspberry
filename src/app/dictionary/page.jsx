@@ -2,8 +2,9 @@
 import Link from "next/link";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 
-const page = () => {
+const Page = () => {
   // const [show, setShow] = useState(false);
   const [word, setWord] = useState({
     wordUnderConsideration: "",
@@ -57,7 +58,7 @@ const page = () => {
         <div className=" w-full h-screen bg-[#030303] flex flex-col items-center text-white justify-around">
           <div className=" flex gap-[60px] w-full items-center">
             <Link href={"/dashboard"}>
-              <img src="/arrow-back-white.svg" alt="" />
+            <Image width={20} height={20} src="/arrow-back-white.svg" alt="" />
             </Link>
             <p className=" bg-primaryButton text-transparent text-[32px] bg-clip-text font-black">
               Science Dictionary
@@ -78,16 +79,16 @@ const page = () => {
               value={word.wordUnderConsideration}
             />
             <button className=" bg-primaryButton  p-3 rounded-[12px]">
-              <img src="/send.svg" alt="" className=" w-8" onClick={search} />
+            <Image width={20} height={20} src="/send.svg" alt="" className=" w-8" onClick={search} />
             </button>
           </div>
-          <img src="/bg-dic.svg" alt="" />
+          <Image width={20} height={20} src="/bg-dic.svg" alt="" />
           <p>Nice to meet you! </p>
         </div>
       ) : (
         <div className=" w-full h-screen fixed inset-0 overflow-hidden  bg-[#191919] flex flex-col text-white p-4 items-start">
           <Link href={"/dashboard"}>
-            <img
+          <Image width={20} height={20}
               src="/arrow-back-white.svg"
               alt=""
               className="cursor-pointer"
@@ -108,7 +109,7 @@ const page = () => {
               value={word.wordUnderConsideration}
             />
             <button className="   p-2 rounded-[12px]" onClick={search}>
-              <img src="/send.svg" alt="" className=" w-8" />
+            <Image width={20} height={20} src="/send.svg" alt="" className=" w-8" />
             </button>
           </div>
           <p className=" text-[32px] font-black pb-6 px-2">{showWord}</p>
@@ -132,4 +133,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

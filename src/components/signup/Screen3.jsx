@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import MyContext from "../../context/context";
+import Image from "next/image";
 
 const Screen3 = ({ screen, setScreen }) => {
   const { user, setUser,typeOfUser, setTypeOfUser } = useContext(MyContext);
@@ -17,7 +18,7 @@ console.log(typeOfUser);
       <div className=" flex flex-col gap-12">
         <div className=" flex gap-[60px]">
           <button onClick={() => setScreen("screen_2")}>
-            <img src="/arrow-back.svg" alt="" />
+           <Image width={30} height={30} src="/arrow-back.svg" alt="" />
           </button>
           <p className=" font-semibold text-lg absolute left-1/2 transform -translate-x-1/2">
             Create an account
@@ -28,7 +29,7 @@ console.log(typeOfUser);
         <div className=" flex flex-col gap-5">
           <div
             className={` flex p-3 gap-2 items-center  border ${
-              typeOfUser == "student" ? "border-primary-green" : ""
+              typeOfUser ? "border-primary-green" : ""
             }  rounded-[15px] cursor-pointer`}
             onClick={(e) =>{
                 e.preventDefault()
@@ -39,7 +40,7 @@ console.log(typeOfUser);
                 // console.log(typeOfUser);
               }}
           >
-            <img src="/student-icon.svg" alt="" />
+            <Image width={30} height={30} src="/student-icon.svg" alt="" />
             <div>
               <p className=" font-semibold">Student</p>
               <p className=" opacity-50 text-sm">come and learn</p>
@@ -47,7 +48,7 @@ console.log(typeOfUser);
           </div>
           <div
             className={` flex p-3 gap-2 items-center  border ${
-              typeOfUser == "creator" ? "border-primary-brown" : ""
+              !typeOfUser ? "border-primary-brown" : ""
             }  rounded-[15px] cursor-pointer`}
             onClick={(e) =>{ 
               e.preventDefault()
@@ -57,7 +58,7 @@ console.log(typeOfUser);
               // console.log(typeOfUser);
               }}
           >
-            <img src="/tutor-icon.svg" alt="" />
+          <Image width={30} height={30} src="/tutor-icon.svg" alt="" />
             <div>
               <p className=" font-semibold">Creator</p>
               <p className=" opacity-50 text-sm">
@@ -79,6 +80,9 @@ console.log(typeOfUser);
           Login
         </Link>
       </div>
+
+
+
     </>
   );
 };

@@ -1,14 +1,23 @@
+import Image from "next/image";
 import React from "react";
 
 const startScreen = ({setQuiz}) => {
   return (
     <>
-      <img src="/cells.jpg" alt="" className=" rounded-xl" />
+         
+ <Image 
+ height={20}
+ width={20}
+        src="/cells.jpg" alt="" className=" rounded-xl" />
       <p className=" font-bold">Topic: Atoms and why they are important</p>
       <div className=" flex gap-6">
         <p className=" font-bold">20 Questions</p>
         <div className=" flex gap-1 items-center">
-          <img src="/time-black.svg" alt="" />
+      
+ <Image
+ height={20}
+ width={20}
+        src="/time-black.svg" alt="" />
           <p className=" font-bold">5:00</p>
         </div>
       </div>

@@ -4,7 +4,7 @@ import Screen1 from "../../components/reset/Screen1";
 import Screen2 from "../../components/reset/Screen2";
 import React, { useState } from "react";
 
-const page = () => {
+const Page = () => {
   const [screen, setScreen] = useState("screen_1");
 
   let currentScreen;
@@ -28,4 +28,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

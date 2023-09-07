@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
 import { AiFillBook, AiOutlineBook } from "react-icons/ai";
+import Image from "next/image";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -12,7 +13,7 @@ const Navbar = () => {
     <div className=" fixed bottom-4 left-1/2 transform -translate-x-1/2  w-[90%] shadow-[20px_50px_40px_100px_rgba(103,148,158,0.20)] bg-white flex justify-between py-3 px-5 rounded-full items-center z-50">
       <Link href={"/dashboard"}>
         <div className=" flex flex-col gap-1 items-center justify-center">
-          <img src="/home-icon.svg" alt="" className=" w-6" />
+        <Image width={20} height={20} src="/home-icon.svg" alt="" className=" w-6" />
           <p
             className={`${
               page == "dashboard" ? "text-[#9E7167]" : "text-[#8C8989]"
@@ -49,7 +50,7 @@ const Navbar = () => {
       </Link>
       <Link href={"/profile"}>
         <div className=" flex flex-col gap-1 items-center justify-center">
-          <img src="/profile-icon.svg" alt="" className=" w-6" />
+        <Image width={20} height={20} src="/profile-icon.svg" alt="" className=" w-6" />
           <p
             className={`${
               page == "profile" ? "text-[#9E7167]" : "text-[#8C8989]"

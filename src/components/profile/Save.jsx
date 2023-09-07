@@ -5,100 +5,72 @@ import Cookies from 'js-cookie';
 import InvalidAuth from "../invalidAuth/InvalidAuth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Image from "next/image";
 const Save = () => {
-  const { token,setToken,setPASS,PASS, setUser,setProfileImage,profileImage, user } = useContext(MyContextProvider);
-
-
-
+  const { token, setToken, setUser, setProfileImage, profileImage,user } = useContext(MyContextProvider);
  
-  const cokkieToken = Cookies.get('token'); 
-
-
-
-if (!cokkieToken) {
-return (<InvalidAuth />)
-
-
-}
-else{
-    
+  const fileInputRef = useRef(null);
   const [formData, setFormData] = useState({
     creator_email_verified: false,
     date_of_birth: null,
-    email:'',
-    user_type:''
+    email: '',
+    user_type: ''
   });
+  const [profilePicture, setProfilePicture] = useState(null);
+  const [PROFILE_PHOTO, setPROFILE_PHOTO] = useState(null);
 
-  useEffect(() => { 
-      console.log(cokkieToken);
-    setToken(cokkieToken)
- 
-    const config = {
-      headers: {
-        Authorization: `Token ${token}`,
-      },
-    };
-
-    axios
-      .get("https://unicdata.pythonanywhere.com/profile/", config)
-      .then((res) => {
-        // Handle successful response here
-        console.log(res.data);
-        setUser({ ...user, ...res.data });
-        setFormData({...formData,...res.data})
-        setToken(token); // Set the token here
-      })
-      .catch((err) => {
-        toast.error('Invalid credentials try again')
-        console.log(err);
-      });
  
 
-}, [token]);
+  useEffect(() => {
 
+    const cokkieToken = Cookies.get('token');
+     // Move the conditional rendering to the top of the component
+  if (!cokkieToken) {
+    return <InvalidAuth />;
+  }
+    console.log(cokkieToken);
+    setToken(cokkieToken);
 
+    // Place the conditional logic inside the useEffect
+    if (cokkieToken) {
+      const config = {
+        headers: {
+          Authorization: `Token ${cokkieToken}`,
+        },
+      };
 
-
-  
-  const[PROFILE_PHOTO,setPROFILE_PHOTO]=useState(null)
-
-  const profilePictureRef = useRef(null);
-
-
-
-
-
-
-  console.log(user?.email);
+      axios
+        .get("https://unicdata.pythonanywhere.com/profile/", config)
+        .then((res) => {
+          console.log(res.data);
+          setUser({ ...user, ...res.data });
+          setFormData({ ...formData, ...res.data });
+          setToken(token);
+        })
+        .catch((err) => {
+          toast.error('Invalid credentials, try again');
+          console.log(err);
+        });
+    }
+  }, []);
 
   const handleInputChange = (e) => {
-  
-
     const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value,
     });
-
   };
 
-  const [profilePicture, setProfilePicture] = useState(null);
-  const fileInputRef = useRef(null);
-
-  
-
-  console.log(PROFILE_PHOTO);
-
-  const handleSave = async(e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
     let cokkieToken = Cookies.get('token');
-   
 
     const config = {
-       headers: {
-          Authorization: `Token ${cokkieToken}`,
-          'Content-Type': 'multipart/form-data', // Set content-type to 'multipart/form-data' for file uploads
-          },
+      headers: {
+        Authorization: `Token ${cokkieToken}`,
+        'Content-Type': 'multipart/form-data', // Set content-type to 'multipart/form-data' for file uploads
+      },
     };
     const newformData = new FormData();
     newformData.append('username', formData?.username);
@@ -106,31 +78,27 @@ else{
     newformData.append('date_of_birth', formData?.date_of_birth);
     newformData.append('last_name', formData?.last_name);
     newformData.append('gender', formData?.gender);
-    if(PROFILE_PHOTO){
-        newformData.append('profile_picture', PROFILE_PHOTO);
+    if (PROFILE_PHOTO) {
+      newformData.append('profile_picture', PROFILE_PHOTO);
     }
-  
-    newformData.append('user_type', formData?.user_type);
-  
-   console.log(PROFILE_PHOTO);
-    await axios
-       .put("https://unicdata.pythonanywhere.com/profile/", newformData, config)
-       .then((res) => {
-          // Handle successful response here
-          console.log(res.data);
-          toast.success("Profile Updated Succesfully ")
-          setUser({ ...user, ...res.data });
-         
-          setToken(token); // Set the token here
-       })
-       .catch((err) => {
-          toast.error('try again')
-          console.log(err);
-       });
-    
-  };
 
-  
+    newformData.append('user_type', formData?.user_type);
+
+    console.log(PROFILE_PHOTO);
+    await axios
+      .put("https://unicdata.pythonanywhere.com/profile/", newformData, config)
+      .then((res) => {
+        // Handle successful response here
+        console.log(res.data);
+        toast.success("Profile Updated Successfully");
+        setUser({ ...user, ...res.data });
+        setToken(token); // Set the token here
+      })
+      .catch((err) => {
+        toast.error('Try again');
+        console.log(err);
+      });
+  };
 
   return (
     <>
@@ -139,7 +107,9 @@ else{
     {/* You can place an avatar or user icon here */}
     {profileImage?(
       
-       <img
+ <Image 
+ height={120}
+ width={120}
        
 
        src={profileImage}
@@ -307,6 +277,6 @@ else{
     </>
   );
 };
-};
+
 
 export default Save;

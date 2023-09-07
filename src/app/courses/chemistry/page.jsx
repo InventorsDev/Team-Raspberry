@@ -4,8 +4,9 @@ import TopicCard from "../../../components/cards/TopicCard";
 import Link from "next/link";
 import axios from "axios";
 import { AiOutlineWarning } from "react-icons/ai";
+import Image from "next/image";
 
-const page = () => {
+const Page = () => {
   const [data,setData]=useState([])
   const [MAINcourse,setMAINCourse]=useState([])
   const [filtered,setFiltered]=useState([])
@@ -67,14 +68,14 @@ const page = () => {
     <div className=" py-6  flex flex-col gap-6 px-4 ">
       <div className=" flex gap-[60px]">
         <Link href={"/dashboard"}>
-          <img src="/arrow-back.svg" alt="" />
+        <Image width={20} height={20} src="/arrow-back.svg" alt="" />
         </Link>
         <p className=" font-semibold text-lg absolute left-1/2 transform -translate-x-1/2">
           Chemistry
         </p>
       </div>
       <div className=" w-full p-3 bg-[#8498CBB2] flex items-center gap-2.5 rounded-[20px] shadow-2xl shadow-[#17337962]">
-        <img src="/chem-icon.svg" alt="" className=" w-[150px]" />
+      <Image width={100} height={100} src="/chem-icon.svg" alt="" className=" w-[150px]" />
         <div className=" flex flex-col gap-5">
           <p className=" text-white font-bold">
             The branch of science concerned with the substances of which matter
@@ -152,4 +153,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

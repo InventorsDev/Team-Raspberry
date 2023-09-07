@@ -5,6 +5,9 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useContext } from "react";
+import MyContext from "../../context/context";
+import Image from "next/image";
 const FirstScreen = ({
   setScreen,
   setEmail, // Make sure you're receiving setEmail as a prop
@@ -22,6 +25,8 @@ const FirstScreen = ({
   const isPasswordMatch =
     (password === confirmPassword) & (password?.length >= 8);
   const isSubmitDisabled = !isPasswordMatch;
+  const {  user,typeOfUser } = useContext(MyContext);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,7 +40,7 @@ const FirstScreen = ({
 
     if (fullname.length > 2) {
       await axios
-        .post("https://unicdata.pythonanywhere.com/student-register/", {
+        .post(`https://unicdata.pythonanywhere.com/${typeOfUser ?'student-register':'creator-register'}/`, {
           username: fullname,
           email,
           password: password,
@@ -47,7 +52,32 @@ const FirstScreen = ({
 
           toast.success("Successful");
           setScreen("success");
-          router.push("/login");
+          if(typeOfUser){
+            router.push("/login");
+          }else{
+
+          const handler = async (req, res)=> {
+              const { user_id, token } = req.query;
+            
+              // Verify the user's email based on user_id and token
+              // You can perform the verification logic here, e.g., compare with the database
+            
+              if (user_id && token) {
+                // Email verification successful
+                res.status(200).json({ message: 'Email verified successfully' });
+              } else {
+                // Email verification failed
+                res.status(400).json({ message: 'Email verification failed' });
+              }
+            }
+
+            const verificationLink = `http://localhost:3000/api/creator-verify-registration/?user_id=MTU&token=bu3tkc-78e4cb55de0422da7731b1b2c2155674`;
+
+
+
+            router.push("/admin-login");
+          }
+         
         })
         .catch((err) => {
           console.log(err);
@@ -55,29 +85,7 @@ const FirstScreen = ({
         });
     }
 
-    // const auth = getAuth();
-    //   createUserWithEmailAndPassword(auth, email, password)
-    //       .then((userCredential) => {
-    //         // Signed in
-    //         const user = userCredential.user;
-    //         console.log(user);
-    //            console.log({
-    //       username:fullname,
-    //       email,
-    //       password,
-    //       password_confirm:confirmPassword,
-    //       });
-    //       // if(user){
-    //       //   router.push('/login')
-    //       // }
-
-    //         // ...
-    //       })
-    //       .catch((error) => {
-    //         const errorCode = error.code;
-    //         const errorMessage = error.message;
-    //         // ..
-    //       });
+  
   };
 
   return (
@@ -101,7 +109,7 @@ const FirstScreen = ({
         </p>
         <div>
           <p className=" font-black text-xl pb-1">Welcome to Learn-verse!</p>
-          <p>Let's get you started!</p>
+          <p>Let &rsquo;s get you started!</p>
         </div>
         <div className=" flex flex-col gap-6">
           <div className=" border border-primary-green h-[60px] rounded-full p-2">
@@ -184,7 +192,7 @@ const FirstScreen = ({
             className=" w-full flex justify-center gap-2 border-primary-green border rounded-full "
             type="submit"
           >
-            <img src="/google.svg" alt="" />
+            <Image width={20} height={20} src="/google.svg" alt="" />
             <p className=" text-sm font-medium py-1">Continue with Google</p>
           </button>
         </div>
