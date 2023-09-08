@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useContext } from "react";
 import MyContext from "../../context/context";
 import Image from "next/image";
+
 const FirstScreen = ({
   setScreen,
   setEmail, // Make sure you're receiving setEmail as a prop
@@ -25,8 +26,7 @@ const FirstScreen = ({
   const isPasswordMatch =
     (password === confirmPassword) & (password?.length >= 8);
   const isSubmitDisabled = !isPasswordMatch;
-  const {  user,typeOfUser } = useContext(MyContext);
-
+  const { user, typeOfUser } = useContext(MyContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,52 +40,53 @@ const FirstScreen = ({
 
     if (fullname.length > 2) {
       await axios
-        .post(`https://unicdata.pythonanywhere.com/${typeOfUser ?'student-register':'creator-register'}/`, {
-          username: fullname,
-          email,
-          password: password,
-          // password_confirm: confirmPassword,
-        })
+        .post(
+          `https://unicdata.pythonanywhere.com/${
+            typeOfUser ? "student-register" : "creator-register"
+          }/`,
+          {
+            username: fullname,
+            email,
+            password: password,
+            // password_confirm: confirmPassword,
+          }
+        )
         .then((res) => {
           console.log("Successful");
           console.log(res.data);
 
           toast.success("Successful");
           setScreen("success");
-          if(typeOfUser){
+          if (typeOfUser) {
             router.push("/login");
-          }else{
-
-          const handler = async (req, res)=> {
+          } else {
+            const handler = async (req, res) => {
               const { user_id, token } = req.query;
-            
+
               // Verify the user's email based on user_id and token
               // You can perform the verification logic here, e.g., compare with the database
-            
+
               if (user_id && token) {
                 // Email verification successful
-                res.status(200).json({ message: 'Email verified successfully' });
+                res
+                  .status(200)
+                  .json({ message: "Email verified successfully" });
               } else {
                 // Email verification failed
-                res.status(400).json({ message: 'Email verification failed' });
+                res.status(400).json({ message: "Email verification failed" });
               }
-            }
+            };
 
             const verificationLink = `http://localhost:3000/api/creator-verify-registration/?user_id=MTU&token=bu3tkc-78e4cb55de0422da7731b1b2c2155674`;
 
-
-
-            router.push("/admin-login");
+            setScreen("uploadCV");
           }
-         
         })
         .catch((err) => {
           console.log(err);
           toast.error("error!,Try again..");
         });
     }
-
-  
   };
 
   return (
@@ -104,9 +105,14 @@ const FirstScreen = ({
         theme="light"
       />
       <form className=" flex flex-col gap-9" onSubmit={handleSubmit}>
-        <p className="font-bold font-montserrat text-[22px] text-center">
-          Sign-up
-        </p>
+        <div className=" flex gap-[60px]">
+          <button onClick={() => setScreen("screen_2")}>
+            <Image height={40} width={40} src="/arrow-back.svg" alt="" />
+          </button>
+          <p className=" font-semibold text-[22px] absolute left-1/2 transform -translate-x-1/2">
+            Sign-up
+          </p>
+        </div>
         <div>
           <p className=" font-black text-xl pb-1">Welcome to Learn-verse!</p>
           <p>Let &rsquo;s get you started!</p>

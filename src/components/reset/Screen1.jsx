@@ -25,11 +25,7 @@ const Screen1 = ({ setScreen }) => {
       <div className=" flex flex-col gap-12">
         <div className=" flex gap-[60px]">
           <Link href={"/login"}>
-                  
- <Image 
- height={40}
- width={40}
-        src="/arrow-back.svg" alt="" />
+            <Image height={40} width={40} src="/arrow-back.svg" alt="" />
           </Link>
           <p className=" font-semibold text-lg absolute left-1/2 transform -translate-x-1/2">
             Reset Password

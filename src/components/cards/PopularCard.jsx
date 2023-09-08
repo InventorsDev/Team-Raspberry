@@ -13,19 +13,19 @@ const PopularCard = ({ img, course, topic }) => {
   // }
 
   return (
-    <div   key={img.id}  className=" min-w-[140px] h-[140px] overflow-hidden flex flex-col gap-1">
+    <div   key={img.id}  className=" min-w-[140px] h-[160px] overflow-hidden flex flex-col gap-1">
 
 
       {/* <Link  href={'/courses/'+courseID}> */}
        {img ?
-     <Image  width={100} height={500} className=" bg-contain  w-full"   src={img.cover_image} alt='e'/>
+     <Image  width={100} height={500} className=" bg-cover  h-[103px]  w-full"   src={img.cover_image} alt='e'/>
       :
-<Image width={100} height={500} className=" bg-contain  w-full"   src={image} alt=''/>
-  
+<Image width={105} height={140} className="    h-[140px] w-[105]"   src={image} alt=''/>
+
     }
       
       <p className=" text-[#8C8989] text-sm">{course.title}</p>
-      <p>{topic}</p>
+      <p className=" text-center">{topic}</p>
       {/* </Link> */}
      
     </div>

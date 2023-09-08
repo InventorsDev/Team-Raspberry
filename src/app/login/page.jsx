@@ -10,6 +10,7 @@ import auth from "../firebase";
 import MyContext from "../../context/context";
 import Cookies from "js-cookie";
 import Image from "next/image";
+import { cookies } from "next/dist/client/components/headers";
 
 const Page = () => {
   const router = useRouter();
@@ -36,13 +37,14 @@ const Page = () => {
       })
       .then((res) => {
         console.log(res.data);
-        Cookies.set("token", res.data.token, { expires: 7 });
+        Cookies.set("token", res.data.token);
         console.log(res.data.token);
         setPASS(res.data?.token);
         setToken(res.data?.token);
-        if (token) {
-          router.push("/dashboard");
-        }
+
+        res.user_type == "student"
+          ? router.push("/dashboard")
+          : router.push("/create");
 
         console.log("Successful");
         toast.success("Successful");
@@ -68,13 +70,12 @@ const Page = () => {
         .get("https://unicdata.pythonanywhere.com/profile/", config)
         .then((res) => {
           console.log(res.data);
-          setToken(res.data?.token);
+          setToken(res.data.token);
           console.log(token);
           setUser({ ...user, ...res.data });
-          console.log(res.data);
-          if (token) {
-            router.push("/dashboard");
-          }
+          res.user_type == "student"
+            ? router.push("/dashboard")
+            : router.push("/create");
         })
         .catch((err) => {
           if (err.response.status === 401) {
@@ -84,7 +85,11 @@ const Page = () => {
           }
         });
     }
-  }, [token, setUser,setToken, user, router]);
+    // // <<<<<<< HEAD
+  }, []);
+  // // =======
+  // }, []);
+  // >>>>>>> 785fb0ef447e2025c73783432a7f2ccfc29bdf7f
 
   useEffect(() => {
     Cookies.set("token", token, { expires: 7 });
@@ -107,9 +112,14 @@ const Page = () => {
       />
       <div className="  flex flex-col gap-12">
         <div className=" items-center justify-center flex-col flex">
-  <Image alt="" width={100} height={100}  className=" rounded-full h-[10em] text-center w-[10em] " src="/lk.png"/>
-        <p className=" font-bold text-[28px]">LearnVerse</p>
-      
+          <Image
+            alt=""
+            width={100}
+            height={100}
+            className=" rounded-full h-[10em] text-center w-[10em] "
+            src="/lk.png"
+          />
+          <p className=" font-bold text-[28px]">LearnVerse</p>
         </div>
         <span className=" text-[22px]">
           <span className=" font-black">Login</span> <span>to account</span>

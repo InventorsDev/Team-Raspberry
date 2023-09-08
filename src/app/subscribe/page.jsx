@@ -71,11 +71,13 @@ const Page = () => {
             </p>
             {/* <p className=" text-sm text-[#5d5d5d]">No refund after payment, so choose wisely</p> */}
           </div>
-          <div className="  p-4 bg-[#3F454D] rounded-[20px] flex gap-4 items-center text-white mt-6">
-          <Image width={400} height={200}src="/master-card.svg" alt="" />
-            <div>
+          <div className="  justify-between  p-4 bg-[#3F454D] rounded-[20px] flex gap-4 items-center text-white mt-6">
+          <Image width={100} height={100}src="/master-card.svg" alt="" />
+            <div className=" gap-3 flex flex-col">
               <p>Team Raspberry</p>
-              <p>xxxx1035</p>
+              <p>0248251689</p>
+              <p>Wema Bank</p>
+              
             </div>
           </div>
 
@@ -104,7 +106,7 @@ const Page = () => {
             onClick={() => setPayment("month")}
           >
             <div className="flex gap-2 items-start">
-              <Image  src="/bullet.svg" alt="" className=" pt-1 h-fit w-fit" />
+              <Image  width={30} height={30} src="/bullet.svg" alt="" className=" pt-1 h-fit w-fit" />
               <div>
                 <p className=" font-bold">Monthly</p>
                 <p className=" text-[#C4C4C4] text-sm pt-1">

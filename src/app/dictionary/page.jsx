@@ -56,11 +56,11 @@ const Page = () => {
     <>
       {!showWord.length ? (
         <div className=" w-full h-screen bg-[#030303] flex flex-col items-center text-white justify-around">
-          <div className=" flex gap-[60px] w-full items-center">
+          <div className=" flex gap-[40px] w-full items-center px-4">
             <Link href={"/dashboard"}>
-            <Image width={20} height={20} src="/arrow-back-white.svg" alt="" />
+            <Image width={40} height={40} src="/arrow-back-white.svg" alt="" />
             </Link>
-            <p className=" bg-primaryButton text-transparent text-[32px] bg-clip-text font-black">
+            <p className=" bg-primaryButton text-transparent text-2xl bg-clip-text font-black">
               Science Dictionary
             </p>
           </div>
@@ -82,7 +82,7 @@ const Page = () => {
             <Image width={20} height={20} src="/send.svg" alt="" className=" w-8" onClick={search} />
             </button>
           </div>
-          <Image width={20} height={20} src="/bg-dic.svg" alt="" />
+          <Image width={460} height={460} src="/bg-dic.svg" alt="" />
           <p>Nice to meet you! </p>
         </div>
       ) : (

@@ -34,7 +34,7 @@ export default function Home() {
     setScreen(screen + 1);
   };
   return (
-    <div className="bg-primaryBg h-screen flex flex-col items-center pt-[50px] justify-between text-white">
+    <div className=" h-screen flex flex-col items-center pt-[50px] justify-between text-white bg-primaryBg">
       <Link
         href={"/signup"}
         className=" text-end px-[30px] font-semibold w-full"
