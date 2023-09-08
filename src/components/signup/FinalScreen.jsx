@@ -33,9 +33,9 @@ const FinalScreen = ({
         setScreen("screen_1");
       }
     }
-  }, [error,setScreen,]);
+  }, [error, setScreen]);
 
-  const handleSubmit =async () => {
+  const handleSubmit = async () => {
     // setLoading(true);
 
     // setUser({ username,
@@ -46,10 +46,10 @@ const FinalScreen = ({
     // const auth = getAuth();
     // createUserWithEmailAndPassword(auth, email, password)
     //   .then((userCredential) => {
-    //     // Signed in 
+    //     // Signed in
     //     const user = userCredential.user;
     //     console.log(user);
-        
+
     //     // ...
     //   })
     //   .catch((error) => {
@@ -57,10 +57,6 @@ const FinalScreen = ({
     //     const errorMessage = error.message;
     //     // ..
     //   });
-    
-
-
-
 
     if (username.length > 2) {
       axios
@@ -70,7 +66,6 @@ const FinalScreen = ({
           first_name: fullname,
           last_name: fullname,
           password: password,
-       
         })
         .then((res) => {
           console.log("Successful");
@@ -90,11 +85,7 @@ const FinalScreen = ({
       <div className=" flex flex-col gap-12">
         <div className=" flex gap-[60px]">
           <button onClick={() => setScreen("screen_3")}>
-                  
- <Image
- height={40}
- width={40}
-        src="/arrow-back.svg" alt="" />
+            <Image height={40} width={40} src="/arrow-back.svg" alt="" />
           </button>
           <p className=" font-semibold text-lg absolute left-1/2 transform -translate-x-1/2">
             Create an account

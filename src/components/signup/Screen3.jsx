@@ -17,14 +17,14 @@ console.log(typeOfUser);
     <>
       <div className=" flex flex-col gap-12">
         <div className=" flex gap-[60px]">
-          <button onClick={() => setScreen("screen_2")}>
+          {/* <button onClick={() => setScreen("screen_2")}>
            <Image width={30} height={30} src="/arrow-back.svg" alt="" />
-          </button>
+          </button> */}
           <p className=" font-semibold text-lg absolute left-1/2 transform -translate-x-1/2">
             Create an account
           </p>
         </div>
-        <p className=" font-semibold text-[22px]">Choose your role</p>
+        <p className=" font-semibold text-lg">Choose your role</p>
 
         <div className=" flex flex-col gap-5">
           <div

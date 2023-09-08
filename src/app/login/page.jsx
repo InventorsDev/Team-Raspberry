@@ -41,9 +41,10 @@ const Page = () => {
         console.log(res.data.token);
         setPASS(res.data?.token);
         setToken(res.data?.token);
-    
-          router.push("/dashboard");
-    
+
+        res.user_type == "student"
+          ? router.push("/dashboard")
+          : router.push("/create");
 
         console.log("Successful");
         toast.success("Successful");
@@ -64,7 +65,7 @@ const Page = () => {
           Authorization: `Token ${token}`,
         },
       };
-   
+
       axios
         .get("https://unicdata.pythonanywhere.com/profile/", config)
         .then((res) => {
@@ -72,9 +73,9 @@ const Page = () => {
           setToken(res.data.token);
           console.log(token);
           setUser({ ...user, ...res.data });
-          router.push("/dashboard");
-         
-     
+          res.user_type == "student"
+            ? router.push("/dashboard")
+            : router.push("/create");
         })
         .catch((err) => {
           if (err.response.status === 401) {
@@ -84,11 +85,11 @@ const Page = () => {
           }
         });
     }
-// // <<<<<<< HEAD
+    // // <<<<<<< HEAD
   }, []);
-// // =======
+  // // =======
   // }, []);
-// >>>>>>> 785fb0ef447e2025c73783432a7f2ccfc29bdf7f
+  // >>>>>>> 785fb0ef447e2025c73783432a7f2ccfc29bdf7f
 
   useEffect(() => {
     Cookies.set("token", token, { expires: 7 });

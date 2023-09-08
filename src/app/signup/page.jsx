@@ -7,6 +7,7 @@ import Screen2 from "../../components/signup/Screen2";
 import Screen3 from "../../components/signup/Screen3";
 import Success from "../../components/signup/Success";
 import axios from "axios";
+import UploadCV from "@/components/signup/UploadCV";
 
 export default function Home() {
   const [screen, setScreen] = useState("screen_2");
@@ -18,8 +19,6 @@ export default function Home() {
     email: "",
     typeOfUser: "student",
   });
-
-  
 
   let currentScreen;
   switch (screen) {
@@ -42,8 +41,6 @@ export default function Home() {
       );
       break;
 
-  
-
     case "screen_2":
       currentScreen = (
         <Screen3
@@ -55,7 +52,7 @@ export default function Home() {
           }
         />
       );
-      break;x
+      break;
 
     case "screen_4":
       currentScreen = (
@@ -76,11 +73,14 @@ export default function Home() {
       currentScreen = <Success screen={screen} setScreen={setScreen} />;
       break;
 
+    case "uploadCV":
+      currentScreen = <UploadCV screen={screen} setScreen={setScreen} />;
+      break;
+
     default:
       currentScreen = <Screen1 screen={screen} setScreen={setScreen} />;
       break;
   }
-
 
   return (
     <div className=" flex justify-center">

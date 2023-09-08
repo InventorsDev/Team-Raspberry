@@ -105,7 +105,7 @@ const handleLogOut = async (e) => {
   :  
     <div className=" flex flex-col px-4 py-8 justify-between h-screen">
       <div >
-        <div className=" flex items-center px-5 justify-between gap-[60px]">
+        <div className=" flex items-center px-4 justify-between gap-[60px]">
           {screen == "edit" ? (
             <Link href={"/dashboard"}>
               <Image width={40} height={20} src="/arrow-back.svg" alt="" />
